@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+
+.runtime/
+apps/backend/vendor/
+apps/backend/storage/logs/
+apps/backend/storage/app/private/uploads/

@@ -1,0 +1,28 @@
+# Page 8 - AI creation requirements and acceptance
+
+## Required end-to-end behaviour
+
+**R28 - Build functioning requirements, not static examples.** Support authorised record creation, viewing, updating, retirement, searching, filtering, sorting and relevant exports. Validate required information, explain errors and preserve activity history. Bulk work needs preview and row-level results. Never invent production credentials or show an unconfirmed integration as connected.
+
+1. **Product structure:** create Colour and Capacity attributes, organise them in groups, and assign them to a Washing Machine set. Create a Variable parent and selected child combinations with distinct stock codes, prices and stock. Buying one child must affect that child's stock.
+2. **Global checkout:** configure two countries, currencies, languages and business time zones. Apply different payment, tax and delivery rules. Complete orders in both markets without implementation changes; show only eligible options.
+3. **Offer fulfilment:** if the proposed component-offer design is approved, purchase a TV + soundbar + washer offer. Reserve components, verify payment, issue the applicable invoice, deliver, record serials and complete installation.
+4. **Return and refund:** inspect a returned item, restore stock only when sellable, refund its original agreed allocation and prevent duplicate financial effects.
+5. **Configuration change:** disable a provider or currency. Restrict new use while preserving existing orders and evidence; handle outstanding transactions through an explicit continuation policy.
+6. **Privacy:** withdraw marketing consent and process a verified privacy request without deleting required commercial evidence or exposing protected information.
+
+## Acceptance evidence
+
+| Area | Required proof |
+|---|---|
+| Product | Reusable attributes, ordered groups, valid templates and unique child combinations |
+| Money | Reconciled totals, currency precision, tax snapshots and verified payments/refunds |
+| Settings | Central configuration, explicit applicability, conflicts resolved and changes logged |
+| Access and recovery | Role/store restrictions, protected secrets and recoverable failed work |
+
+**Proposed (to confirm) phasing:** MVP delivers the four modules, both product types, attribute structures, international configuration, stock, orders and confirmed connectors. Phase 2 expands connectors, advanced pricing, component offers and service automation. Phase 3 adds deeper automation and reporting. Final scope is **[To be agreed]**; costs and durations are **[To be estimated]**.
+
+Leadership must confirm launch markets, tax/privacy policies, stock and accounting source of truth, fiscal-invoice arrangements, payment aggregators, instalment partners, refund limits and cross-branch customer/order access.
+
+The AI must flag open decisions rather than silently fixing assumptions into policy. Acceptance requires the above test workflows, clear failure outcomes and administrator setup instructions.
+
