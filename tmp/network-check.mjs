@@ -1,0 +1,1 @@
+for(const url of ['http://10.0.0.17:5173/','http://10.0.0.17:3000/','http://10.0.0.17:5173/api/v1/health']){try{const result=await fetch(url,{signal:AbortSignal.timeout(6000)});console.log(url,result.status);}catch(error){console.log(url,error.message)}}

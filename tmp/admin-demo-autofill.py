@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('apps/admin/src/main.tsx');s=p.read_text(encoding='utf-8');old="setEmail('admin@leekav.com');setPassword('');";new="setEmail('admin@leekav.com');setPassword(import.meta.env.DEV?'jCBJ@oyB2Gjs':'');";assert old in s;s=s.replace(old,new).replace('}}>Use admin email <ArrowUpRight','}}>{import.meta.env.DEV?\'Use demo credentials\':\'Use admin email\'} <ArrowUpRight');p.write_text(s,encoding='utf-8')

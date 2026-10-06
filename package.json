@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "apps/admin"
+    "apps/admin",
+    "apps/storefront"
   ],
   "engines": {
     "node": ">=22.12.0"
@@ -15,7 +16,9 @@
     "test": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/test-api.ps1",
     "services:up": "docker compose up -d",
     "services:down": "docker compose down",
-    "dev:api": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/serve-api.ps1"
+    "dev:api": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/serve-api.ps1",
+    "dev:storefront": "npm run dev -w @ecomm/storefront",
+    "build:storefront": "npm run build -w @ecomm/storefront"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",

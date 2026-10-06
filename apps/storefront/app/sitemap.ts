@@ -1,0 +1,2 @@
+import {catalog,slugify} from '@/lib/store';
+export default async function sitemap(){const data=await catalog();const base=process.env.NEXT_PUBLIC_SITE_URL||'http://127.0.0.1:3000';return ['','/products',...data.products.map(p=>'/products/'+p.slug),...data.brands.map(b=>'/brands/'+slugify(b.name)),...data.categories.map(c=>'/categories/'+c.slug),...data.pages.map(p=>'/'+p.slug)].map(path=>({url:base+path,lastModified:new Date()}));}

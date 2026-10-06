@@ -51,9 +51,9 @@ class DatabaseSeeder extends Seeder
         foreach ([['Capacity', 'capacity', 'Number', 'kg'], ['Power', 'power', 'Number', 'W'], ['Colour', 'colour', 'Single choice', ''], ['Dimensions', 'dimensions', 'Text', 'cm']] as $a) {
             $make('attributes', ['name' => $a[0], 'code' => $a[1], 'input_type' => $a[2], 'unit' => $a[3], 'options' => $a[2] === 'Single choice' ? ['White', 'Silver', 'Black'] : [], 'filterable' => true, 'required' => false]);
         }
-        $zone = $make('delivery-zones', ['name' => 'Nairobi metro', 'towns' => ['Nairobi', 'Westlands', 'Kilimani', 'Karen'], 'charge' => 500, 'free_threshold' => 50000]);
-        $make('delivery-zones', ['name' => 'Kiambu & satellite towns', 'towns' => ['Kiambu', 'Ruiru', 'Thika'], 'charge' => 900, 'free_threshold' => 75000]);
-        $make('delivery-zones', ['name' => 'Mombasa', 'towns' => ['Mombasa', 'Nyali'], 'charge' => 1800, 'free_threshold' => 100000]);
+        $zone = $make('delivery-zones', ['name' => 'Nairobi metro', 'country_code' => 'KE', 'country_name' => 'Kenya', 'county_codes' => ['047'], 'county_names' => ['Nairobi'], 'towns' => ['Nairobi', 'Westlands', 'Kilimani', 'Karen'], 'charge' => 500, 'free_threshold' => 50000]);
+        $make('delivery-zones', ['name' => 'Kiambu & satellite towns', 'country_code' => 'KE', 'country_name' => 'Kenya', 'county_codes' => ['022'], 'county_names' => ['Kiambu'], 'towns' => ['Kiambu', 'Ruiru', 'Thika'], 'charge' => 900, 'free_threshold' => 75000]);
+        $make('delivery-zones', ['name' => 'Mombasa', 'country_code' => 'KE', 'country_name' => 'Kenya', 'county_codes' => ['001'], 'county_names' => ['Mombasa'], 'towns' => ['Mombasa', 'Nyali'], 'charge' => 1800, 'free_threshold' => 100000]);
         $make('taxes', ['name' => 'Standard VAT · demo configuration', 'rate' => 16, 'inclusive' => true]);
         $make('coupons', ['name' => 'A warm welcome', 'code' => 'WELCOME10', 'discount_kind' => 'Order', 'scope' => 'All', 'eligibility' => 'All', 'minimum_type' => 'Amount', 'minimum_amount' => 10000, 'discount_type' => 'Percentage', 'value' => 10, 'min_order' => 10000, 'usage_limit' => 100, 'usage' => 0, 'starts_at' => now()->startOfMonth()->toDateString(), 'ends_at' => now()->addMonths(2)->toDateString()]);
         $products = [];

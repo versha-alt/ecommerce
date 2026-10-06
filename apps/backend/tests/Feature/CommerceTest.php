@@ -114,9 +114,9 @@ class CommerceTest extends TestCase
         [$c,$z,$p] = $this->fixtures();
         $p->data = array_merge($p->data, ['reserved' => 3]);
         $p->save();
-        $this->withToken($token)->postJson('/api/v1/inventory/adjust', ['product_id' => $p->id, 'quantity' => -4, 'reason' => 'Test', 'version' => 1])->assertUnprocessable();
-        $this->postJson('/api/v1/inventory/adjust', ['product_id' => $p->id, 'quantity' => 2, 'reason' => 'Receipt', 'version' => 1])->assertOk();
-        $this->postJson('/api/v1/inventory/adjust', ['product_id' => $p->id, 'quantity' => 2, 'reason' => 'Receipt', 'version' => 1])->assertConflict();
+        $this->withToken($token)->postJson('/api/v1/inventory/adjust', ['product_id' => $p->id, 'stock' => 1, 'version' => 1])->assertUnprocessable();
+        $this->postJson('/api/v1/inventory/adjust', ['product_id' => $p->id, 'stock' => 7, 'version' => 1])->assertOk();
+        $this->postJson('/api/v1/inventory/adjust', ['product_id' => $p->id, 'stock' => 7, 'version' => 1])->assertConflict();
         $this->assertEquals(7, $p->fresh()->data['stock']);
     }
 

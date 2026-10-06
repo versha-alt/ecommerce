@@ -67,6 +67,9 @@ class CommerceRecord extends Model
     public function row(): array
     {
         $data = $this->data;
+        if ($this->resource === 'customers') {
+            unset($data['password_hash']);
+        }
         if ($this->resource === 'payment-methods') {
             $data['has_credentials'] = ! empty($data['credentials']);
             $data['credentials'] = '';

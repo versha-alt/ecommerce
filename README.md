@@ -10,7 +10,7 @@ npm run dev
 
 - Admin: http://127.0.0.1:5173
 - Laravel API: http://127.0.0.1:8000/api/v1
-- Local demo login: `admin@olive.local` / `OliveLocal!2026`
+- Admin login: `admin@leekav.com`. Configure a strong `ADMIN_PASSWORD` in the backend `.env`.
 
 The current workspace includes clearly labelled sample business data. It never sends provider requests. Browser verification orders are explicitly labelled and cancelled after testing.
 
@@ -89,3 +89,5 @@ Laravel tests use an isolated in-memory test database, never the business databa
 Environment files, uploads, runtime binaries and vendor dependencies are ignored by Git. Back up MySQL and uploaded files together before deployment.
 
 Payment history is separate from Payment methods. Admins can review, filter/export and annotate transactions. Financial fields are immutable through the admin API. The internal adapter endpoint `POST /api/v1/payment-events` requires `PAYMENT_EVENTS_SECRET` (32+ characters), an `X-Payment-Timestamp` within five minutes, and `X-Payment-Signature` equal to HMAC-SHA256 of `timestamp.raw_request_body`. Payload: `event_id`, checkout attempt UUID `payment_id`, `method`, `reference`, `amount`, `currency` (KES), and `status` (Successful/Failed). Gateway adapters must verify their provider-specific response before sending a normalized event server-to-server. This endpoint does not accept raw provider webhooks or browser payment claims; it stays disabled until configured. Retries are idempotent and provider transaction references have a database unique index.
+
+

@@ -8,6 +8,7 @@ use App\Services\Commerce;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -218,9 +219,14 @@ class AdminManagementTest extends TestCase
         $this->assertEquals(['client_secret' => 'secret-value'], json_decode(Crypt::decryptString($stored->data['credentials']), true));
         $this->patchJson('/api/v1/payment-methods/'.$method['id'], array_merge($method, ['status' => 'Inactive', 'credentials' => '']))->assertOk();
         $this->assertEquals($stored->data['credentials'], $stored->fresh()->data['credentials']);
+        $this->assertEquals('Inactive', $stored->fresh()->data['status']);
+        $active = $this->patchJson('/api/v1/payment-methods/'.$method['id'], array_merge($method, ['version' => 2, 'status' => 'Active', 'credentials' => '']))->assertOk()->assertJsonPath('status', 'Active')->json();
+        $this->assertEquals('Active', $stored->fresh()->data['status']);
+        $this->patchJson('/api/v1/payment-methods/'.$method['id'], array_merge($active, ['status' => 'Inactive']))->assertOk()->assertJsonPath('status', 'Inactive');
+        $this->assertEquals($stored->data['credentials'], $stored->fresh()->data['credentials']);
         $this->assertStringNotContainsString('secret-value', $this->getJson('/api/v1/workspace')->assertOk()->getContent());
         $this->assertStringNotContainsString('secret-value', DB::table('audit_events')->get()->toJson());
-        $this->patchJson('/api/v1/payment-methods/'.$method['id'], array_merge($method, ['version' => 2, 'configuration' => '{"nested":{"api_secret":"unsafe"}}']))->assertUnprocessable();
+        $this->patchJson('/api/v1/payment-methods/'.$method['id'], array_merge($method, ['version' => 4, 'configuration' => '{"nested":{"api_secret":"unsafe"}}']))->assertUnprocessable();
         $this->postJson('/api/v1/payment-methods', ['name' => 'Duplicate', 'category' => 'Online', 'provider' => 'PayPal', 'environment' => 'Sandbox', 'status' => 'Inactive'])->assertUnprocessable();
     }
 
@@ -229,6 +235,12 @@ class AdminManagementTest extends TestCase
         $this->login();
         $method = $this->postJson('/api/v1/payment-methods', ['name' => 'Cash on delivery', 'category' => 'Manual', 'provider' => 'COD', 'environment' => 'Production', 'instructions' => 'Pay the courier', 'status' => 'Active'])->assertOk()->json();
         $this->assertEquals('', $method['credentials']);
+        Cache::put('commerce.records.payment-methods', [array_merge($method, ['status' => 'Inactive'])], 30);
+        $this->getJson('/api/v1/workspace')->assertOk()->assertJsonPath('records.payment-methods.0.status', 'Active')->assertHeader('Cache-Control', 'no-store, private');
+        $online = $this->postJson('/api/v1/payment-methods', ['name' => 'PayPal', 'category' => 'Online', 'provider' => 'PayPal', 'environment' => 'Sandbox', 'status' => 'Inactive'])->assertOk()->json();
+        $manual = $this->patchJson('/api/v1/payment-methods/'.$online['id'], array_merge($online, ['category' => 'Manual', 'provider' => 'Bank transfer', 'environment' => 'Production', 'status' => 'Active']))->assertOk()->assertJsonPath('category', 'Manual')->assertJsonPath('status', 'Active')->json();
+        $this->assertEquals('Active', Record::find($online['id'])->data['status']);
+        $this->patchJson('/api/v1/payment-methods/'.$online['id'], array_merge($manual, ['status' => 'Inactive']))->assertOk()->assertJsonPath('status', 'Inactive');
         $this->postJson('/api/v1/payment-methods', ['name' => 'Wrong category', 'category' => 'Manual', 'provider' => 'Razorpay', 'environment' => 'Sandbox'])->assertUnprocessable();
         $this->login('Sales');
         $this->patchJson('/api/v1/payment-methods/'.$method['id'], array_merge($method, ['status' => 'Inactive']))->assertForbidden();

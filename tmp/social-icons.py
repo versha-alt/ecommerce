@@ -1,0 +1,4 @@
+from pathlib import Path
+p=Path('apps/storefront/components/store.tsx');s=p.read_text(encoding='utf-8').replace('Tag,Facebook,Instagram}', 'Tag}');idx=s.index('type Line=');s=s[:idx]+'''function Facebook({size=19,...props}:React.SVGProps<SVGSVGElement>&{size?:number}){return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}><path d="M14 22v-9h3l.5-4H14V7c0-1.2.3-2 2-2h2V1.4C17.6 1.3 16.3 1 14.8 1 11.7 1 10 2.9 10 6.4V9H7v4h3v9z"/></svg>}
+function Instagram({size=19,...props}:React.SVGProps<SVGSVGElement>&{size?:number}){return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>}
+'''+s[idx:];p.write_text(s,encoding='utf-8')

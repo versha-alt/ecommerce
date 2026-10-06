@@ -10,3 +10,6 @@ coverage/
 apps/backend/vendor/
 apps/backend/storage/logs/
 apps/backend/storage/app/private/uploads/
+
+apps/storefront/.next/
+*.tsbuildinfo

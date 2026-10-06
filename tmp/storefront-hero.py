@@ -1,0 +1,3 @@
+from pathlib import Path
+p=Path('apps/storefront/app/page.tsx');s=p.read_text();s="import Hero from '@/components/hero';\n"+s;s=s[:s.index('<section className="hero container">')]+'<Hero data={data}/>'+s[s.index('<Benefits/>'):];p.write_text(s)
+p=Path('apps/storefront/app/globals.css');s=p.read_text(encoding='utf-8');s+='\n.hero-controls{display:flex;gap:15px;align-items:center;font-size:10px;margin-top:20px;color:var(--olive)}.hero-controls button{display:flex;padding:7px;border:1px solid #ced6bd;border-radius:50%}.hero-banner-image{width:100%;height:100%;object-fit:cover}\n';p.write_text(s,encoding='utf-8')

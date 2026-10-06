@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('apps/storefront/components/store.tsx');s=p.read_text(encoding='utf-8');idx=s.index('\n')+1;s=s[:idx]+"import MegaNavigation from './mega-navigation';\n"+s[idx:];start=s.index("<nav className={'container store-nav '");end=s.index('</nav>',start)+len('</nav>');s=s[:start]+'<MegaNavigation data={data} mobileOpen={open} onNavigate={()=>setOpen(false)}/>'+s[end:];s=s.replace('aria-label="Toggle navigation" onClick=', 'aria-label="Toggle navigation" aria-expanded={open} onClick=');p.write_text(s,encoding='utf-8')

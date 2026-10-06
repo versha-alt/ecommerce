@@ -1,0 +1,1 @@
+export default function robots(){return {rules:{userAgent:'*',allow:'/',disallow:['/account','/checkout','/cart','/orders','/api/']},sitemap:(process.env.NEXT_PUBLIC_SITE_URL||'http://127.0.0.1:3000')+'/sitemap.xml'}}

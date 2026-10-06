@@ -16,10 +16,10 @@ use Illuminate\Validation\ValidationException;
 
 class Commerce
 {
-    public const RESOURCES = ['products', 'brands', 'categories', 'attributes', 'customers', 'delivery-zones', 'taxes', 'coupons', 'banners', 'pages', 'orders', 'payments', 'payment-methods', 'returns', 'enquiries', 'emails', 'settings'];
+    public const RESOURCES = ['products', 'brands', 'categories', 'attributes', 'customers', 'delivery-zones', 'taxes', 'coupons', 'banners', 'pages', 'orders', 'payments', 'payment-methods', 'returns', 'reviews', 'enquiries', 'emails', 'settings'];
 
     public const PERMISSIONS = [
-        'Admin' => ['dashboard', 'products', 'brands', 'categories', 'attributes', 'inventory', 'customers', 'delivery-zones', 'taxes', 'coupons', 'banners', 'pages', 'users', 'orders', 'payments', 'payment-methods', 'returns', 'enquiries', 'emails', 'settings', 'reports', 'activity'],
+        'Admin' => ['dashboard', 'products', 'brands', 'categories', 'attributes', 'inventory', 'customers', 'delivery-zones', 'taxes', 'coupons', 'banners', 'pages', 'users', 'orders', 'payments', 'payment-methods', 'returns', 'reviews', 'enquiries', 'emails', 'settings', 'reports', 'activity'],
         'Sales' => ['dashboard', 'products', 'brands', 'categories', 'customers', 'orders', 'payments', 'returns', 'enquiries', 'reports'],
         'Store Manager' => ['dashboard', 'products', 'brands', 'categories', 'attributes', 'inventory', 'customers', 'orders', 'reports'],
     ];
@@ -37,11 +37,11 @@ class Commerce
         }
     }
 
-    public function rows(string $resource): array
+    public function rows(string $resource, bool $fresh = false): array
     {
         $load = fn () => Record::where('resource', $resource)->latest()->get()->map(fn ($r) => $r->row())->all();
 
-        return DB::transactionLevel() > 0 ? $load() : Cache::remember('commerce.records.'.$resource, 30, $load);
+        return $fresh || DB::transactionLevel() > 0 ? $load() : Cache::remember('commerce.records.'.$resource, 30, $load);
     }
 
     public function find(string $resource, string $id, bool $lock = false): Record
@@ -84,17 +84,18 @@ class Commerce
 
     public function validate(string $resource, array $data, ?Record $old = null): array
     {
-        $base = ['name' => 'required|string|max:180', 'status' => 'nullable|string|max:30', 'description' => 'nullable|string|max:20000', 'notes' => 'nullable|string|max:20000', 'image' => 'nullable|string|max:2000', 'banner' => 'nullable|string|max:2000', 'website' => 'nullable|url|max:2000'];
+        $base = ['name' => 'required|string|max:180', 'status' => 'nullable|string|max:30', 'description' => 'nullable|string|max:20000', 'notes' => 'nullable|string|max:20000', 'image' => 'nullable|string|max:2000', 'banner' => 'nullable|string|max:2000', 'seo_title' => 'nullable|string|max:250', 'seo_description' => 'nullable|string|max:2000', 'specifications' => 'nullable|string|max:20000', 'warranty' => 'nullable|string|max:2000', 'website' => 'nullable|url|max:2000'];
         $rules = match ($resource) {
-            'products' => ['slug' => ['required', 'max:180', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('commerce_records', 'product_slug')->ignore($old?->id)], 'sku' => 'required|string|max:80', 'type' => 'required|in:Simple,Variable', 'price' => 'required|numeric|min:0|max:100000000', 'sale_price' => 'nullable|numeric|min:0|max:100000000', 'stock' => 'required|integer|min:0|max:1000000', 'low_stock_threshold' => 'nullable|integer|min:0', 'brand_id' => 'nullable|uuid', 'category_ids' => 'nullable|array', 'category_ids.*' => 'uuid', 'status' => 'required|in:Draft,Active,Inactive,Retired', 'image' => 'nullable|string|max:2000', 'manual' => 'nullable|string|max:2000'],
-            'categories' => ['slug' => 'required|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'parent_id' => 'nullable|uuid'],
-            'attributes' => ['code' => 'required|regex:/^[a-z][a-z0-9_]*$/', 'input_type' => 'required|in:Text,Number,Single choice,Multiple choice,Yes/No', 'options' => 'nullable|array'],
-            'customers' => ['email' => 'required|email|max:180', 'phone' => 'nullable|string|max:50', 'account_type' => 'required|in:Individual,Business', 'status' => 'required|in:Active,Inactive,Retired', 'address' => 'nullable|string|max:2000'],
-            'delivery-zones' => ['charge' => 'required|numeric|min:0', 'free_threshold' => 'nullable|numeric|min:0', 'towns' => 'required|array|min:1', 'towns.*' => 'string|max:150'],
+            'products' => ['gallery_images' => 'nullable|array', 'gallery_images.*' => ['required', 'string', 'max:2000', 'distinct', 'regex:~^(https?://|/api/v1/media/)~'], 'slug' => ['required', 'max:180', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('commerce_records', 'product_slug')->ignore($old?->id)], 'sku' => 'required|string|max:80', 'type' => 'required|in:Simple,Variable', 'price' => 'required|numeric|min:0|max:100000000', 'sale_price' => 'nullable|numeric|min:0|max:100000000', 'stock' => 'required|integer|min:0|max:1000000', 'low_stock_threshold' => 'nullable|integer|min:0', 'brand_id' => 'nullable|uuid', 'category_ids' => 'nullable|array', 'category_ids.*' => 'uuid', 'status' => 'required|in:Draft,Active,Inactive,Retired', 'image' => 'nullable|string|max:2000', 'manual' => 'nullable|string|max:2000'],
+            'categories' => ['slug' => 'required|string|max:180|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'parent_id' => 'nullable|uuid'],
+            'attributes' => ['filterable' => 'nullable|boolean', 'required' => 'nullable|boolean', 'unit' => 'nullable|string|max:80', 'options.*' => 'string|max:180', 'code' => 'required|string|max:80|regex:/^[a-z][a-z0-9_]*$/', 'input_type' => 'required|in:Text,Number,Single choice,Multiple choice,Yes/No', 'options' => 'nullable|array'],
+            'customers' => ['marketing_consent' => 'nullable|boolean', 'company' => 'nullable|string|max:180', 'county' => 'nullable|string|max:180', 'email' => 'required|email|max:180', 'phone' => 'nullable|string|max:50', 'account_type' => 'required|in:Individual,Business', 'status' => 'required|in:Active,Inactive,Retired', 'address' => 'nullable|string|max:2000'],
+            'delivery-zones' => ['country_code' => ['required', Rule::in(array_keys(config('shipping.countries')))], 'county_codes' => 'required|array|min:1|max:47', 'county_codes.*' => ['required', 'string', 'distinct', Rule::in(array_keys(config('shipping.countries.'.($data['country_code'] ?? 'KE').'.counties', [])))], 'charge' => 'required|numeric|min:0', 'free_threshold' => 'nullable|numeric|min:0', 'status' => 'required|in:Active,Inactive,Retired'],
             'taxes' => ['rate' => 'required|numeric|min:0|max:100', 'inclusive' => 'boolean'],
             'coupons' => [],
-            'pages' => ['slug' => 'required|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'body' => 'required|string|max:50000'],
-            'emails' => ['event' => 'required|string|max:100', 'subject' => 'required|string|max:250', 'body' => 'required|string|max:20000'],
+            'banners' => ['placement' => 'required|in:Hero slider,Promotional banner,Featured brand,Featured product', 'headline' => 'nullable|string|max:250', 'link' => ['nullable', 'string', 'max:2000', 'regex:~^(https?://|/(?!/)|\#)~']],
+            'pages' => ['slug' => 'required|string|max:180|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'body' => 'required|string|max:50000'],
+            'emails' => ['event' => 'required|in:Order confirmation,Order status update,Admin new order,Payment successful,Password reset', 'subject' => 'required|string|max:250', 'body' => 'required|string|max:20000'],
             'enquiries' => ['email' => 'required|email', 'subject' => 'required|string|max:200', 'message' => 'required|string|max:10000', 'status' => 'required|in:Open,In progress,Resolved'],
             'payments' => ['name' => 'nullable', 'order_id' => 'required|uuid', 'reference' => 'required|string|max:120', 'method' => 'required|in:M-Pesa,Card,PayPal,Razorpay,COD,Bank transfer,Other online,Other manual,Pesapal,Flutterwave,DPO', 'amount' => 'required|numeric|min:0.01', 'status' => 'required|in:Pending,Failed'],
             'returns' => ['name' => 'nullable', 'order_id' => 'required|uuid', 'reason' => 'required|string|max:2000', 'refund_amount' => 'required|numeric|min:0.01', 'status' => 'required|in:Requested,Approved,Received,Rejected'],
@@ -123,10 +124,19 @@ class Commerce
                 }$clean[$k] = (float) $clean[$k];
             }
         }
+        if ($resource === 'delivery-zones') {
+            $counties = config('shipping.countries.'.$clean['country_code'].'.counties');
+            $clean['country_name'] = config('shipping.countries.'.$clean['country_code'].'.name');
+            $clean['county_codes'] = array_values($clean['county_codes']);
+            $clean['county_names'] = array_map(fn (string $code): string => $counties[$code], $clean['county_codes']);
+            $clean['towns'] = $clean['county_names'];
+            unset($clean['legacy_unmapped_locations']);
+        }
         if ($resource === 'products') {
+            $clean['gallery_images'] = array_values($clean['gallery_images'] ?? $old?->data['gallery_images'] ?? []);
             foreach ($this->rows('products') as $p) {
                 if ($p['id'] !== $old?->id && strcasecmp($p['sku'], $clean['sku']) === 0) {
-                    $this->fail('This SKU already exists.');
+                    throw ValidationException::withMessages(['sku' => 'This SKU already exists.']);
                 }
             }
             if (! empty($clean['brand_id'])) {
@@ -144,7 +154,7 @@ class Commerce
                 $this->fail('Use Inventory to adjust existing product stock with a reason.');
             }
             if (isset($clean['sale_price']) && $clean['sale_price'] > $clean['price']) {
-                $this->fail('Sale price must be lower than or equal to regular price.');
+                throw ValidationException::withMessages(['sale_price' => 'Sale price must be lower than or equal to regular price.']);
             }
             if ($clean['type'] === 'Variable') {
                 $clean['stock'] = 0;
@@ -207,7 +217,7 @@ class Commerce
             }
             $clean['consent_history'] = $old?->data['consent_history'] ?? [];
             if (! $old || ($old->data['marketing_consent'] ?? false) !== ($clean['marketing_consent'] ?? false)) {
-                $clean['consent_history'][] = ['channel' => 'Email', 'consent' => $clean['marketing_consent'] ?? false, 'source' => 'Storefront', 'status_history' => [['from' => null, 'to' => 'Pending', 'at' => now()->toISOString(), 'actor' => $customer['id'], 'note' => 'Order placed']], 'at' => now()->toISOString()];
+                $clean['consent_history'][] = ['channel' => 'Email', 'consent' => $clean['marketing_consent'] ?? false, 'source' => 'Storefront', 'at' => now()->toISOString()];
             }
         }
         if ($resource === 'taxes' && $clean['status'] === 'Active') {
@@ -260,7 +270,7 @@ class Commerce
         return DB::transaction(function () use ($resource, $input, $actor, $id) {
             Record::where('resource', 'settings')->lockForUpdate()->first();
             abort_unless(in_array($resource, self::RESOURCES) && ! in_array($resource, ['orders', 'settings']), 404);
-            abort_if(! $id && in_array($resource, ['customers', 'returns', 'payments']), 405, 'Customers, return requests and payments originate in the storefront.');
+            abort_if(! $id && in_array($resource, ['customers', 'returns', 'payments', 'reviews']), 405, 'Customers, return requests, payments and reviews originate in the storefront.');
             $old = $id ? $this->find($resource, $id, true) : null;
             if ($old && ($input['version'] ?? null) !== $old->version) {
                 abort(409, 'This record changed. Reload before saving.');
@@ -268,6 +278,29 @@ class Commerce
             $before = $old?->row();
             if (($input['status'] ?? '') === 'Retired' || ($old?->data['status'] ?? '') === 'Retired') {
                 $this->fail('Use the retirement action; retired records cannot be edited.');
+            }
+            if ($resource === 'reviews') {
+                Validator::make($input, ['status' => 'required|in:Pending,Approved,Rejected', 'notes' => 'nullable|string|max:20000'])->validate();
+                foreach ($input as $field => $value) {
+                    if (! in_array($field, ['id', 'version', 'created_at', 'updated_at', 'status', 'notes']) && $value !== ($old->row()[$field] ?? null)) {
+                        $this->fail('Customer review details cannot be changed.');
+                    }
+                }
+                if ($input['status'] === 'Pending' && $old->data['status'] !== 'Pending') {
+                    $this->fail('Choose Approved or Rejected for a moderated review.');
+                }
+                $data = $old->data;
+                if ($input['status'] !== $data['status']) {
+                    $data['status_history'][] = ['from' => $data['status'], 'to' => $input['status'], 'actor' => $actor->email, 'at' => now()->toISOString(), 'note' => $input['notes'] ?? ''];
+                }
+                $data['status'] = $input['status'];
+                $data['notes'] = $input['notes'] ?? $data['notes'] ?? '';
+                $old->data = $data;
+                $old->version++;
+                $old->save();
+                $this->audit($actor, 'Review moderated', 'reviews', $before, $old->row());
+
+                return $old->row();
             }
             if ($resource === 'payments') {
                 foreach ($input as $field => $value) {
@@ -302,7 +335,15 @@ class Commerce
                 }
                 $input = array_merge($old->data, array_intersect_key($input, array_flip(['status', 'notes'])));
             }
+            unset($input['password_hash']);
             $clean = $this->validate($resource, $input, $old);
+            if ($resource === 'customers' && $old) {
+                foreach (['password_hash', 'addresses', 'wishlist'] as $field) {
+                    if (array_key_exists($field, $old->data)) {
+                        $clean[$field] = $old->data[$field];
+                    }
+                }
+            }
             if ($resource === 'returns' && $old) {
                 $clean['refund_status'] = $old->data['refund_status'] ?? 'Pending';
                 $clean['status_history'] = $old->data['status_history'] ?? [];
@@ -328,6 +369,8 @@ class Commerce
 
     public function retire(string $resource, string $id, int $version, User $actor): array
     {
+        abort_if($resource === 'reviews', 405, 'Use Approved or Rejected to moderate reviews.');
+
         return DB::transaction(function () use ($resource, $id, $version, $actor) {
             Record::where('resource', 'settings')->lockForUpdate()->first();
             $r = $this->find($resource, $id, true);
@@ -355,7 +398,7 @@ class Commerce
 
     public function inventory(array $input, User $actor): array
     {
-        Validator::make($input, ['product_id' => 'required|uuid', 'quantity' => 'required|integer|not_in:0', 'reason' => 'required|string|max:500', 'version' => 'required|integer'])->validate();
+        Validator::make($input, ['product_id' => 'required|uuid', 'stock' => 'required|integer|min:0|max:100000000', 'version' => 'required|integer'])->validate();
 
         return DB::transaction(function () use ($input, $actor) {
             Record::where('resource', 'settings')->lockForUpdate()->first();
@@ -364,16 +407,18 @@ class Commerce
                 abort(409, 'Stock changed. Reload before adjusting.');
             }$before = $p->row();
             $d = $p->data;
-            if ($d['type'] !== 'Simple') {
+            if (($d['status'] ?? '') === 'Retired') {
+                $this->fail('Retired products cannot have stock updated.');
+            }if ($d['type'] !== 'Simple') {
                 $this->fail('Variable parents do not hold physical stock.');
-            }$stock = $d['stock'] + $input['quantity'];
+            }$stock = (int) $input['stock'];
             if ($stock < ($d['reserved'] ?? 0)) {
                 $this->fail('Stock cannot be lower than reserved quantities.');
             }$d['stock'] = $stock;
             $p->data = $d;
             $p->version++;
             $p->save();
-            $this->audit($actor, 'Stock adjustment: '.$input['reason'], 'inventory', $before, $p->row());
+            $this->audit($actor, 'Stock quantity set', 'inventory', $before, $p->row());
 
             return $p->row();
         });
@@ -454,6 +499,7 @@ class Commerce
             $order = Record::create(['resource' => 'orders', 'data' => ['reference' => 'ORD-'.strtoupper(Str::random(7)), 'name' => $customer['name'], 'customer_id' => $customer['id'], 'customer_name' => $customer['name'], 'customer_email' => $customer['email'], 'customer_phone' => $customer['phone'] ?? '', 'delivery_address' => $input['delivery_address'], 'delivery_zone_id' => $zone['id'], 'delivery_zone_name' => $zone['name'], 'delivery_snapshot' => $zone, 'tax_snapshot' => $tax->row(), 'currency' => 'KES', 'lines' => $lines, 'subtotal' => $subtotal / 100, 'discount' => $discount / 100, 'tax_total' => $taxAmount / 100, 'tax_inclusive' => $inclusive, 'shipping_total' => $shipping / 100, 'shipping_discount' => $shippingDiscount / 100, 'total' => ($net + ($inclusive ? 0 : $taxAmount) + $shipping) / 100, 'coupon_code' => $code, 'coupon_id' => $coupon?->id, 'status' => 'Pending', 'payment_status' => 'Unpaid', 'fulfilment_status' => 'Reserved', 'notes' => $input['notes'] ?? '', 'source' => 'Storefront', 'status_history' => [['from' => null, 'to' => 'Pending', 'at' => now()->toISOString(), 'actor' => $customer['id'], 'note' => 'Order placed']]]]);
             if (! empty($input['payment_method_id'])) {
                 app(CustomerPayments::class)->begin($order, $this->active('payment-methods', $input['payment_method_id']));
+                $order->refresh();
             }
             foreach ($productRecords as $i => $p) {
                 $before = $p->row();
@@ -551,6 +597,36 @@ class Commerce
         });
     }
 
+    public function updateOrderStatuses(string $id, array $input, string $key, User $actor): array
+    {
+        Validator::make($input, ['version' => 'required|integer|min:1', 'status' => 'nullable|in:Pending,Confirmed,Dispatched,Delivered,Cancelled', 'payment_status' => 'nullable|in:Unpaid,Pending,Incomplete,Failed,Paid,Refunded,Partially refunded', 'evidence' => 'required|string|max:10000'])->validate();
+
+        return $this->idempotent('order-status:'.$key, $input + ['order_id' => $id], function () use ($id, $input, $key, $actor) {
+            $order = $this->find('orders', $id, true);
+            abort_if($order->version !== $input['version'], 409, 'This order changed. Reload before continuing.');
+            if (isset($input['payment_status']) && $input['payment_status'] !== ($order->data['payment_status'] ?? 'Unpaid')) {
+                $before = $order->row();
+                $data = $order->data;
+                $data['payment_status'] = $input['payment_status'];
+                $data['payment_status_history'][] = ['from' => $before['payment_status'], 'to' => $input['payment_status'], 'actor' => $actor->email, 'at' => now()->toISOString(), 'note' => $input['evidence'], 'source' => 'Manual admin override'];
+                $order->data = $data;
+                $order->version++;
+                $order->save();
+                $this->audit($actor, 'Manual payment status override', 'orders', $before, $order->row());
+            }
+            if (isset($input['status']) && $input['status'] !== $order->data['status']) {
+                $action = ['Confirmed' => 'confirm', 'Dispatched' => 'dispatch', 'Delivered' => 'deliver', 'Cancelled' => 'cancel'][$input['status']] ?? null;
+                if (! $action) {
+                    $this->fail('An order cannot be moved backwards to Pending.');
+                }
+
+                return $this->orderAction($id, ['action' => $action, 'version' => $order->version, 'evidence' => $input['evidence']], 'status-transition:'.$key, $actor);
+            }
+
+            return $order->row();
+        });
+    }
+
     public function settings(): array
     {
         $r = Record::where('resource', 'settings')->first();
@@ -566,7 +642,17 @@ class Commerce
 
     public function saveSettings(array $input, User $actor): array
     {
-        Validator::make($input, ['store_name' => 'required|string|max:180', 'email' => 'nullable|email', 'mail_from' => 'nullable|email', 'smtp_port' => 'nullable|integer|min:1|max:65535', 'card_gateway' => 'nullable|in:Not selected,Pesapal,Flutterwave,DPO', 'mpesa_environment' => 'nullable|in:Sandbox,Production'])->validate();
+        Validator::make($input, [
+            'store_name' => 'required|string|max:180', 'version' => 'required|integer|min:1',
+            'email' => 'nullable|email|max:180', 'mail_from' => 'nullable|email|max:180',
+            'phone' => 'nullable|string|max:50', 'whatsapp' => 'nullable|string|max:50', 'address' => 'nullable|string|max:2000',
+            'logo' => 'nullable|string|max:2000', 'facebook' => 'nullable|url:http,https|max:2000', 'instagram' => 'nullable|url:http,https|max:2000', 'cdn_url' => 'nullable|url:http,https|max:2000',
+            'mail_transport' => 'nullable|in:Log (local preview),SMTP,Amazon SES',
+            'smtp_host' => 'required_if:mail_transport,SMTP|nullable|string|max:250',
+            'smtp_port' => 'required_if:mail_transport,SMTP|nullable|integer|min:1|max:65535',
+            'smtp_username' => 'nullable|string|max:250', 'smtp_password' => 'nullable|string|max:2000',
+            'ga4_id' => ['nullable', 'regex:/^G-[A-Z0-9]+$/'], 'meta_pixel_id' => ['nullable', 'regex:/^[0-9]+$/'],
+        ])->validate();
 
         return DB::transaction(function () use ($input, $actor) {
             $r = Record::where('resource', 'settings')->lockForUpdate()->firstOrFail();
@@ -599,14 +685,14 @@ class Commerce
 
     public function saveUser(array $input, User $actor, ?string $id = null): array
     {
-        Validator::make($input, ['name' => 'required|string|max:180', 'email' => 'required|email', 'role' => 'required|in:Admin,Sales,Store Manager', 'status' => 'required|in:Active,Inactive,Retired', 'password' => ($id ? 'nullable' : 'required').'|string|min:12'])->validate();
+        Validator::make($input, ['name' => 'required|string|max:180', 'email' => 'required|email', 'role' => 'required|in:Admin,Sales,Store Manager', 'status' => 'required|in:Active,Inactive,Retired', 'password' => ($id ? 'nullable' : 'required').'|string|min:12|max:1024'])->validate();
 
         return DB::transaction(function () use ($input, $actor, $id) {
             $u = $id ? User::lockForUpdate()->findOrFail($id) : new User;
             if ($id && ($input['version'] ?? null) !== $u->version) {
                 abort(409, 'User changed. Reload before saving.');
             }if (User::where('email', $input['email'])->where('id', '!=', $id ?? 0)->exists()) {
-                $this->fail('This email is already in use.');
+                throw ValidationException::withMessages(['email' => 'This email is already in use.']);
             }if ($id && $u->role === 'Admin' && ($input['role'] !== 'Admin' || $input['status'] !== 'Active') && User::where('role', 'Admin')->where('status', 'Active')->count() <= 1) {
                 $this->fail('Keep at least one active administrator.');
             }$before = $id ? $u->toArray() : null;

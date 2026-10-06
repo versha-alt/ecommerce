@@ -1,0 +1,1 @@
+import Order from '@/components/order';export const metadata={title:'Your order',robots:{index:false}};export default async function Page({params}:{params:Promise<{id:string}>}){return <Order id={(await params).id}/>}

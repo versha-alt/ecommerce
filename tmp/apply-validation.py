@@ -1,0 +1,28 @@
+from pathlib import Path
+p=Path('apps/admin/src/main.tsx')
+s=p.read_text(encoding='utf-8')
+s=s.replace("import './styles.css';", "import './styles.css';\nimport { SubmissionForm, FormValidationContext, applyInputRules, request, readResponse } from './validation';")
+a=s.index('async function api('); b=s.index('\nfunction Icon',a)
+s=s[:a]+'''async function api(path:string, method='GET', data?:any) {
+ return request(`/api/v1/${path}`,{method,headers:{Accept:'application/json','Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`} : {}),...(['orders','order-actions'].some(p=>path.startsWith(p))&&method==='POST'?{'Idempotency-Key':data?._key??crypto.randomUUID()}: {})},body:data?JSON.stringify(data):undefined},path==='auth/login');
+}'''+s[b:]
+s=s.replace('<form ', '<SubmissionForm ').replace('</form>','</SubmissionForm>')
+s=s.replace("const [uploading,setUploading]", "const validation=React.useContext(FormValidationContext);\n const [uploading,setUploading]")
+s=s.replace(' const upload=async(file:File)=>{setUploading(true);', " const upload=async(file:File)=>{if(file.size>5*1024*1024){setUploadError('Select a file smaller than 5 MB.');return;}const allowed=field.type==='image'?['image/jpeg','image/png','image/webp']:['application/pdf'];if(!allowed.includes(file.type)){setUploadError(field.type==='image'?'Select a JPG, PNG or WebP image.':'Select a PDF document.');return;}setUploading(true);")
+s=s.replace("const result=await res.json();if(!res.ok)throw new Error(result.message??'Upload failed.');", "const result=await readResponse(res);")
+s=s.replace('className={`form-field ${field.wide?', 'data-field={field.key} className={`form-field ${field.wide?')
+s=s.replace('> *</b>}</span>', '> *</b>}</span>')
+s=s.replace("type={field.type??'text'} required=", "{...applyInputRules(field)} name={field.key} aria-invalid={!!validation.errors[field.key]} aria-describedby={validation.errors[field.key]?`error-${field.key}`:undefined} type={field.type??'text'} required=")
+s=s.replace('<textarea required={field.required}', '<textarea name={field.key} maxLength={field.key===\'body\'?50000:20000} required={field.required}')
+s=s.replace('<select required={field.required}', '<select name={field.key} required={field.required}')
+s=s.replace("{field.hint&&<small>{field.hint}</small>}</label>", "{field.hint&&<small>{field.hint}</small>}{validation.errors[field.key]&&<small id={`error-${field.key}`} className=\"field-error\" role=\"alert\">{validation.errors[field.key].join(' ')}</small>}</label>")
+s=s.replace('className="form-error"','className="form-error" role="alert"')
+s=s.replace('e.preventDefault();setBusy(true);', 'e.preventDefault();if(busy)return;setBusy(true);')
+s=s.replace("const result=await response.json();if(response.status===401){window.dispatchEvent(new Event('session-expired'));}if(result.rows)setReport(result);if(!response.ok)throw new Error(result.message??'Import failed.');", "const result=await readResponse(response, false, result=>{if(result.rows)setReport(result);});")
+s=s.replace('type="email" required value={email}', 'name="email" type="email" maxLength={180} required value={email}')
+s=s.replace('type="password" required value={password}', 'name="password" type="password" maxLength={1024} required value={password}')
+s=s.replace('input value={refundEvidence}', 'input maxLength={200} value={refundEvidence}')
+s=s.replace('input value={evidence}', 'input maxLength={10000} value={evidence}')
+s=s.replace('textarea value={note}', 'textarea maxLength={10000} value={note}')
+s=s.replace('Administrators record payment evidence in Orders.', 'Payment transactions are created through customer checkout.')
+p.write_text(s,encoding='utf-8')

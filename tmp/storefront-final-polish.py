@@ -1,0 +1,11 @@
+from pathlib import Path
+p=Path('apps/storefront/lib/store.ts');s=p.read_text();old="export async function catalog():Promise<Catalog>{const response=await fetch(`${apiBase()}/api/v1/store/catalog`,{cache:'no-store',signal:AbortSignal.timeout(15000)});if(!response.ok)throw new Error('The store is temporarily unavailable. Please try again shortly.');return response.json();}";new="""let publicCatalog:{expires:number;promise:Promise<Catalog>}|undefined;
+export async function catalog():Promise<Catalog>{if(publicCatalog&&publicCatalog.expires>Date.now())return publicCatalog.promise;const promise=(async()=>{const response=await fetch(`${apiBase()}/api/v1/store/catalog`,{cache:'no-store',signal:AbortSignal.timeout(15000)});if(!response.ok)throw new Error('The store is temporarily unavailable. Please try again shortly.');return response.json();})();publicCatalog={expires:Date.now()+5000,promise};try{return await promise;}catch(error){publicCatalog=undefined;throw error;}}""";s=s.replace(old,new);p.write_text(s)
+# Remove the backdrop from the existing vector appliance assets for this storefront.
+for p in Path('apps/storefront/public/assets').glob('*.svg'):
+ s=p.read_text();s=s.replace('<rect width="120" height="120" fill="#f5f6f0"/>','');p.write_text(s)
+# Prefer products with imagery for visual category collections while keeping every product in the catalog.
+p=Path('apps/storefront/app/page.tsx');s=p.read_text();s=s.replace("data.products.find(p=>p.category_ids?.includes(c.id))","data.products.find(p=>p.image&&p.category_ids?.includes(c.id))||data.products.find(p=>p.category_ids?.includes(c.id))");s=s.replace('data.products.slice(0,4)','[...data.products].sort((a,b)=>Number(Boolean(b.image))-Number(Boolean(a.image))).slice(0,4)');p.write_text(s)
+p=Path('apps/storefront/components/store.tsx');s=p.read_text();s=s.replace('quantity<=0?lines.filter', 'quantity<=0||max<=0?lines.filter');p.write_text(s)
+p=Path('apps/storefront/components/product-detail.tsx');s=p.read_text();s=s.replace('aria-label="Zoom product image" onClick','aria-label="Zoom product image" disabled={!images.length} onClick');p.write_text(s)
+p=Path('apps/storefront/components/checkout.tsx');s=p.read_text();s=s.replace('setQuote(null);}}>{address.address}',"setQuote(null);key.current='';}}>{address.address}");p.write_text(s)

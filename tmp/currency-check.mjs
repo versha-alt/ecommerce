@@ -1,0 +1,1 @@
+const response=await fetch('http://localhost:3000/products');const html=await response.text();if(!response.ok||!html.includes('KES ')||html.includes('KSh'))throw Error('Storefront currency verification failed');console.log('Live product listing displays KES consistently.');

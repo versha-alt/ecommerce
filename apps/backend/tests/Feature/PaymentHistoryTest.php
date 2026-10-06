@@ -73,9 +73,9 @@ class PaymentHistoryTest extends TestCase
         [$order,$payment] = $this->fixtures();
         $this->sendEvent($this->event($payment), false)->assertUnauthorized();
         $this->sendEvent($this->event($payment, ['amount' => 1]))->assertUnprocessable();
-        $this->assertEquals('Unpaid', $order->fresh()->data['payment_status']);
+        $this->assertEquals('Pending', $order->fresh()->data['payment_status']);
         $this->sendEvent($this->event($payment, ['status' => 'Failed']))->assertOk()->assertJsonPath('status', 'Failed');
-        $this->assertEquals('Unpaid', $order->fresh()->data['payment_status']);
+        $this->assertEquals('Failed', $order->fresh()->data['payment_status']);
     }
 
     public function test_refunds_update_payment_history_and_preserve_original_amount(): void
@@ -89,6 +89,6 @@ class PaymentHistoryTest extends TestCase
         $this->assertEquals('Refunded', $payment->fresh()->data['status']);
         $this->assertEquals(500, $payment->fresh()->data['amount']);
         $this->login();
-        $this->getJson('/api/v1/workspace')->assertOk()->assertJsonPath('records.payments.0.status','Refunded');
+        $this->getJson('/api/v1/workspace')->assertOk()->assertJsonPath('records.payments.0.status', 'Refunded');
     }
 }

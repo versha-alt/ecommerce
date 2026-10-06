@@ -1,0 +1,5 @@
+from pathlib import Path
+p=Path('apps/backend/app/Services/Commerce.php');s=p.read_text(encoding='utf-8');s=s.replace("            $clean = $this->validate($resource, $input, $old);", "            unset($input['password_hash']);\n            $clean = $this->validate($resource, $input, $old);\n            if ($resource === 'customers' && $old) {\n                foreach (['password_hash', 'addresses', 'wishlist'] as $field) {\n                    if (array_key_exists($field, $old->data)) {\n                        $clean[$field] = $old->data[$field];\n                    }\n                }\n            }");p.write_text(s,encoding='utf-8')
+p=Path('scripts/dev.ps1');s=p.read_text();s=s.replace("-n api,admin 'npm run dev:api' 'npm run dev -w @ecomm/admin'","-n api,admin,storefront 'npm run dev:api' 'npm run dev -w @ecomm/admin' 'npm run dev:storefront'");p.write_text(s)
+import json
+p=Path('apps/storefront/package.json');d=json.loads(p.read_text());d['dependencies']['next']='16.3.8';p.write_text(json.dumps(d,indent=2)+'\n')

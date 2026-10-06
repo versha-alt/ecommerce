@@ -12,18 +12,24 @@ class CustomerPayments
 {
     public function begin(Record $order, Record $method): Record
     {
-        $data = $order->data;
-        if (($method->data['status'] ?? '') !== 'Active') {
-            app(Commerce::class)->fail('The selected payment method is disabled.');
-        }
-        $id = (string) Str::uuid();
+        return DB::transaction(function () use ($order, $method): Record {
+            $order = app(Commerce::class)->find('orders', $order->id, true);
+            $data = $order->data;
+            if (($method->data['status'] ?? '') !== 'Active') {
+                app(Commerce::class)->fail('The selected payment method is disabled.');
+            }
+            $id = (string) Str::uuid();
 
-        return Record::create(['id' => $id, 'resource' => 'payments', 'data' => ['name' => 'PAY-'.$id, 'payment_id' => 'PAY-'.$id, 'order_id' => $order->id, 'order_reference' => $data['reference'], 'customer_id' => $data['customer_id'] ?? null, 'customer_name' => $data['customer_name'] ?? $data['name'], 'customer_email' => $data['customer_email'] ?? '', 'payment_method_id' => $method->id, 'method' => $method->data['provider'], 'method_name' => $method->data['name'], 'currency' => $data['currency'] ?? 'KES', 'amount' => $data['total'], 'status' => 'Pending', 'reference' => null, 'refunded_amount' => 0, 'source' => 'Customer checkout', 'status_history' => [['from' => null, 'to' => 'Pending', 'at' => now()->toISOString(), 'actor' => 'Customer checkout']]]]);
+            $payment = Record::create(['id' => $id, 'resource' => 'payments', 'data' => ['name' => 'PAY-'.$id, 'payment_id' => 'PAY-'.$id, 'order_id' => $order->id, 'order_reference' => $data['reference'], 'customer_id' => $data['customer_id'] ?? null, 'customer_name' => $data['customer_name'] ?? $data['name'], 'customer_email' => $data['customer_email'] ?? '', 'payment_method_id' => $method->id, 'method' => $method->data['provider'], 'method_name' => $method->data['name'], 'currency' => $data['currency'] ?? 'KES', 'amount' => $data['total'], 'status' => 'Pending', 'reference' => null, 'refunded_amount' => 0, 'source' => 'Customer checkout', 'status_history' => [['from' => null, 'to' => 'Pending', 'at' => now()->toISOString(), 'actor' => 'Customer checkout']]]]);
+            $this->updateOrderStatus($order, 'Pending', 'Customer checkout started', $payment->id);
+
+            return $payment;
+        });
     }
 
     public function event(array $input): array
     {
-        Validator::make($input, ['event_id' => 'required|string|max:100', 'payment_id' => 'required|uuid', 'method' => 'required|string|max:80', 'reference' => 'required|string|max:120', 'amount' => 'required|numeric|min:0.01', 'currency' => 'required|in:KES', 'status' => 'required|in:Successful,Failed'])->validate();
+        Validator::make($input, ['event_id' => 'required|string|max:100', 'payment_id' => 'required|uuid', 'method' => 'required|string|max:80', 'reference' => 'required_if:status,Successful|nullable|string|max:120', 'amount' => 'required|numeric|min:0.01', 'currency' => 'required|in:KES', 'status' => 'required|in:Successful,Failed,Pending,Incomplete'])->validate();
 
         return app(Commerce::class)->idempotent('payment-event:'.$input['event_id'], $input, function () use ($input) {
             $commerce = app(Commerce::class);
@@ -33,15 +39,15 @@ class CustomerPayments
             if ($input['method'] !== $data['method'] || $input['currency'] !== ($data['currency'] ?? 'KES') || (int) round($input['amount'] * 100) !== (int) round($data['amount'] * 100)) {
                 $commerce->fail('Payment event does not match the checkout amount, currency or method.');
             }
-            if (! in_array($data['status'], ['Pending', 'Failed'], true)) {
-                if (($data['reference'] ?? '') !== $input['reference']) {
+            if (! in_array($data['status'], ['Pending', 'Incomplete', 'Failed'], true) || ($data['status'] === 'Failed' && in_array($input['status'], ['Pending', 'Incomplete'], true))) {
+                if (! empty($input['reference']) && ($data['reference'] ?? '') !== $input['reference']) {
                     abort(409, 'Transaction is already finalized with a different reference.');
                 }
 
                 return $payment->row();
             }
             $before = $payment->row();
-            $data['reference'] = $input['reference'];
+            $data['reference'] = $input['reference'] ?? $data['reference'] ?? null;
             $data['status'] = $input['status'];
             $data['provider_event_id'] = $input['event_id'];
             $data['processed_at'] = now()->toISOString();
@@ -55,17 +61,38 @@ class CustomerPayments
                     abort(409, 'This provider transaction reference belongs to another payment.');
                 }throw $exception;
             }
-            if ($input['status'] === 'Successful') {
-                $old = $order->row();
-                $order->data = array_merge($order->data, ['payment_status' => 'Paid']);
-                $order->version++;
-                $order->save();
-                $this->audit('Customer payment completed', 'orders', $old, $order->row());
-            }
+            $this->updateOrderStatus($order, $input['status'] === 'Successful' ? 'Paid' : $input['status'], 'Verified payment event', $payment->id);
             $this->audit('Verified payment '.$input['status'], 'payments', $before, $payment->row());
 
             return $payment->row();
         });
+    }
+
+    private function updateOrderStatus(Record $order, string $status, string $source, string $paymentId): void
+    {
+        $before = $order->row();
+        $checkout = $source === 'Customer checkout started';
+        if (! $checkout && $status !== 'Paid' && ! empty($before['active_payment_id']) && $before['active_payment_id'] !== $paymentId) {
+            return;
+        }
+        if ($status !== 'Paid' && in_array($before['payment_status'] ?? '', ['Paid', 'Refunded', 'Partially refunded'], true)) {
+            return;
+        }
+        if (($status === ($before['payment_status'] ?? null) && (! $checkout || ($before['active_payment_id'] ?? null) === $paymentId)) || in_array($before['payment_status'] ?? '', ['Refunded', 'Partially refunded'], true)) {
+            return;
+        }
+        $data = $order->data;
+        $data['payment_status'] = $status;
+        if ($checkout) {
+            $data['active_payment_id'] = $paymentId;
+        }
+        if ($status !== ($before['payment_status'] ?? null)) {
+            $data['payment_status_history'][] = ['from' => $before['payment_status'] ?? null, 'to' => $status, 'actor' => $source, 'at' => now()->toISOString()];
+        }
+        $order->data = $data;
+        $order->version++;
+        $order->save();
+        $this->audit($source, 'orders', $before, $order->row());
     }
 
     public function synchronizeRefunds(Record $order, float $total): void

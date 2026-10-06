@@ -6,7 +6,9 @@ use App\Models\CommerceRecord as Record;
 use App\Models\User;
 use App\Services\Commerce;
 use App\Services\CustomerPayments;
+use App\Services\InventoryImport;
 use App\Services\ProductImport;
+use App\Services\StoreEmails;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,11 +45,11 @@ class AdminController extends Controller
         $records = [];
         foreach (Commerce::RESOURCES as $resource) {
             if ($resource !== 'settings' && (in_array($resource, $permissions) || ($resource === 'products' && in_array('inventory', $permissions)))) {
-                $records[$resource] = $this->commerce->rows($resource);
+                $records[$resource] = $this->commerce->rows($resource, true);
             }
         }
         if (in_array('orders', $permissions)) {
-            $records['delivery-zones'] = $this->commerce->rows('delivery-zones');
+            $records['delivery-zones'] = $this->commerce->rows('delivery-zones', true);
         }
         if (in_array('users', $permissions)) {
             $records['users'] = User::orderByDesc('id')->get()->toArray();
@@ -59,7 +61,7 @@ class AdminController extends Controller
         $activity = $r->user()->role === 'Admin' ? DB::table('audit_events')->orderByDesc('created_at')->limit(100)->get()->map(fn ($e) => array_merge((array) $e, ['before' => $e->before ? json_decode($e->before, true) : null, 'after' => $e->after ? json_decode($e->after, true) : null]))->all() : [];
         $settings = in_array('settings', $permissions) ? $this->commerce->settings() : ['store_name' => $this->commerce->settings()['store_name'] ?? 'Olive Electronics'];
 
-        return ['records' => $records, 'user' => $r->user()->toArray(), 'permissions' => $permissions, 'settings' => $settings, 'activity' => $activity, 'demo' => config('commerce.demo')];
+        return response()->json(['shipping_locations' => config('shipping'), 'records' => $records, 'user' => $r->user()->toArray(), 'permissions' => $permissions, 'settings' => $settings, 'activity' => $activity, 'demo' => config('commerce.demo')])->header('Cache-Control', 'no-store, private');
     }
 
     public function save(Request $r, string $resource, ?string $id = null)
@@ -101,6 +103,23 @@ class AdminController extends Controller
         return $this->commerce->orderAction($id, $r->all(), $r->header('Idempotency-Key', ''), $r->user());
     }
 
+    public function orderStatuses(Request $request, string $id): array
+    {
+        abort_unless($request->user()->role === 'Admin', 403, 'Only administrators can override order and payment statuses.');
+
+        return $this->commerce->updateOrderStatuses($id, $request->all(), $request->header('Idempotency-Key', ''), $request->user());
+    }
+
+    public function testEmail(Request $request): JsonResponse
+    {
+        $this->commerce->authorize($request->user(), 'settings', true);
+        $input = $request->validate(['recipient' => 'required|email|max:180']);
+        $delivery = app(StoreEmails::class)->test($input['recipient']);
+        $this->commerce->audit($request->user(), 'Test email '.$delivery['status'], 'emails', null, ['recipient' => $input['recipient'], 'delivery_id' => $delivery['id'], 'status' => $delivery['status']]);
+
+        return response()->json($delivery + ['message' => $delivery['status'] === 'Sent' ? 'Test email accepted by the SMTP server. Check the inbox and spam folder.' : $delivery['error']], $delivery['status'] === 'Sent' ? 200 : 422);
+    }
+
     public function settings(Request $r)
     {
         $this->commerce->authorize($r->user(), 'settings', true);
@@ -121,6 +140,18 @@ class AdminController extends Controller
         $report = app(ProductImport::class)->run($request->file('file'), $commit, $key, $request->user());
 
         return response()->json($report + ['message' => $report['can_import'] ? 'Products validated successfully.' : 'Fix every invalid row before importing.'], $commit && ! $report['can_import'] ? 422 : 200);
+    }
+
+    public function importInventory(Request $request): JsonResponse
+    {
+        $this->commerce->authorize($request->user(), 'inventory', true);
+        $request->validate(['file' => 'required|file|mimes:csv,txt|max:2048', 'commit' => 'required|boolean', 'versions' => 'nullable|json']);
+        abort_unless(strtolower($request->file('file')->getClientOriginalExtension()) === 'csv', 422, 'Select a .csv file.');
+        $versions = json_decode($request->input('versions', '{}'), true);
+        abort_unless(is_array($versions), 422, 'Preview the file before importing.');
+        $report = app(InventoryImport::class)->run($request->file('file'), $request->boolean('commit'), $request->header('Idempotency-Key', ''), $request->user(), $versions);
+
+        return response()->json($report, $request->boolean('commit') && ! $report['can_import'] ? 422 : 200);
     }
 
     public function upload(Request $r)
