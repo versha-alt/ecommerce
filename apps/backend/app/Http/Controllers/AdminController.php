@@ -39,6 +39,24 @@ class AdminController extends Controller
         return ['ok' => true];
     }
 
+    public function profile(Request $r): array
+    {
+        $input = $r->validate([
+            'name' => 'required|string|max:180',
+            'email' => 'required|email|max:254',
+            'version' => 'required|integer|min:1',
+        ]);
+        $input['name'] = trim($input['name']);
+        $input['email'] = strtolower(trim($input['email']));
+        $user = $r->user();
+
+        return $this->commerce->saveUser([
+            ...$input,
+            'role' => $user->role,
+            'status' => $user->status,
+        ], $user, (string) $user->id);
+    }
+
     public function workspace(Request $r)
     {
         $permissions = $this->commerce->permissions($r->user());
@@ -59,7 +77,7 @@ class AdminController extends Controller
             $records['products'][$i]['brand_name'] = collect($records['brands'] ?? [])->firstWhere('id', $p['brand_id'] ?? null)['name'] ?? '';
         }
         $activity = $r->user()->role === 'Admin' ? DB::table('audit_events')->orderByDesc('created_at')->limit(100)->get()->map(fn ($e) => array_merge((array) $e, ['before' => $e->before ? json_decode($e->before, true) : null, 'after' => $e->after ? json_decode($e->after, true) : null]))->all() : [];
-        $settings = in_array('settings', $permissions) ? $this->commerce->settings() : ['store_name' => $this->commerce->settings()['store_name'] ?? 'Olive Electronics'];
+        $settings = in_array('settings', $permissions) ? $this->commerce->settings() : ['store_name' => $this->commerce->settings()['store_name'] ?? 'Leekav'];
 
         return response()->json(['shipping_locations' => config('shipping'), 'records' => $records, 'user' => $r->user()->toArray(), 'permissions' => $permissions, 'settings' => $settings, 'activity' => $activity, 'demo' => config('commerce.demo')])->header('Cache-Control', 'no-store, private');
     }

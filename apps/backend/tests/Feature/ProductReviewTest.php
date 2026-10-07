@@ -4,8 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\CommerceRecord as Record;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -19,6 +21,8 @@ class ProductReviewTest extends TestCase
         Record::create(['resource' => 'settings', 'data' => ['store_name' => 'Store']]);
         $product = Record::create(['resource' => 'products', 'data' => ['name' => 'Appliance', 'slug' => 'review-appliance', 'status' => 'Active']]);
         $customer = Record::create(['resource' => 'customers', 'data' => ['name' => 'Buyer', 'email' => 'buyer@example.com', 'status' => 'Active']]);
+
+        Record::create(['resource' => 'orders', 'data' => ['customer_id' => $customer->id, 'status' => 'Delivered', 'lines' => [['product_id' => $product->id, 'quantity' => 1]]]]);
 
         return [$product, $customer];
     }
@@ -84,6 +88,53 @@ class ProductReviewTest extends TestCase
         $this->patchJson('/api/v1/reviews/'.$id, ['version' => 1, 'status' => 'Approved', 'rating' => 1])->assertUnprocessable();
         $this->assertSame(5, Record::findOrFail($id)->data['rating']);
         $this->postJson('/api/v1/reviews/'.$id.'/retire', ['version' => 1])->assertStatus(405);
+    }
+
+    public function test_purchase_required_and_existing_review_can_be_edited(): void
+    {
+        [$product, $customer] = $this->fixtures();
+        $order = Record::where('resource', 'orders')->firstOrFail();
+        $order->data = array_merge($order->data, ['status' => 'Dispatched']);
+        $order->save();
+        $input = $this->input($product, $customer);
+        $this->submit($input)->assertForbidden();
+        $order->data = array_merge($order->data, ['status' => 'Completed']);
+        $order->save();
+        $id = $this->submit($input)->assertOk()->json('id');
+        $this->submit($this->input($product, $customer))->assertConflict();
+        $review = Record::findOrFail($id);
+        $review->data = array_merge($review->data, ['status' => 'Approved']);
+        $review->save();
+        $this->getJson('/api/v1/products/'.$product->id.'/reviews')->assertJsonPath('data.0.verified_purchase', true);
+        $this->submit(array_merge($this->input($product, $customer), ['version' => 1, 'rating' => 3, 'body' => 'Edited review', 'photos' => []]))->assertOk()->assertJsonPath('id', $id);
+        $this->assertSame(1, Record::where('resource', 'reviews')->count());
+        $this->assertSame('Pending', $review->fresh()->data['status']);
+        $this->assertSame(3, $review->fresh()->data['rating']);
+        $this->getJson('/api/v1/products/'.$product->id.'/reviews')->assertJsonCount(0, 'data');
+        $this->submit(array_merge($this->input($product, $customer), ['version' => 2, 'photos' => ['https://example.com/photo.jpg']]))->assertUnprocessable();
+        $other = Record::create(['resource' => 'customers', 'data' => ['name' => 'Other', 'status' => 'Active']]);
+        $this->submit($this->input($product, $other))->assertForbidden();
+    }
+
+    public function test_photos_and_database_uniqueness(): void
+    {
+        Storage::fake('local');
+        [$product, $customer] = $this->fixtures();
+        $image = imagecreatetruecolor(10, 10);
+        ob_start();
+        imagepng($image);
+        $photo = 'data:image/png;base64,'.base64_encode(ob_get_clean());
+        imagedestroy($image);
+        $id = $this->submit($this->input($product, $customer) + ['photos' => [$photo]])->assertOk()->json('id');
+        $review = Record::findOrFail($id);
+        $url = $review->data['photos'][0];
+        Storage::disk('local')->assertExists('uploads/'.basename($url));
+        $this->submit($this->input($product, $customer) + ['version' => 1, 'photos' => [$url]])->assertOk();
+        $this->assertSame([$url], $review->fresh()->data['photos']);
+        $this->submit($this->input($product, $customer) + ['version' => 2, 'photos' => ['data:image/png;base64,bm90YW5pbWFnZQ==']])->assertUnprocessable();
+        $this->submit($this->input($product, $customer) + ['version' => 2, 'photos' => [$photo, $photo, $photo, $photo]])->assertUnprocessable();
+        $this->expectException(QueryException::class);
+        Record::create(['resource' => 'reviews', 'data' => $review->fresh()->data]);
     }
 
     public function test_sales_staff_cannot_moderate_customer_reviews(): void

@@ -204,10 +204,20 @@ class StorefrontController extends Controller
         return ['order' => $this->orderData(app(Commerce::class)->orderAction($id, $input + ['action' => 'cancel'], $request->header('Idempotency-Key', ''), $actor))];
     }
 
+    public function reviewEligibility(Request $request, string $product): array
+    {
+        $customer = $this->customer($request);
+        app(Commerce::class)->active('products', $product);
+        $eligible = (bool) app(ProductReviewController::class)->eligibility($customer->id, $product);
+        $review = Record::where('resource', 'reviews')->where('data->customer_id', $customer->id)->where('data->product_id', $product)->first();
+
+        return ['eligible' => $eligible, 'review' => $review ? array_intersect_key($review->row(), array_flip(['id', 'version', 'rating', 'title', 'body', 'photos', 'status'])) : null];
+    }
+
     public function review(Request $request): array
     {
         $customer = $this->customer($request);
-        $input = $request->validate(['submission_id' => 'required|uuid', 'product_id' => 'required|uuid', 'rating' => 'required|integer|min:1|max:5', 'title' => 'nullable|string|max:180', 'body' => 'required|string|max:5000']);
+        $input = $request->validate(['submission_id' => 'required|uuid', 'product_id' => 'required|uuid', 'rating' => 'required|integer|min:1|max:5', 'title' => 'nullable|string|max:180', 'body' => 'required|string|max:5000', 'photos' => 'sometimes|array|max:3', 'photos.*' => 'required|string|max:3000000', 'version' => 'nullable|integer|min:1']);
 
         return app(ProductReviewController::class)->create($input + ['customer_id' => $customer->id], app(Commerce::class));
     }
@@ -241,8 +251,10 @@ class StorefrontController extends Controller
     public function newsletter(Request $request): array
     {
         $input = $request->validate(['email' => 'required|email|max:180']);
-        Record::firstOrCreate(['resource' => 'newsletter', 'data->email' => strtolower($input['email'])], ['data' => ['email' => strtolower($input['email']), 'status' => 'Subscribed', 'consent_at' => now()->toISOString()]]);
+        $subscriber = Record::firstOrCreate(['resource' => 'newsletter', 'data->email' => strtolower($input['email'])], ['data' => ['email' => strtolower($input['email']), 'status' => 'Subscribed', 'consent_at' => now()->toISOString()]]);
 
-        return ['message' => 'Thanks for subscribing.'];
+        $delivery = app(StoreEmails::class)->newsletter($subscriber);
+
+        return ['message' => $delivery['status'] === 'Failed' ? 'You are subscribed, but we could not send the welcome email. Please try again later.' : 'Thanks for subscribing.', 'email_delivery' => $delivery];
     }
 }

@@ -49,7 +49,7 @@ class FormValidationTest extends TestCase
     public function test_product_images_are_validated_persisted_preserved_and_removable(): void
     {
         $this->signIn();
-        $payload = ['name' => 'Appliance', 'sku' => 'GALLERY-001', 'slug' => 'gallery-appliance', 'type' => 'Simple', 'price' => 1000, 'stock' => 5, 'status' => 'Draft'];
+        $payload = ['name' => 'Appliance', 'sku' => 'GALLERY-001', 'slug' => 'gallery-appliance', 'type' => 'Simple', 'price' => 1000, 'stock' => 5, 'status' => 'Inactive'];
         $this->postJson('/api/v1/products', $payload + ['image' => ['one', 'two'], 'gallery_images' => 'invalid'])->assertUnprocessable()->assertJsonValidationErrors(['image', 'gallery_images']);
         $this->postJson('/api/v1/products', $payload + ['gallery_images' => ['javascript:alert(1)']])->assertUnprocessable()->assertJsonValidationErrors('gallery_images.0');
         $images = ['/api/v1/media/front.webp', '/api/v1/media/back.webp'];
@@ -58,5 +58,18 @@ class FormValidationTest extends TestCase
         unset($product['gallery_images']);
         $updated = $this->patchJson('/api/v1/products/'.$product['id'], $product)->assertOk()->assertJsonPath('gallery_images', $images)->assertJsonPath('image', 'https://example.com/main.jpg')->json();
         $this->patchJson('/api/v1/products/'.$product['id'], array_merge($updated, ['image' => '', 'gallery_images' => []]))->assertOk()->assertJsonPath('gallery_images', [])->assertJsonPath('image', null);
+    }
+
+    public function test_products_only_accept_active_and_inactive_statuses(): void
+    {
+        $this->signIn();
+        $payload = ['name' => 'Status appliance', 'sku' => 'STATUS-001', 'slug' => 'status-appliance', 'type' => 'Simple', 'price' => 1000, 'stock' => 5];
+        foreach (['Draft', 'Published'] as $status) {
+            $this->postJson('/api/v1/products', $payload + ['status' => $status])->assertUnprocessable()->assertJsonValidationErrors('status');
+        }
+        $product = $this->postJson('/api/v1/products', $payload + ['status' => 'Inactive'])->assertOk()->assertJsonPath('status', 'Inactive')->json();
+        $active = $this->patchJson('/api/v1/products/'.$product['id'], array_merge($product, ['status' => 'Active']))->assertOk()->assertJsonPath('status', 'Active')->json();
+        $this->patchJson('/api/v1/products/'.$product['id'], array_merge($active, ['status' => 'Draft']))->assertUnprocessable()->assertJsonValidationErrors('status');
+        $this->assertSame('Active', CommerceRecord::findOrFail($product['id'])->data['status']);
     }
 }

@@ -20,7 +20,7 @@ export async function readResponse(response:Response, login=false, inspect?:(bod
 export async function request(url:string, options:RequestInit, login=false){
  const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
  try{return await readResponse(await fetch(url,{...options,signal:controller.signal}),login);}
- catch(error){if(error instanceof TypeError)throw new Error('Unable to connect. Check your connection and try again.');if(error instanceof DOMException&&error.name==='AbortError')throw new Error('The request timed out. Check the record before retrying.');throw error;}
+ catch(error){const failure=error instanceof TypeError?new Error('Unable to connect. Check your connection and try again.'):error instanceof DOMException&&error.name==='AbortError'?new Error('The request timed out. Check the record before retrying.'):error;if(!['GET','HEAD'].includes((options.method||'GET').toUpperCase()))window.dispatchEvent(new CustomEvent('admin-save-error',{detail:failure instanceof Error?failure.message:'The update could not be saved.'}));throw failure;}
  finally{clearTimeout(timeout);}
 }
 const integerKeys=['stock','low_stock_threshold','quantity','minimum_quantity','buy_quantity','get_quantity','max_applications','usage_limit','smtp_port'];
@@ -49,8 +49,8 @@ export function SubmissionForm({onSubmit,children,...props}:React.FormHTMLAttrib
   if(value('starts_at')&&value('ends_at')&&value('ends_at')<value('starts_at'))next.ends_at=['End date must be on or after the start date.'];
   if(value('discount_type')==='Percentage'&&Number(value('value'))>100)next.value=['Percentage cannot exceed 100%.'];
   for(const key of ['credentials','configuration']){const content=value(key);if(content.trim()){try{const parsed=JSON.parse(content);if(!parsed||Array.isArray(parsed)||typeof parsed!=='object')throw new Error();}catch{next[key]=['Enter a valid JSON object.'];}}}
-  setErrors(next);if(Object.keys(next).length){setMessage('Please correct the highlighted fields before submitting.');(invalid??form.querySelector<HTMLElement>(`[name="${Object.keys(next)[0]}"]`))?.focus();return;}
-  if(form.querySelector('input[type="file"]:disabled')){setMessage('Wait for the file upload to finish before saving.');return;}
+  setErrors(next);if(Object.keys(next).length){setMessage('Please correct the highlighted fields before submitting.');window.dispatchEvent(new CustomEvent('admin-save-error',{detail:'Changes were not saved. Please correct the highlighted fields.'}));(invalid??form.querySelector<HTMLElement>(`[name="${Object.keys(next)[0]}"]`))?.focus();return;}
+  if(form.querySelector('input[type="file"]:disabled')){setMessage('Wait for the file upload to finish before saving.');window.dispatchEvent(new CustomEvent('admin-save-error',{detail:'Wait for the file upload to finish before saving.'}));return;}
   setMessage('');pending.current=true;try{await onSubmit?.(event);}finally{pending.current=false;}
  }}>{message&&<div className="form-error" role="alert">{message}</div>}{children}</form></FormValidationContext.Provider>;
 }

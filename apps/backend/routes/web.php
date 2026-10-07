@@ -21,6 +21,7 @@ Route::prefix('api/v1')->group(function () {
         Route::post('quote', [StorefrontController::class, 'quote'])->middleware('throttle:30,1,quote:');
         Route::get('orders/{id}', [StorefrontController::class, 'order']);
         Route::post('orders/{id}/cancel', [StorefrontController::class, 'cancel']);
+        Route::get('review-eligibility/{product}', [StorefrontController::class, 'reviewEligibility']);
         Route::post('reviews', [StorefrontController::class, 'review']);
         Route::post('returns', [StorefrontController::class, 'returns']);
         Route::post('enquiries', [StorefrontController::class, 'enquiry'])->middleware('throttle:10,1,enquiry:');
@@ -36,6 +37,7 @@ Route::prefix('api/v1')->group(function () {
     Route::get('media/{file}', [AdminController::class, 'media']);
     Route::middleware(AdminSession::class)->group(function () {
         Route::post('auth/logout', [AdminController::class, 'logout']);
+        Route::patch('auth/profile', [AdminController::class, 'profile']);
         Route::get('workspace', [AdminController::class, 'workspace']);
         Route::post('products/import', [AdminController::class, 'importProducts']);
         Route::post('inventory/import', [AdminController::class, 'importInventory']);

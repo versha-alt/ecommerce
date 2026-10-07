@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\ProductCatalog;
+use App\Services\StoreEmails;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,7 @@ class CommerceRecord extends Model
 
     protected $keyType = 'string';
 
-    protected $guarded = ['product_slug'];
+    protected $guarded = ['product_slug', 'verified_review_key'];
 
     protected function casts(): array
     {
@@ -53,6 +54,11 @@ class CommerceRecord extends Model
             }
         });
         static::saved(function ($record) {
+            if ($record->resource === 'orders' && ($record->wasRecentlyCreated || $record->wasChanged('data'))) {
+                $order = $record->row();
+                $before = $record->getOriginal('data');
+                DB::afterCommit(fn () => app(StoreEmails::class)->orderChanged($order, $before));
+            }
             Cache::forget('commerce.records.'.$record->resource);
             if ($record->resource === 'products') {
                 app(ProductCatalog::class)->synchronize($record);

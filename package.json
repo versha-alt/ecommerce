@@ -17,6 +17,7 @@
     "services:up": "docker compose up -d",
     "services:down": "docker compose down",
     "dev:api": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/serve-api.ps1",
+    "dev:mail": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/serve-mail.ps1",
     "dev:storefront": "npm run dev -w @ecomm/storefront",
     "build:storefront": "npm run build -w @ecomm/storefront"
   },

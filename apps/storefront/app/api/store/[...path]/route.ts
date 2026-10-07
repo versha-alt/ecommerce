@@ -3,7 +3,7 @@ import {NextRequest,NextResponse} from 'next/server';
 import {apiBase} from '@/lib/store';
 async function proxy(request:NextRequest,{params}:{params:Promise<{path:string[]}>}){
  const path=(await params).path.join('/');const isRead=request.method==='GET';
- const allowed=isRead?/^(catalog|account|orders\/[a-f0-9-]+|product-reviews\/[a-f0-9-]+)$/.test(path):/^(register|login|logout|checkout|quote|profile|reviews|returns|enquiries|newsletter|orders\/[a-f0-9-]+\/cancel)$/.test(path);
+ const allowed=isRead?/^(catalog|account|orders\/[a-f0-9-]+|product-reviews\/[a-f0-9-]+|review-eligibility\/[a-f0-9-]+)$/.test(path):/^(register|login|logout|checkout|quote|profile|reviews|returns|enquiries|newsletter|orders\/[a-f0-9-]+\/cancel)$/.test(path);
  if(!allowed)return NextResponse.json({message:'Not found.'},{status:404});
  const expectedOrigin=process.env.NEXT_PUBLIC_SITE_URL||`${request.nextUrl.protocol}//${request.headers.get('host')}`;
  if(!isRead&&request.headers.get('origin')!==expectedOrigin)return NextResponse.json({message:'Invalid request origin.'},{status:403});

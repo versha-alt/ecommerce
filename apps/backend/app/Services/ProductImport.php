@@ -24,13 +24,13 @@ class ProductImport
 
     private function prepare(array $input): array
     {
-        foreach (['type' => 'Simple', 'stock' => 0, 'low_stock_threshold' => 5, 'status' => 'Draft'] as $key => $default) {
+        foreach (['type' => 'Simple', 'stock' => 0, 'low_stock_threshold' => 5, 'status' => 'Inactive'] as $key => $default) {
             if (! isset($input[$key]) || $input[$key] === '') {
                 $input[$key] = $default;
             }
         }
-        if (! in_array($input['status'], ['Draft', 'Active', 'Inactive'], true)) {
-            $this->commerce->fail('Imported product status must be Draft, Active or Inactive.');
+        if (! in_array($input['status'], ['Active', 'Inactive'], true)) {
+            $this->commerce->fail('Imported product status must be Active or Inactive.');
         }
         foreach (['sale_price', 'brand_id'] as $key) {
             if (($input[$key] ?? '') === '') {

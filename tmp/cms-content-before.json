@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Privacy",
+    "slug": "privacy",
+    "body": "Draft content for Privacy. Replace with your approved business information before publishing.",
+    "status": "Active",
+    "seo_title": "Privacy",
+    "id": "5136b96a-917c-4f9a-b2ba-329ef1fba693",
+    "version": 2,
+    "created_at": "2026-10-05T09:59:08.000000Z",
+    "updated_at": "2026-10-07T10:03:06.000000Z"
+  },
+  {
+    "name": "Terms & Conditions",
+    "slug": "terms-conditions",
+    "body": "Draft content for Terms & Conditions. Replace with your approved business information before publishing.",
+    "status": "Active",
+    "seo_title": "Terms & Conditions",
+    "id": "5472b617-27bf-4645-9209-dc1aaf2bcdc1",
+    "version": 2,
+    "created_at": "2026-10-05T09:59:08.000000Z",
+    "updated_at": "2026-10-07T10:03:07.000000Z"
+  },
+  {
+    "name": "About",
+    "slug": "about",
+    "body": "<p>Draft content for About. Replace with your approved business information before publishing.</p>",
+    "status": "Active",
+    "seo_title": "About",
+    "password": null,
+    "seo_description": null,
+    "id": "75be38d4-6d4f-4b75-87fb-34eeebd836ba",
+    "version": 3,
+    "created_at": "2026-10-05T09:59:08.000000Z",
+    "updated_at": "2026-10-07T10:03:07.000000Z"
+  },
+  {
+    "name": "FAQ",
+    "slug": "faq",
+    "body": "Draft content for FAQ. Replace with your approved business information before publishing.",
+    "status": "Active",
+    "seo_title": "FAQ",
+    "id": "9b38c56a-5e7a-4598-b427-e4ae32ee97fd",
+    "version": 2,
+    "created_at": "2026-10-05T09:59:08.000000Z",
+    "updated_at": "2026-10-07T10:03:08.000000Z"
+  },
+  {
+    "name": "Contact",
+    "slug": "contact",
+    "body": "<p>Draft content for Contact. Replace with your approved business information before publishing.</p>",
+    "status": "Active",
+    "seo_title": "Contact",
+    "password": null,
+    "seo_description": null,
+    "id": "b5a75dd9-587c-45d4-8e2e-b348066c7bb1",
+    "version": 3,
+    "created_at": "2026-10-05T09:59:08.000000Z",
+    "updated_at": "2026-10-07T10:03:08.000000Z"
+  },
+  {
+    "name": "Shipping & Returns",
+    "slug": "shipping-returns",
+    "body": "Draft content for Shipping & Returns. Replace with your approved business information before publishing.",
+    "status": "Active",
+    "seo_title": "Shipping & Returns",
+    "id": "bd2107ac-cb78-44c3-a09a-6677f2b8a345",
+    "version": 2,
+    "created_at": "2026-10-05T09:59:08.000000Z",
+    "updated_at": "2026-10-07T10:03:09.000000Z"
+  }
+]

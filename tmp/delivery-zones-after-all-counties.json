@@ -1,0 +1,613 @@
+[
+  {
+    "name": "Nyamira delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "046"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Nyamira"
+    ],
+    "id": "293aa56d-5fe3-401b-9773-131ac072d45e"
+  },
+  {
+    "name": "Kisii delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "045"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Kisii"
+    ],
+    "id": "4eec1f0c-834e-4e2e-803c-8e3b37bdcdc5"
+  },
+  {
+    "name": "Migori delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "044"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Migori"
+    ],
+    "id": "7a9e3caa-eeb8-46c4-b1aa-a4af9d836c16"
+  },
+  {
+    "name": "Homa Bay delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "043"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Homa Bay"
+    ],
+    "id": "d4ddd996-d27f-4239-acca-d6b99969f55b"
+  },
+  {
+    "name": "Siaya delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "041"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Siaya"
+    ],
+    "id": "62fdafbb-8bb0-4aed-b464-a66f15e9ee2c"
+  },
+  {
+    "name": "Kisumu delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "042"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Kisumu"
+    ],
+    "id": "a4995b02-b821-4dea-9c01-9258647cee01"
+  },
+  {
+    "name": "Busia delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "040"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Busia"
+    ],
+    "id": "b07cfdab-f20c-437a-8b7e-f4b2bd976f0a"
+  },
+  {
+    "name": "Bungoma delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "039"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Bungoma"
+    ],
+    "id": "4c4a13cd-246f-4c64-8cd8-df938e329523"
+  },
+  {
+    "name": "Vihiga delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "038"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Vihiga"
+    ],
+    "id": "66a4bea7-4f80-427a-9211-5daaef7c9152"
+  },
+  {
+    "name": "Kakamega delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "037"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Kakamega"
+    ],
+    "id": "e4345bcf-1de2-4495-b645-b4f2afded3b1"
+  },
+  {
+    "name": "Kajiado delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "034"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Kajiado"
+    ],
+    "id": "0165b052-25c9-4092-8917-aaac3775b35f"
+  },
+  {
+    "name": "Kericho delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "035"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Kericho"
+    ],
+    "id": "7a89aa6e-75d5-47b6-a28a-ca0b903df086"
+  },
+  {
+    "name": "Bomet delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "036"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Bomet"
+    ],
+    "id": "af29d1f3-558f-4ef4-8984-6bfb606b4d49"
+  },
+  {
+    "name": "Laikipia delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "031"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Laikipia"
+    ],
+    "id": "1384f526-c724-4e2b-9d32-d0dbe77eb694"
+  },
+  {
+    "name": "Nakuru delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "032"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Nakuru"
+    ],
+    "id": "5897a248-6af7-4e04-9ffa-959f1304edcd"
+  },
+  {
+    "name": "Narok delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "033"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Narok"
+    ],
+    "id": "c3a0e042-ef44-4e1d-b230-ff8816504953"
+  },
+  {
+    "name": "Nandi delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "029"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Nandi"
+    ],
+    "id": "0f54655f-8523-4b87-92f5-9c88c8daa585"
+  },
+  {
+    "name": "Baringo delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "030"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Baringo"
+    ],
+    "id": "1b87a189-469f-4c09-8a54-a267fc59e935"
+  },
+  {
+    "name": "Elgeyo/Marakwet delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "028"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Elgeyo/Marakwet"
+    ],
+    "id": "31253afb-43ea-4b0d-924d-aa8f4ec4dbc4"
+  },
+  {
+    "name": "Trans Nzoia delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "026"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Trans Nzoia"
+    ],
+    "id": "23fcf20b-753d-4a37-b67b-aa0f670d495f"
+  },
+  {
+    "name": "Samburu delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "025"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Samburu"
+    ],
+    "id": "52773a37-6a61-4e92-95ec-52ef4ef3bbca"
+  },
+  {
+    "name": "Uasin Gishu delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "027"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Uasin Gishu"
+    ],
+    "id": "9669617e-a43b-4f76-b97e-f737ef72c171"
+  },
+  {
+    "name": "Murang'a delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "021"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Murang'a"
+    ],
+    "id": "15e6340c-ec77-4e09-83ea-77deca82dc28"
+  },
+  {
+    "name": "West Pokot delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "024"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "West Pokot"
+    ],
+    "id": "2e45deae-c820-4dcc-b234-555b6dbae0b3"
+  },
+  {
+    "name": "Turkana delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "023"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Turkana"
+    ],
+    "id": "78f24917-3d73-48a4-81bc-0955e0fa2f93"
+  },
+  {
+    "name": "Kirinyaga delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "020"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Kirinyaga"
+    ],
+    "id": "3bae18f6-417e-4482-884c-88429fa1b172"
+  },
+  {
+    "name": "Nyeri delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "019"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Nyeri"
+    ],
+    "id": "5e180c3b-af78-465d-8be2-bbc19f3e4090"
+  },
+  {
+    "name": "Nyandarua delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "018"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Nyandarua"
+    ],
+    "id": "b8f4ebf8-8d4c-417b-8a80-1cf90e539e18"
+  },
+  {
+    "name": "Kitui delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "015"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Kitui"
+    ],
+    "id": "4b507f78-b287-492a-96d0-c52b842c69b9"
+  },
+  {
+    "name": "Machakos delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "016"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Machakos"
+    ],
+    "id": "670fa7a2-879e-4b67-a534-34cc8bed161f"
+  },
+  {
+    "name": "Makueni delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "017"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Makueni"
+    ],
+    "id": "faab0b2c-0ded-4b5d-bd66-ede62a84cba8"
+  },
+  {
+    "name": "Tharaka-Nithi delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "013"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Tharaka-Nithi"
+    ],
+    "id": "15573dfd-83f3-4fda-90e4-33ac915c2495"
+  },
+  {
+    "name": "Embu delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "014"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Embu"
+    ],
+    "id": "2e654fdf-41d2-48c4-83de-c213f64635e1"
+  },
+  {
+    "name": "Meru delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "012"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Meru"
+    ],
+    "id": "b32f5638-f632-4302-8002-cdbeca4c6e15"
+  },
+  {
+    "name": "Mandera delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "009"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Mandera"
+    ],
+    "id": "f026458f-a01d-4bb3-a0c1-e59a2b74768e"
+  },
+  {
+    "name": "Marsabit delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "010"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Marsabit"
+    ],
+    "id": "fe59af22-a0da-458c-a001-35ff1b0a0be3"
+  },
+  {
+    "name": "Isiolo delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "011"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Isiolo"
+    ],
+    "id": "ff58f2e3-2b9c-4099-ac89-fa8ad9b7f9c3"
+  },
+  {
+    "name": "Wajir delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "008"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Wajir"
+    ],
+    "id": "910f517a-5050-4afe-a49f-0bb63a556a4a"
+  },
+  {
+    "name": "Taita/Taveta delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "006"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Taita/Taveta"
+    ],
+    "id": "dc77a86e-e577-4588-8f00-f4860e45c37e"
+  },
+  {
+    "name": "Garissa delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "007"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Garissa"
+    ],
+    "id": "ea9554ab-2ee1-416b-98be-ddbeb54ed0e1"
+  },
+  {
+    "name": "Tana River delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "004"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Tana River"
+    ],
+    "id": "39c941e7-729c-441f-96f1-be6ef3028a02"
+  },
+  {
+    "name": "Kilifi delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "003"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Kilifi"
+    ],
+    "id": "3d35dc61-2aa0-44ce-a154-e13135371ef7"
+  },
+  {
+    "name": "Lamu delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "005"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Lamu"
+    ],
+    "id": "76e3e265-89f9-4fe5-80bb-41d03acb3689"
+  },
+  {
+    "name": "Kwale delivery",
+    "country_code": "KE",
+    "county_codes": [
+      "002"
+    ],
+    "charge": 500,
+    "free_threshold": null,
+    "county_names": [
+      "Kwale"
+    ],
+    "id": "04086023-441c-46f7-9a02-aafafba18d57"
+  },
+  {
+    "name": "Kiambu & satellite towns",
+    "charge": 500,
+    "free_threshold": 75000,
+    "country_code": "KE",
+    "county_codes": [
+      "022"
+    ],
+    "county_names": [
+      "Kiambu"
+    ],
+    "id": "39321bbe-bf13-4858-9626-31023759e7fc"
+  },
+  {
+    "name": "Mombasa",
+    "charge": 500,
+    "free_threshold": 100000,
+    "country_code": "KE",
+    "county_codes": [
+      "001"
+    ],
+    "county_names": [
+      "Mombasa"
+    ],
+    "id": "8fa2ad84-a2d2-4405-8299-4f6d866d9fee"
+  },
+  {
+    "name": "Nairobi metro",
+    "charge": 500,
+    "free_threshold": 50000,
+    "country_code": "KE",
+    "county_codes": [
+      "047"
+    ],
+    "county_names": [
+      "Nairobi"
+    ],
+    "id": "ad97ce35-82a0-479b-8049-1d378a711169"
+  }
+]

@@ -44,7 +44,7 @@ class ProductImportTest extends TestCase
         $this->assertEquals($brand->id, $product->data['brand_id']);
         $this->assertEquals([$child->id, $root->id], $product->data['category_ids']);
         $this->assertEquals(7, $product->data['stock']);
-        $this->assertEquals('Draft', $product->data['status']);
+        $this->assertEquals('Inactive', $product->data['status']);
         $this->assertDatabaseHas('product_categories', ['product_id' => $product->id, 'category_id' => $root->id]);
         $this->postJson('/api/v1/products/import', ['file' => $this->csv($csv), 'commit' => true])->assertOk()->assertJsonPath('imported', 2);
         $this->assertEquals(2, Record::where('resource', 'products')->count());
@@ -115,7 +115,7 @@ class ProductImportTest extends TestCase
             $csv .= "A,S-$index,a-$index,1\n";
         }
         $this->postJson('/api/v1/products/import', ['file' => $this->csv($csv), 'commit' => false])->assertUnprocessable();
-        $this->postJson('/api/v1/products/import',['file' => $this->csv("name,sku,slug,price\nA,A,a,1\n"), 'commit' => true])->assertUnprocessable();
-        $this->assertEquals(0,Record::where('resource','products')->count());
+        $this->postJson('/api/v1/products/import', ['file' => $this->csv("name,sku,slug,price\nA,A,a,1\n"), 'commit' => true])->assertUnprocessable();
+        $this->assertEquals(0, Record::where('resource', 'products')->count());
     }
 }

@@ -84,8 +84,9 @@ class StorefrontTest extends TestCase
 
     public function test_mail_failure_does_not_block_checkout_or_duplicate_confirmation(): void
     {
+        config(['queue.default' => 'sync']);
         $f = $this->fixture();
-        Mail::shouldReceive('build')->once()->andThrow(new \RuntimeException('Connection refused'));
+        Mail::shouldReceive('build')->twice()->andThrow(new \RuntimeException('Connection refused'));
         $body = $this->body($f);
         $this->postJson('/api/v1/store/quote', $body)->assertOk();
         $this->assertDatabaseCount('email_deliveries', 0);
@@ -118,6 +119,10 @@ class StorefrontTest extends TestCase
         $this->getJson('/api/v1/store/account')->assertOk()->assertJsonCount(1, 'orders');
         $this->withHeader('Idempotency-Key', 'cancel')->postJson('/api/v1/store/orders/'.$order['id'].'/cancel', ['version' => $order['version'], 'evidence' => 'Changed mind'])->assertOk()->assertJsonPath('order.status', 'Cancelled');
         $this->assertSame(0, $f[0]->fresh()->data['reserved']);
+        $this->getJson('/api/v1/store/review-eligibility/'.$f[0]->id)->assertOk()->assertJsonPath('eligible', false);
+        $this->postJson('/api/v1/store/reviews', ['submission_id' => (string) Str::uuid(), 'product_id' => $f[0]->id, 'rating' => 4, 'body' => 'Too early'])->assertForbidden();
+        Record::create(['resource' => 'orders', 'data' => ['customer_id' => $order['customer_id'], 'status' => 'Delivered', 'lines' => [['product_id' => $f[0]->id, 'quantity' => 1]]]]);
+        $this->getJson('/api/v1/store/review-eligibility/'.$f[0]->id)->assertOk()->assertJsonPath('eligible', true);
         $this->postJson('/api/v1/store/reviews', ['submission_id' => (string) Str::uuid(), 'product_id' => $f[0]->id, 'rating' => 4, 'body' => 'Very useful'])->assertOk();
         $this->assertSame('Pending', Record::where('resource', 'reviews')->firstOrFail()->data['status']);
         $this->getJson('/api/v1/products/'.$f[0]->id.'/reviews')->assertOk()->assertJsonCount(0, 'data');

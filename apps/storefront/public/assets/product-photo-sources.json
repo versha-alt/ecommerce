@@ -1,0 +1,728 @@
+{
+  "verified_on": "2026-10-07",
+  "usage": "Representative category photographs; main view with two detail crops. No exact model identity is asserted.",
+  "image_dimensions": [
+    1000,
+    1000
+  ],
+  "storage": "Laravel local uploads, served through /api/v1/media/",
+  "sources": {
+    "front-washer": {
+      "file": "17158638.jpg",
+      "rect": [
+        0.08,
+        0.25,
+        0.59,
+        1
+      ],
+      "id": 17158638,
+      "source": "https://www.pexels.com/photo/17158638/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "front-washer-main.jpg",
+        "front-washer-detail-1.jpg",
+        "front-washer-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/2dc130fc-3982-4553-b3b2-e63ba931bec6.webp",
+        "/api/v1/media/91b4a5b8-2714-43c9-92c9-175a3cbdf0a8.webp",
+        "/api/v1/media/8d69bdac-d8cd-4684-910f-262aecdd5c1a.webp"
+      ]
+    },
+    "top-washer": {
+      "file": "31602334.jpg",
+      "rect": [
+        0.3,
+        0.47,
+        0.65,
+        1
+      ],
+      "id": 31602334,
+      "source": "https://www.pexels.com/photo/31602334/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "top-washer-main.jpg",
+        "top-washer-detail-1.jpg",
+        "top-washer-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/388f520e-c0d9-4d74-a864-6fcb29781f74.webp",
+        "/api/v1/media/d0a6d834-38dd-4c4d-887d-c88e997ee636.webp",
+        "/api/v1/media/b86b3299-9dfb-4125-bfb0-2add38b3c6ae.webp"
+      ]
+    },
+    "dryer": {
+      "file": "7614539.jpg",
+      "rect": [
+        0.7,
+        0.2,
+        0.92,
+        0.67
+      ],
+      "id": 7614539,
+      "source": "https://www.pexels.com/photo/7614539/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "dryer-main.jpg",
+        "dryer-detail-1.jpg",
+        "dryer-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/d90f6931-b94b-4d96-bee0-86c0240b266b.webp",
+        "/api/v1/media/7baabfaf-3dbc-4a51-9e3e-9e929e7d253b.webp",
+        "/api/v1/media/d3bcb71d-d3d2-4e77-ab14-b14a3c70998d.webp"
+      ]
+    },
+    "microwave": {
+      "file": "8135120.jpg",
+      "rect": [
+        0.018,
+        0.33,
+        0.27,
+        0.565
+      ],
+      "id": 8135120,
+      "source": "https://www.pexels.com/photo/8135120/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "microwave-main.jpg",
+        "microwave-detail-1.jpg",
+        "microwave-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/546ac2ef-c59e-4bf3-85f6-1c31554771ca.webp",
+        "/api/v1/media/7ca5b308-7621-4c89-bc55-3172a164be29.webp",
+        "/api/v1/media/c2a1b6e4-6732-41ed-a608-d50e26d8f301.webp"
+      ]
+    },
+    "kettle": {
+      "file": "30319669.jpg",
+      "rect": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "id": 30319669,
+      "source": "https://www.pexels.com/photo/30319669/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "kettle-main.jpg",
+        "kettle-detail-1.jpg",
+        "kettle-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/5787338c-d8de-4332-b0d1-ec42ef0d6c01.webp",
+        "/api/v1/media/416b1963-7998-4cf7-a30f-788216af3aed.webp",
+        "/api/v1/media/478de6c5-853d-4fa1-a947-9fc8ce5a2c4e.webp"
+      ]
+    },
+    "cooker": {
+      "file": "cooker-pixabay.jpg",
+      "rect": [
+        0.08,
+        0.66,
+        0.78,
+        1
+      ],
+      "source": "https://pixabay.com/photos/stove-oven-range-back-splash-4994398/",
+      "license": "https://pixabay.com/service/license-summary/",
+      "assets": [
+        "cooker-main.jpg",
+        "cooker-detail-1.jpg",
+        "cooker-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/928863d9-6a7b-4410-a328-565b833152c5.webp",
+        "/api/v1/media/af29851c-4ae7-437f-b9be-ca018762a613.webp",
+        "/api/v1/media/d3f84b0e-2053-465e-aede-6e17bc8d9b49.webp"
+      ]
+    },
+    "vacuum": {
+      "file": "3616735.jpg",
+      "rect": [
+        0.32,
+        0.13,
+        0.99,
+        0.88
+      ],
+      "id": 3616735,
+      "source": "https://www.pexels.com/photo/3616735/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "vacuum-main.jpg",
+        "vacuum-detail-1.jpg",
+        "vacuum-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/cc8cde8a-c7a9-4dce-aee0-b6180a836bbc.webp",
+        "/api/v1/media/09743530-cf76-4f48-a273-72b69b0a7407.webp",
+        "/api/v1/media/1af01135-56f7-4aaa-8548-10590d246a1a.webp"
+      ]
+    },
+    "pressure-washer": {
+      "file": "4876669.jpg",
+      "rect": [
+        0.1,
+        0.3,
+        0.95,
+        0.97
+      ],
+      "id": 4876669,
+      "source": "https://www.pexels.com/photo/4876669/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "pressure-washer-main.jpg",
+        "pressure-washer-detail-1.jpg",
+        "pressure-washer-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/575ce8f1-28d3-4ff7-bb15-ee94705d5724.webp",
+        "/api/v1/media/a01aca39-f493-4895-ad0f-363ee8bc54da.webp",
+        "/api/v1/media/8e23039f-d4f6-464b-958e-a56630ccf5f6.webp"
+      ]
+    },
+    "tv": {
+      "file": "6297091.jpg",
+      "rect": [
+        0.25,
+        0.3,
+        0.75,
+        0.66
+      ],
+      "id": 6297091,
+      "source": "https://www.pexels.com/photo/6297091/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "tv-main.jpg",
+        "tv-detail-1.jpg",
+        "tv-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/5b762ad6-0276-4b8d-b5e3-4197530ea617.webp",
+        "/api/v1/media/5c34222d-8a22-4008-8fce-3c3d4cf20fff.webp",
+        "/api/v1/media/609da1c4-20bf-4013-90ff-64d2c0ee14ea.webp"
+      ]
+    },
+    "fridge": {
+      "file": "6631793.jpg",
+      "rect": [
+        0.02,
+        0.34,
+        0.31,
+        0.99
+      ],
+      "id": 6631793,
+      "source": "https://www.pexels.com/photo/6631793/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "fridge-main.jpg",
+        "fridge-detail-1.jpg",
+        "fridge-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/11129187-9686-405b-8f27-66fe4580fc57.webp",
+        "/api/v1/media/0664d70a-ce53-4ac7-8159-67e78921506d.webp",
+        "/api/v1/media/302dd619-e6d7-4875-9911-5e85fe459c5e.webp"
+      ]
+    },
+    "freezer": {
+      "file": "freezer-cc0.jpg",
+      "rect": [
+        0,
+        0.26,
+        1,
+        0.84
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Freezer_1.jpg",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "author": "Laura Stoinski",
+      "assets": [
+        "freezer-main.jpg",
+        "freezer-detail-1.jpg",
+        "freezer-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/0ec112c8-3354-4fa5-89f4-730be679d51d.webp",
+        "/api/v1/media/0599c4c1-b2f4-453e-ba09-b9bd23763f5b.webp",
+        "/api/v1/media/a4a107ff-abbd-49c4-b30b-b6068b9de5ae.webp"
+      ]
+    },
+    "ac": {
+      "file": "38788452.jpg",
+      "rect": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "id": 38788452,
+      "source": "https://www.pexels.com/photo/38788452/",
+      "license": "https://www.pexels.com/license/",
+      "assets": [
+        "ac-main.jpg",
+        "ac-detail-1.jpg",
+        "ac-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/2f467326-7b07-478f-92eb-b7de5cdfd050.webp",
+        "/api/v1/media/f8b6c30b-a6fd-46af-aff6-69e28ec6ad6f.webp",
+        "/api/v1/media/b04aa29d-4f7b-4f25-93ab-a0a362b23125.webp"
+      ]
+    },
+    "steam": {
+      "file": "steam-unsplash.jpg",
+      "rect": [
+        0.3,
+        0.22,
+        0.94,
+        1
+      ],
+      "source": "https://unsplash.com/photos/steam-cleaner-sanitizing-tiled-wall-in-bathroom-LB3y1u7h61c",
+      "license": "https://unsplash.com/license",
+      "author": "Aurum Gebäudereinigung Kassel",
+      "assets": [
+        "steam-main.jpg",
+        "steam-detail-1.jpg",
+        "steam-detail-2.jpg"
+      ],
+      "urls": [
+        "/api/v1/media/a4a0bec6-29b9-424d-81a5-2682b9dce94d.webp",
+        "/api/v1/media/74ddc048-f0da-4f4c-9346-8f90f672bd95.webp",
+        "/api/v1/media/e7f38843-22cb-435c-b623-83f74ff81270.webp"
+      ]
+    }
+  },
+  "products": [
+    {
+      "id": "4d69310b-a40a-4961-b17a-426601ec5786",
+      "sku": "TEST-CATALOG-030",
+      "category": "steam",
+      "image": "/api/v1/media/a4a0bec6-29b9-424d-81a5-2682b9dce94d.webp",
+      "gallery_images": [
+        "/api/v1/media/74ddc048-f0da-4f4c-9346-8f90f672bd95.webp",
+        "/api/v1/media/e7f38843-22cb-435c-b623-83f74ff81270.webp"
+      ]
+    },
+    {
+      "id": "7da142cc-48e3-4190-978d-5d4a81f8355b",
+      "sku": "TEST-CATALOG-029",
+      "category": "steam",
+      "image": "/api/v1/media/a4a0bec6-29b9-424d-81a5-2682b9dce94d.webp",
+      "gallery_images": [
+        "/api/v1/media/74ddc048-f0da-4f4c-9346-8f90f672bd95.webp",
+        "/api/v1/media/e7f38843-22cb-435c-b623-83f74ff81270.webp"
+      ]
+    },
+    {
+      "id": "8c6249d4-0162-4948-aea8-b1e3b1719930",
+      "sku": "TEST-CATALOG-028",
+      "category": "pressure-washer",
+      "image": "/api/v1/media/575ce8f1-28d3-4ff7-bb15-ee94705d5724.webp",
+      "gallery_images": [
+        "/api/v1/media/a01aca39-f493-4895-ad0f-363ee8bc54da.webp",
+        "/api/v1/media/8e23039f-d4f6-464b-958e-a56630ccf5f6.webp"
+      ]
+    },
+    {
+      "id": "c6781a7a-b406-4d27-8e73-1fac5e41c6fc",
+      "sku": "TEST-CATALOG-027",
+      "category": "pressure-washer",
+      "image": "/api/v1/media/575ce8f1-28d3-4ff7-bb15-ee94705d5724.webp",
+      "gallery_images": [
+        "/api/v1/media/a01aca39-f493-4895-ad0f-363ee8bc54da.webp",
+        "/api/v1/media/8e23039f-d4f6-464b-958e-a56630ccf5f6.webp"
+      ]
+    },
+    {
+      "id": "59cd15c3-75a8-4d00-bd7b-f8ff24bd13f3",
+      "sku": "TEST-CATALOG-026",
+      "category": "vacuum",
+      "image": "/api/v1/media/cc8cde8a-c7a9-4dce-aee0-b6180a836bbc.webp",
+      "gallery_images": [
+        "/api/v1/media/09743530-cf76-4f48-a273-72b69b0a7407.webp",
+        "/api/v1/media/1af01135-56f7-4aaa-8548-10590d246a1a.webp"
+      ]
+    },
+    {
+      "id": "e3f0ca9c-713f-437c-9c1c-98b4db16185d",
+      "sku": "TEST-CATALOG-025",
+      "category": "vacuum",
+      "image": "/api/v1/media/cc8cde8a-c7a9-4dce-aee0-b6180a836bbc.webp",
+      "gallery_images": [
+        "/api/v1/media/09743530-cf76-4f48-a273-72b69b0a7407.webp",
+        "/api/v1/media/1af01135-56f7-4aaa-8548-10590d246a1a.webp"
+      ]
+    },
+    {
+      "id": "eb60993f-77ee-4445-a006-f57fce35b118",
+      "sku": "TEST-CATALOG-024",
+      "category": "tv",
+      "image": "/api/v1/media/5b762ad6-0276-4b8d-b5e3-4197530ea617.webp",
+      "gallery_images": [
+        "/api/v1/media/5c34222d-8a22-4008-8fce-3c3d4cf20fff.webp",
+        "/api/v1/media/609da1c4-20bf-4013-90ff-64d2c0ee14ea.webp"
+      ]
+    },
+    {
+      "id": "b7dd40be-2229-4ad9-b6d0-a30bde2d894b",
+      "sku": "TEST-CATALOG-023",
+      "category": "tv",
+      "image": "/api/v1/media/5b762ad6-0276-4b8d-b5e3-4197530ea617.webp",
+      "gallery_images": [
+        "/api/v1/media/5c34222d-8a22-4008-8fce-3c3d4cf20fff.webp",
+        "/api/v1/media/609da1c4-20bf-4013-90ff-64d2c0ee14ea.webp"
+      ]
+    },
+    {
+      "id": "30015e75-650b-45d5-bf3b-4ca111f00e72",
+      "sku": "TEST-CATALOG-021",
+      "category": "tv",
+      "image": "/api/v1/media/5b762ad6-0276-4b8d-b5e3-4197530ea617.webp",
+      "gallery_images": [
+        "/api/v1/media/5c34222d-8a22-4008-8fce-3c3d4cf20fff.webp",
+        "/api/v1/media/609da1c4-20bf-4013-90ff-64d2c0ee14ea.webp"
+      ]
+    },
+    {
+      "id": "d0b6ab05-ba1b-4e7a-bdfc-1624f4b1285f",
+      "sku": "TEST-CATALOG-022",
+      "category": "tv",
+      "image": "/api/v1/media/5b762ad6-0276-4b8d-b5e3-4197530ea617.webp",
+      "gallery_images": [
+        "/api/v1/media/5c34222d-8a22-4008-8fce-3c3d4cf20fff.webp",
+        "/api/v1/media/609da1c4-20bf-4013-90ff-64d2c0ee14ea.webp"
+      ]
+    },
+    {
+      "id": "7584ce65-2222-4b32-a932-5bdbfb375d8f",
+      "sku": "TEST-CATALOG-019",
+      "category": "tv",
+      "image": "/api/v1/media/5b762ad6-0276-4b8d-b5e3-4197530ea617.webp",
+      "gallery_images": [
+        "/api/v1/media/5c34222d-8a22-4008-8fce-3c3d4cf20fff.webp",
+        "/api/v1/media/609da1c4-20bf-4013-90ff-64d2c0ee14ea.webp"
+      ]
+    },
+    {
+      "id": "adec86dd-6f1f-4ed1-aace-4676cb690330",
+      "sku": "TEST-CATALOG-020",
+      "category": "tv",
+      "image": "/api/v1/media/5b762ad6-0276-4b8d-b5e3-4197530ea617.webp",
+      "gallery_images": [
+        "/api/v1/media/5c34222d-8a22-4008-8fce-3c3d4cf20fff.webp",
+        "/api/v1/media/609da1c4-20bf-4013-90ff-64d2c0ee14ea.webp"
+      ]
+    },
+    {
+      "id": "474c71c4-820c-4bed-ba19-70fe70a041cb",
+      "sku": "TEST-CATALOG-017",
+      "category": "ac",
+      "image": "/api/v1/media/2f467326-7b07-478f-92eb-b7de5cdfd050.webp",
+      "gallery_images": [
+        "/api/v1/media/f8b6c30b-a6fd-46af-aff6-69e28ec6ad6f.webp",
+        "/api/v1/media/b04aa29d-4f7b-4f25-93ab-a0a362b23125.webp"
+      ]
+    },
+    {
+      "id": "5a0f04a1-bf7d-4408-b683-4067e6e75c01",
+      "sku": "TEST-CATALOG-018",
+      "category": "ac",
+      "image": "/api/v1/media/2f467326-7b07-478f-92eb-b7de5cdfd050.webp",
+      "gallery_images": [
+        "/api/v1/media/f8b6c30b-a6fd-46af-aff6-69e28ec6ad6f.webp",
+        "/api/v1/media/b04aa29d-4f7b-4f25-93ab-a0a362b23125.webp"
+      ]
+    },
+    {
+      "id": "888c779f-e6f7-4b61-8480-8a1ecfac6af8",
+      "sku": "TEST-CATALOG-015",
+      "category": "freezer",
+      "image": "/api/v1/media/0ec112c8-3354-4fa5-89f4-730be679d51d.webp",
+      "gallery_images": [
+        "/api/v1/media/0599c4c1-b2f4-453e-ba09-b9bd23763f5b.webp",
+        "/api/v1/media/a4a107ff-abbd-49c4-b30b-b6068b9de5ae.webp"
+      ]
+    },
+    {
+      "id": "92d103fe-ad5b-4a83-b838-308211659408",
+      "sku": "TEST-CATALOG-016",
+      "category": "freezer",
+      "image": "/api/v1/media/0ec112c8-3354-4fa5-89f4-730be679d51d.webp",
+      "gallery_images": [
+        "/api/v1/media/0599c4c1-b2f4-453e-ba09-b9bd23763f5b.webp",
+        "/api/v1/media/a4a107ff-abbd-49c4-b30b-b6068b9de5ae.webp"
+      ]
+    },
+    {
+      "id": "1adab51b-d649-4787-bad2-671e86a82a9f",
+      "sku": "TEST-CATALOG-013",
+      "category": "fridge",
+      "image": "/api/v1/media/11129187-9686-405b-8f27-66fe4580fc57.webp",
+      "gallery_images": [
+        "/api/v1/media/0664d70a-ce53-4ac7-8159-67e78921506d.webp",
+        "/api/v1/media/302dd619-e6d7-4875-9911-5e85fe459c5e.webp"
+      ]
+    },
+    {
+      "id": "adb273a0-b405-4bef-8a26-40bdb1e2998e",
+      "sku": "TEST-CATALOG-014",
+      "category": "fridge",
+      "image": "/api/v1/media/11129187-9686-405b-8f27-66fe4580fc57.webp",
+      "gallery_images": [
+        "/api/v1/media/0664d70a-ce53-4ac7-8159-67e78921506d.webp",
+        "/api/v1/media/302dd619-e6d7-4875-9911-5e85fe459c5e.webp"
+      ]
+    },
+    {
+      "id": "7ae6cae0-f10e-431b-8dd7-dfed9d4f11f0",
+      "sku": "TEST-CATALOG-012",
+      "category": "cooker",
+      "image": "/api/v1/media/928863d9-6a7b-4410-a328-565b833152c5.webp",
+      "gallery_images": [
+        "/api/v1/media/af29851c-4ae7-437f-b9be-ca018762a613.webp",
+        "/api/v1/media/d3f84b0e-2053-465e-aede-6e17bc8d9b49.webp"
+      ]
+    },
+    {
+      "id": "397db506-e51f-428c-b516-6ec63fe156c0",
+      "sku": "TEST-CATALOG-011",
+      "category": "cooker",
+      "image": "/api/v1/media/928863d9-6a7b-4410-a328-565b833152c5.webp",
+      "gallery_images": [
+        "/api/v1/media/af29851c-4ae7-437f-b9be-ca018762a613.webp",
+        "/api/v1/media/d3f84b0e-2053-465e-aede-6e17bc8d9b49.webp"
+      ]
+    },
+    {
+      "id": "a89a6ddd-7966-4c78-a645-54cb72e429b0",
+      "sku": "TEST-CATALOG-009",
+      "category": "kettle",
+      "image": "/api/v1/media/5787338c-d8de-4332-b0d1-ec42ef0d6c01.webp",
+      "gallery_images": [
+        "/api/v1/media/416b1963-7998-4cf7-a30f-788216af3aed.webp",
+        "/api/v1/media/478de6c5-853d-4fa1-a947-9fc8ce5a2c4e.webp"
+      ]
+    },
+    {
+      "id": "fa831e13-6633-4b90-99c6-86215af63647",
+      "sku": "TEST-CATALOG-010",
+      "category": "kettle",
+      "image": "/api/v1/media/5787338c-d8de-4332-b0d1-ec42ef0d6c01.webp",
+      "gallery_images": [
+        "/api/v1/media/416b1963-7998-4cf7-a30f-788216af3aed.webp",
+        "/api/v1/media/478de6c5-853d-4fa1-a947-9fc8ce5a2c4e.webp"
+      ]
+    },
+    {
+      "id": "6fc111aa-3f3a-493b-b28f-bc11d9e058d0",
+      "sku": "TEST-CATALOG-007",
+      "category": "microwave",
+      "image": "/api/v1/media/546ac2ef-c59e-4bf3-85f6-1c31554771ca.webp",
+      "gallery_images": [
+        "/api/v1/media/7ca5b308-7621-4c89-bc55-3172a164be29.webp",
+        "/api/v1/media/c2a1b6e4-6732-41ed-a608-d50e26d8f301.webp"
+      ]
+    },
+    {
+      "id": "a8ace6ac-a6aa-4af7-911a-24d0286cb671",
+      "sku": "TEST-CATALOG-008",
+      "category": "microwave",
+      "image": "/api/v1/media/546ac2ef-c59e-4bf3-85f6-1c31554771ca.webp",
+      "gallery_images": [
+        "/api/v1/media/7ca5b308-7621-4c89-bc55-3172a164be29.webp",
+        "/api/v1/media/c2a1b6e4-6732-41ed-a608-d50e26d8f301.webp"
+      ]
+    },
+    {
+      "id": "4fc8747f-3546-497a-9fe4-6125db752297",
+      "sku": "TEST-CATALOG-006",
+      "category": "dryer",
+      "image": "/api/v1/media/d90f6931-b94b-4d96-bee0-86c0240b266b.webp",
+      "gallery_images": [
+        "/api/v1/media/7baabfaf-3dbc-4a51-9e3e-9e929e7d253b.webp",
+        "/api/v1/media/d3bcb71d-d3d2-4e77-ab14-b14a3c70998d.webp"
+      ]
+    },
+    {
+      "id": "45ebcb8f-d036-4d3c-8870-0945f79d3993",
+      "sku": "TEST-CATALOG-005",
+      "category": "dryer",
+      "image": "/api/v1/media/d90f6931-b94b-4d96-bee0-86c0240b266b.webp",
+      "gallery_images": [
+        "/api/v1/media/7baabfaf-3dbc-4a51-9e3e-9e929e7d253b.webp",
+        "/api/v1/media/d3bcb71d-d3d2-4e77-ab14-b14a3c70998d.webp"
+      ]
+    },
+    {
+      "id": "4aa77503-468a-4095-ad91-68e45faa112a",
+      "sku": "TEST-CATALOG-004",
+      "category": "top-washer",
+      "image": "/api/v1/media/388f520e-c0d9-4d74-a864-6fcb29781f74.webp",
+      "gallery_images": [
+        "/api/v1/media/d0a6d834-38dd-4c4d-887d-c88e997ee636.webp",
+        "/api/v1/media/b86b3299-9dfb-4125-bfb0-2add38b3c6ae.webp"
+      ]
+    },
+    {
+      "id": "9d81fe34-555e-4314-a6f4-2348a0ddcfcd",
+      "sku": "TEST-CATALOG-003",
+      "category": "top-washer",
+      "image": "/api/v1/media/388f520e-c0d9-4d74-a864-6fcb29781f74.webp",
+      "gallery_images": [
+        "/api/v1/media/d0a6d834-38dd-4c4d-887d-c88e997ee636.webp",
+        "/api/v1/media/b86b3299-9dfb-4125-bfb0-2add38b3c6ae.webp"
+      ]
+    },
+    {
+      "id": "471e3784-76bd-4a5c-8c5a-e397b7b1a218",
+      "sku": "TEST-CATALOG-002",
+      "category": "front-washer",
+      "image": "/api/v1/media/2dc130fc-3982-4553-b3b2-e63ba931bec6.webp",
+      "gallery_images": [
+        "/api/v1/media/91b4a5b8-2714-43c9-92c9-175a3cbdf0a8.webp",
+        "/api/v1/media/8d69bdac-d8cd-4684-910f-262aecdd5c1a.webp"
+      ]
+    },
+    {
+      "id": "e4744cec-057d-4309-988f-d11ded8c848c",
+      "sku": "TEST-CATALOG-001",
+      "category": "front-washer",
+      "image": "/api/v1/media/2dc130fc-3982-4553-b3b2-e63ba931bec6.webp",
+      "gallery_images": [
+        "/api/v1/media/91b4a5b8-2714-43c9-92c9-175a3cbdf0a8.webp",
+        "/api/v1/media/8d69bdac-d8cd-4684-910f-262aecdd5c1a.webp"
+      ]
+    },
+    {
+      "id": "3b82db97-ab7a-4835-9db2-5548bb5c636f",
+      "sku": "123",
+      "category": "front-washer",
+      "image": "/api/v1/media/2dc130fc-3982-4553-b3b2-e63ba931bec6.webp",
+      "gallery_images": [
+        "/api/v1/media/91b4a5b8-2714-43c9-92c9-175a3cbdf0a8.webp",
+        "/api/v1/media/8d69bdac-d8cd-4684-910f-262aecdd5c1a.webp"
+      ]
+    },
+    {
+      "id": "0d7c26ea-e4e7-46c5-9d4a-4019150ab578",
+      "sku": "LG-MW-025",
+      "category": "microwave",
+      "image": "/api/v1/media/546ac2ef-c59e-4bf3-85f6-1c31554771ca.webp",
+      "gallery_images": [
+        "/api/v1/media/7ca5b308-7621-4c89-bc55-3172a164be29.webp",
+        "/api/v1/media/c2a1b6e4-6732-41ed-a608-d50e26d8f301.webp"
+      ]
+    },
+    {
+      "id": "0f01233e-92df-4897-8c98-40225a3b0378",
+      "sku": "MD-CK-004",
+      "category": "cooker",
+      "image": "/api/v1/media/928863d9-6a7b-4410-a328-565b833152c5.webp",
+      "gallery_images": [
+        "/api/v1/media/af29851c-4ae7-437f-b9be-ca018762a613.webp",
+        "/api/v1/media/d3f84b0e-2053-465e-aede-6e17bc8d9b49.webp"
+      ]
+    },
+    {
+      "id": "14bc6f98-db3b-4503-8830-0a9639a65f19",
+      "sku": "KA-WD3-001",
+      "category": "vacuum",
+      "image": "/api/v1/media/cc8cde8a-c7a9-4dce-aee0-b6180a836bbc.webp",
+      "gallery_images": [
+        "/api/v1/media/09743530-cf76-4f48-a273-72b69b0a7407.webp",
+        "/api/v1/media/1af01135-56f7-4aaa-8548-10590d246a1a.webp"
+      ]
+    },
+    {
+      "id": "1833411f-4fd4-401e-a239-8b1e2c94729c",
+      "sku": "MD-WM-008",
+      "category": "front-washer",
+      "image": "/api/v1/media/2dc130fc-3982-4553-b3b2-e63ba931bec6.webp",
+      "gallery_images": [
+        "/api/v1/media/91b4a5b8-2714-43c9-92c9-175a3cbdf0a8.webp",
+        "/api/v1/media/8d69bdac-d8cd-4684-910f-262aecdd5c1a.webp"
+      ]
+    },
+    {
+      "id": "51389f73-1d4b-4dd0-969c-12c5b5d5a361",
+      "sku": "LG-WM-009",
+      "category": "front-washer",
+      "image": "/api/v1/media/2dc130fc-3982-4553-b3b2-e63ba931bec6.webp",
+      "gallery_images": [
+        "/api/v1/media/91b4a5b8-2714-43c9-92c9-175a3cbdf0a8.webp",
+        "/api/v1/media/8d69bdac-d8cd-4684-910f-262aecdd5c1a.webp"
+      ]
+    },
+    {
+      "id": "62ebd34d-394a-4018-9e01-d6c0c11c34fd",
+      "sku": "LG-TV-055",
+      "category": "tv",
+      "image": "/api/v1/media/5b762ad6-0276-4b8d-b5e3-4197530ea617.webp",
+      "gallery_images": [
+        "/api/v1/media/5c34222d-8a22-4008-8fce-3c3d4cf20fff.webp",
+        "/api/v1/media/609da1c4-20bf-4013-90ff-64d2c0ee14ea.webp"
+      ]
+    },
+    {
+      "id": "6d21a261-64dc-440e-a7de-bd5c465697d8",
+      "sku": "KA-K4-001",
+      "category": "pressure-washer",
+      "image": "/api/v1/media/575ce8f1-28d3-4ff7-bb15-ee94705d5724.webp",
+      "gallery_images": [
+        "/api/v1/media/a01aca39-f493-4895-ad0f-363ee8bc54da.webp",
+        "/api/v1/media/8e23039f-d4f6-464b-958e-a56630ccf5f6.webp"
+      ]
+    },
+    {
+      "id": "b017334c-3b72-45ca-9fc6-5711ffeaa785",
+      "sku": "MD-RF-210",
+      "category": "fridge",
+      "image": "/api/v1/media/11129187-9686-405b-8f27-66fe4580fc57.webp",
+      "gallery_images": [
+        "/api/v1/media/0664d70a-ce53-4ac7-8159-67e78921506d.webp",
+        "/api/v1/media/302dd619-e6d7-4875-9911-5e85fe459c5e.webp"
+      ]
+    },
+    {
+      "id": "b23156a8-44c7-4353-b8c1-ea1ca850ad49",
+      "sku": "LG-TV-043",
+      "category": "tv",
+      "image": "/api/v1/media/5b762ad6-0276-4b8d-b5e3-4197530ea617.webp",
+      "gallery_images": [
+        "/api/v1/media/5c34222d-8a22-4008-8fce-3c3d4cf20fff.webp",
+        "/api/v1/media/609da1c4-20bf-4013-90ff-64d2c0ee14ea.webp"
+      ]
+    },
+    {
+      "id": "d142b23d-0b33-4804-9375-b1e10a086500",
+      "sku": "MD-KT-017",
+      "category": "kettle",
+      "image": "/api/v1/media/5787338c-d8de-4332-b0d1-ec42ef0d6c01.webp",
+      "gallery_images": [
+        "/api/v1/media/416b1963-7998-4cf7-a30f-788216af3aed.webp",
+        "/api/v1/media/478de6c5-853d-4fa1-a947-9fc8ce5a2c4e.webp"
+      ]
+    },
+    {
+      "id": "deac0390-4fa4-43e3-a1e7-fee32893d9bc",
+      "sku": "KA-SC2-001",
+      "category": "steam",
+      "image": "/api/v1/media/a4a0bec6-29b9-424d-81a5-2682b9dce94d.webp",
+      "gallery_images": [
+        "/api/v1/media/74ddc048-f0da-4f4c-9346-8f90f672bd95.webp",
+        "/api/v1/media/e7f38843-22cb-435c-b623-83f74ff81270.webp"
+      ]
+    },
+    {
+      "id": "e302fa85-aeea-4d86-a9f5-4fe92b7c51b3",
+      "sku": "MD-AC-012",
+      "category": "ac",
+      "image": "/api/v1/media/2f467326-7b07-478f-92eb-b7de5cdfd050.webp",
+      "gallery_images": [
+        "/api/v1/media/f8b6c30b-a6fd-46af-aff6-69e28ec6ad6f.webp",
+        "/api/v1/media/b04aa29d-4f7b-4f25-93ab-a0a362b23125.webp"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "license": "https://www.pexels.com/license/",
+  "commercial_use_reference": "https://help.pexels.com/hc/en-us/articles/360042295214-Can-I-use-the-photos-and-videos-for-a-commercial-project",
+  "verified_on": "2026-10-07",
+  "images": [
+    {
+      "file": "everyday-home.jpg",
+      "photographer": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/kitchen-interior-8089190/"
+    },
+    {
+      "file": "lg-living.jpg",
+      "photographer": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/interior-of-living-room-with-tv-6297091/"
+    },
+    {
+      "file": "midea-kitchen.jpg",
+      "photographer": "Max Vakhtbovych",
+      "source": "https://www.pexels.com/photo/contemporary-kitchen-interior-with-furniture-and-built-in-electric-appliances-6980571/"
+    }
+  ]
+}

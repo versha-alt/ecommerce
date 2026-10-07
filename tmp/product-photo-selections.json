@@ -1,0 +1,222 @@
+{
+  "front-washer": {
+    "file": "17158638.jpg",
+    "rect": [
+      0.08,
+      0.25,
+      0.59,
+      1
+    ],
+    "id": 17158638,
+    "source": "https://www.pexels.com/photo/17158638/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "front-washer-main.jpg",
+      "front-washer-detail-1.jpg",
+      "front-washer-detail-2.jpg"
+    ]
+  },
+  "top-washer": {
+    "file": "31602334.jpg",
+    "rect": [
+      0.3,
+      0.47,
+      0.65,
+      1
+    ],
+    "id": 31602334,
+    "source": "https://www.pexels.com/photo/31602334/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "top-washer-main.jpg",
+      "top-washer-detail-1.jpg",
+      "top-washer-detail-2.jpg"
+    ]
+  },
+  "dryer": {
+    "file": "7614539.jpg",
+    "rect": [
+      0.7,
+      0.2,
+      0.92,
+      0.67
+    ],
+    "id": 7614539,
+    "source": "https://www.pexels.com/photo/7614539/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "dryer-main.jpg",
+      "dryer-detail-1.jpg",
+      "dryer-detail-2.jpg"
+    ]
+  },
+  "microwave": {
+    "file": "8135120.jpg",
+    "rect": [
+      0.018,
+      0.33,
+      0.27,
+      0.565
+    ],
+    "id": 8135120,
+    "source": "https://www.pexels.com/photo/8135120/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "microwave-main.jpg",
+      "microwave-detail-1.jpg",
+      "microwave-detail-2.jpg"
+    ]
+  },
+  "kettle": {
+    "file": "30319669.jpg",
+    "rect": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "id": 30319669,
+    "source": "https://www.pexels.com/photo/30319669/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "kettle-main.jpg",
+      "kettle-detail-1.jpg",
+      "kettle-detail-2.jpg"
+    ]
+  },
+  "cooker": {
+    "file": "cooker-pixabay.jpg",
+    "rect": [
+      0.08,
+      0.66,
+      0.78,
+      1
+    ],
+    "source": "https://pixabay.com/photos/stove-oven-range-back-splash-4994398/",
+    "license": "https://pixabay.com/service/license-summary/",
+    "assets": [
+      "cooker-main.jpg",
+      "cooker-detail-1.jpg",
+      "cooker-detail-2.jpg"
+    ]
+  },
+  "vacuum": {
+    "file": "3616735.jpg",
+    "rect": [
+      0.32,
+      0.13,
+      0.99,
+      0.88
+    ],
+    "id": 3616735,
+    "source": "https://www.pexels.com/photo/3616735/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "vacuum-main.jpg",
+      "vacuum-detail-1.jpg",
+      "vacuum-detail-2.jpg"
+    ]
+  },
+  "pressure-washer": {
+    "file": "4876669.jpg",
+    "rect": [
+      0.1,
+      0.3,
+      0.95,
+      0.97
+    ],
+    "id": 4876669,
+    "source": "https://www.pexels.com/photo/4876669/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "pressure-washer-main.jpg",
+      "pressure-washer-detail-1.jpg",
+      "pressure-washer-detail-2.jpg"
+    ]
+  },
+  "tv": {
+    "file": "6297091.jpg",
+    "rect": [
+      0.25,
+      0.3,
+      0.75,
+      0.66
+    ],
+    "id": 6297091,
+    "source": "https://www.pexels.com/photo/6297091/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "tv-main.jpg",
+      "tv-detail-1.jpg",
+      "tv-detail-2.jpg"
+    ]
+  },
+  "fridge": {
+    "file": "6631793.jpg",
+    "rect": [
+      0.02,
+      0.34,
+      0.31,
+      0.99
+    ],
+    "id": 6631793,
+    "source": "https://www.pexels.com/photo/6631793/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "fridge-main.jpg",
+      "fridge-detail-1.jpg",
+      "fridge-detail-2.jpg"
+    ]
+  },
+  "freezer": {
+    "file": "freezer-cc0.jpg",
+    "rect": [
+      0,
+      0.26,
+      1,
+      0.84
+    ],
+    "source": "https://commons.wikimedia.org/wiki/File:Freezer_1.jpg",
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "author": "Laura Stoinski",
+    "assets": [
+      "freezer-main.jpg",
+      "freezer-detail-1.jpg",
+      "freezer-detail-2.jpg"
+    ]
+  },
+  "ac": {
+    "file": "38788452.jpg",
+    "rect": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "id": 38788452,
+    "source": "https://www.pexels.com/photo/38788452/",
+    "license": "https://www.pexels.com/license/",
+    "assets": [
+      "ac-main.jpg",
+      "ac-detail-1.jpg",
+      "ac-detail-2.jpg"
+    ]
+  },
+  "steam": {
+    "file": "steam-unsplash.jpg",
+    "rect": [
+      0.3,
+      0.22,
+      0.94,
+      1
+    ],
+    "source": "https://unsplash.com/photos/steam-cleaner-sanitizing-tiled-wall-in-bathroom-LB3y1u7h61c",
+    "license": "https://unsplash.com/license",
+    "author": "Aurum Gebäudereinigung Kassel",
+    "assets": [
+      "steam-main.jpg",
+      "steam-detail-1.jpg",
+      "steam-detail-2.jpg"
+    ]
+  }
+}

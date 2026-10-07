@@ -86,7 +86,7 @@ class Commerce
     {
         $base = ['name' => 'required|string|max:180', 'status' => 'nullable|string|max:30', 'description' => 'nullable|string|max:20000', 'notes' => 'nullable|string|max:20000', 'image' => 'nullable|string|max:2000', 'banner' => 'nullable|string|max:2000', 'seo_title' => 'nullable|string|max:250', 'seo_description' => 'nullable|string|max:2000', 'specifications' => 'nullable|string|max:20000', 'warranty' => 'nullable|string|max:2000', 'website' => 'nullable|url|max:2000'];
         $rules = match ($resource) {
-            'products' => ['gallery_images' => 'nullable|array', 'gallery_images.*' => ['required', 'string', 'max:2000', 'distinct', 'regex:~^(https?://|/api/v1/media/)~'], 'slug' => ['required', 'max:180', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('commerce_records', 'product_slug')->ignore($old?->id)], 'sku' => 'required|string|max:80', 'type' => 'required|in:Simple,Variable', 'price' => 'required|numeric|min:0|max:100000000', 'sale_price' => 'nullable|numeric|min:0|max:100000000', 'stock' => 'required|integer|min:0|max:1000000', 'low_stock_threshold' => 'nullable|integer|min:0', 'brand_id' => 'nullable|uuid', 'category_ids' => 'nullable|array', 'category_ids.*' => 'uuid', 'status' => 'required|in:Draft,Active,Inactive,Retired', 'image' => 'nullable|string|max:2000', 'manual' => 'nullable|string|max:2000'],
+            'products' => ['gallery_images' => 'nullable|array', 'gallery_images.*' => ['required', 'string', 'max:2000', 'distinct', 'regex:~^(https?://|/api/v1/media/)~'], 'slug' => ['required', 'max:180', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('commerce_records', 'product_slug')->ignore($old?->id)], 'sku' => 'required|string|max:80', 'type' => 'required|in:Simple,Variable', 'price' => 'required|numeric|min:0|max:100000000', 'sale_price' => 'nullable|numeric|min:0|max:100000000', 'stock' => 'required|integer|min:0|max:1000000', 'low_stock_threshold' => 'nullable|integer|min:0', 'brand_id' => 'nullable|uuid', 'category_ids' => 'nullable|array', 'category_ids.*' => 'uuid', 'status' => 'required|in:Active,Inactive', 'image' => 'nullable|string|max:2000', 'manual' => 'nullable|string|max:2000'],
             'categories' => ['slug' => 'required|string|max:180|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'parent_id' => 'nullable|uuid'],
             'attributes' => ['filterable' => 'nullable|boolean', 'required' => 'nullable|boolean', 'unit' => 'nullable|string|max:80', 'options.*' => 'string|max:180', 'code' => 'required|string|max:80|regex:/^[a-z][a-z0-9_]*$/', 'input_type' => 'required|in:Text,Number,Single choice,Multiple choice,Yes/No', 'options' => 'nullable|array'],
             'customers' => ['marketing_consent' => 'nullable|boolean', 'company' => 'nullable|string|max:180', 'county' => 'nullable|string|max:180', 'email' => 'required|email|max:180', 'phone' => 'nullable|string|max:50', 'account_type' => 'required|in:Individual,Business', 'status' => 'required|in:Active,Inactive,Retired', 'address' => 'nullable|string|max:2000'],
@@ -630,7 +630,7 @@ class Commerce
     public function settings(): array
     {
         $r = Record::where('resource', 'settings')->first();
-        $d = $r?->row() ?? ['store_name' => 'Olive Electronics'];
+        $d = $r?->row() ?? ['store_name' => 'Leekav'];
         foreach ($d as $k => $v) {
             if (preg_match('/secret|password|passkey|consumer_key/', $k)) {
                 $d[$k] = '';
