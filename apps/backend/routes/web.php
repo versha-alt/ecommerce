@@ -12,6 +12,7 @@ Route::get('/', fn () => response()->json(['service' => 'Olive Commerce Laravel 
 Route::prefix('api/v1')->group(function () {
     Route::prefix('store')->middleware('throttle:120,1,store:')->group(function () {
         Route::get('catalog', [StorefrontController::class, 'catalog']);
+        Route::get('brands/{id}/hero', [StorefrontController::class, 'brandHero']);
         Route::post('register', [StorefrontController::class, 'register'])->middleware('throttle:10,1,store-auth:');
         Route::post('login', [StorefrontController::class, 'login'])->middleware('throttle:10,1,store-auth:');
         Route::post('logout', [StorefrontController::class, 'logout']);

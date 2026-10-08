@@ -646,7 +646,7 @@ class Commerce
             'store_name' => 'required|string|max:180', 'version' => 'required|integer|min:1',
             'email' => 'nullable|email|max:180', 'mail_from' => 'nullable|email|max:180',
             'phone' => 'nullable|string|max:50', 'whatsapp' => 'nullable|string|max:50', 'address' => 'nullable|string|max:2000',
-            'logo' => 'nullable|string|max:2000', 'facebook' => 'nullable|url:http,https|max:2000', 'instagram' => 'nullable|url:http,https|max:2000', 'cdn_url' => 'nullable|url:http,https|max:2000',
+            'logo' => 'nullable|string|max:2000', 'favicon' => 'nullable|string|max:2000', 'facebook' => 'nullable|url:http,https|max:2000', 'instagram' => 'nullable|url:http,https|max:2000', 'cdn_url' => 'nullable|url:http,https|max:2000',
             'mail_transport' => 'nullable|in:Log (local preview),SMTP,Amazon SES',
             'smtp_host' => 'required_if:mail_transport,SMTP|nullable|string|max:250',
             'smtp_port' => 'required_if:mail_transport,SMTP|nullable|integer|min:1|max:65535',
@@ -672,7 +672,7 @@ class Commerce
                 } else {
                     $d[$k] = $v;
                 }
-            }$allowed = ['store_name', 'email', 'phone', 'whatsapp', 'address', 'logo', 'facebook', 'instagram', 'cdn_url', 'mail_transport', 'smtp_host', 'smtp_port', 'smtp_username', 'smtp_password', 'mail_from', 'ga4_id', 'meta_pixel_id'];
+            }$allowed = ['store_name', 'email', 'phone', 'whatsapp', 'address', 'logo', 'favicon', 'facebook', 'instagram', 'cdn_url', 'mail_transport', 'smtp_host', 'smtp_port', 'smtp_username', 'smtp_password', 'mail_from', 'ga4_id', 'meta_pixel_id'];
             $d = array_intersect_key($d, array_flip($allowed));
             $r->data = $d;
             $r->version++;

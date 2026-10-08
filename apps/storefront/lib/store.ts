@@ -3,6 +3,7 @@ export type Catalog={products:Product[];brands:any[];categories:any[];banners:an
 export const apiBase=()=>process.env.LARAVEL_API_URL||'http://127.0.0.1:8000';
 let publicCatalog:{expires:number;promise:Promise<Catalog>}|undefined;
 export async function catalog():Promise<Catalog>{if(publicCatalog&&publicCatalog.expires>Date.now())return publicCatalog.promise;const promise=(async()=>{const response=await fetch(`${apiBase()}/api/v1/store/catalog`,{cache:'no-store',signal:AbortSignal.timeout(15000)});if(!response.ok)throw new Error('The store is temporarily unavailable. Please try again shortly.');return response.json();})();publicCatalog={expires:Date.now()+5000,promise};try{return await promise;}catch(error){publicCatalog=undefined;throw error;}}
+export async function brandHero(id:string):Promise<{image?:string|null;source?:string|null;author?:string|null;link?:string|null}>{try{const response=await fetch(`${apiBase()}/api/v1/store/brands/${id}/hero`,{cache:'no-store',signal:AbortSignal.timeout(20000)});if(!response.ok)return {};const data=await response.json();return data.hero||{};}catch{return {};}}
 export const money=(value:number)=>'KES '+Number(value||0).toLocaleString('en-KE',{maximumFractionDigits:2});
 export const price=(p:Product)=>p.sale_price??p.price;
 export const slugify=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');

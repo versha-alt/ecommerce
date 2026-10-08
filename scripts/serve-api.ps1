@@ -7,6 +7,6 @@ New-Item -ItemType Directory -Path $uploadTempDirectory -Force | Out-Null
 $env:TEMP = $uploadTempDirectory
 $env:TMP = $uploadTempDirectory
 Set-Location (Join-Path $projectRoot 'apps/backend')
-& $phpRuntime artisan serve --host=0.0.0.0 --port=8000 --no-reload
+& $phpRuntime -d extension=pdo_mysql -S 0.0.0.0:8000 -t public public/index.php
 exit $LASTEXITCODE
 

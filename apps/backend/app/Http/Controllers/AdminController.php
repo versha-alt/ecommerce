@@ -183,7 +183,14 @@ class AdminController extends Controller
             if (! $size || $size[0] * $size[1] > 40000000) {
                 abort(422, 'Image dimensions are too large.');
             }
+            Storage::disk('local')->makeDirectory('uploads');
+            if (! function_exists('imagecreatefromstring') || ! function_exists('imagewebp')) {
+                $file->storeAs('uploads', $name, 'local');
+
+                return ['url' => '/api/v1/media/'.$name];
+            }
             $source = imagecreatefromstring(file_get_contents($file->getRealPath()));
+            abort_unless($source, 422, 'Upload a valid image file.');
             $ratio = min(1, 1600 / max($size[0], $size[1]));
             $width = max(1, (int) round($size[0] * $ratio));
             $height = max(1, (int) round($size[1] * $ratio));
@@ -192,7 +199,6 @@ class AdminController extends Controller
             imagesavealpha($image, true);
             imagecopyresampled($image, $source, 0, 0, 0, 0, $width, $height, $size[0], $size[1]);
             $name = Str::uuid().'.webp';
-            Storage::disk('local')->makeDirectory('uploads');
             imagewebp($image, Storage::disk('local')->path('uploads/'.$name), 82);
             imagedestroy($image);
             imagedestroy($source);

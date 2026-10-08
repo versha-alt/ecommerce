@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CommerceRecord as Record;
 use App\Models\User;
+use App\Services\BrandImageResolver;
 use App\Services\Commerce;
 use App\Services\StoreEmails;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class StorefrontController extends Controller
     {
         $commerce = app(Commerce::class);
         $active = fn (string $resource): array => array_values(array_filter($commerce->rows($resource), fn ($row) => ($row['status'] ?? '') === 'Active'));
-        $settings = array_intersect_key($commerce->settings(), array_flip(['store_name', 'email', 'phone', 'whatsapp', 'address', 'logo', 'facebook', 'instagram', 'ga4_id', 'meta_pixel_id']));
+        $settings = array_intersect_key($commerce->settings(), array_flip(['store_name', 'email', 'phone', 'whatsapp', 'address', 'logo', 'favicon', 'facebook', 'instagram', 'ga4_id', 'meta_pixel_id']));
         $products = array_map(fn ($row) => array_intersect_key($row, array_flip(['id', 'name', 'sku', 'slug', 'type', 'brand_id', 'category_ids', 'price', 'sale_price', 'stock', 'reserved', 'image', 'gallery_images', 'description', 'specifications', 'warranty', 'manual', 'seo_title', 'seo_description', 'created_at'])), $active('products'));
 
         $sold = [];
@@ -37,6 +38,13 @@ class StorefrontController extends Controller
         $expose = fn (string $resource, array $fields): array => array_map(fn (array $row): array => array_intersect_key($row, array_flip($fields)), $active($resource));
 
         return ['products' => $products, 'brands' => $expose('brands', ['id', 'name', 'description', 'image', 'banner']), 'categories' => $expose('categories', ['id', 'name', 'slug', 'parent_id', 'description']), 'banners' => $expose('banners', ['id', 'name', 'placement', 'headline', 'description', 'image', 'link']), 'pages' => array_map(fn ($row) => array_intersect_key($row, array_flip(['name', 'slug', 'body', 'seo_title', 'seo_description'])), $active('pages')), 'delivery_zones' => $expose('delivery-zones', ['id', 'name', 'country_code', 'county_codes', 'county_names', 'charge', 'free_threshold']), 'locations' => config('shipping'), 'payment_methods' => array_map(fn ($row) => array_intersect_key($row, array_flip(['id', 'name', 'category', 'provider', 'instructions'])), $active('payment-methods')), 'settings' => $settings];
+    }
+
+    public function brandHero(string $id, BrandImageResolver $resolver): array
+    {
+        $brand = app(Commerce::class)->active('brands', $id);
+
+        return ['hero' => $resolver->ensure($brand)];
     }
 
     private function customer(Request $request, bool $member = true): Record
