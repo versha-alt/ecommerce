@@ -1,0 +1,254 @@
+/* Homepage polish: one container, compact rhythm, no content changes. */
+:root{--home-accent:var(--surface-alt);--home-accent-ink:var(--muted);--home-width:1240px}
+body:has(.home-hero-reference){background:var(--surface)}
+body:has(.home-hero-reference) .container,
+#main>.hero.home-hero-reference{width:min(var(--home-width),calc(100% - 64px))!important;max-width:var(--home-width)!important}
+#main:has(.home-hero-reference)>.section{padding:48px 0;margin:0 auto}
+#main:has(.home-hero-reference) .section-heading{gap:16px;margin:0 0 20px;align-items:center}
+#main:has(.home-hero-reference) .section-heading h2{margin:0;font-size:clamp(26px,3vw,36px);letter-spacing:-.04em}
+#main:has(.home-hero-reference) .eyebrow{margin-bottom:8px;font-size:10px;letter-spacing:1.8px}
+#main:has(.home-hero-reference) .section-heading p{margin:8px 0 0}
+#main>.hero.home-hero-reference{gap:32px!important;margin:0 auto!important;padding:48px 0!important;min-height:0!important;background:transparent!important}
+#main>.hero.home-hero-reference::before{width:100%;background:transparent}
+#main .home-hero-reference .hero-copy h1{font-family:var(--font-heading);font-size:clamp(46px,5.6vw,76px)!important;line-height:1.02!important;font-weight:750!important;letter-spacing:-.055em!important;overflow-wrap:break-word}
+#main .home-hero-reference .hero-description{margin:16px 0!important;line-height:1.65!important}
+#main .home-hero-reference .hero-showcase{min-height:390px!important;border-radius:24px!important;box-shadow:0 16px 40px color-mix(in srgb,var(--text) 9%,transparent)!important}
+#main .home-hero-reference .hero-showcase-note{background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(16px)}
+#main .home-hero-reference .carousel-controls{margin-top:16px!important}
+#main:has(.home-hero-reference)>.benefits{margin:0 auto;padding:20px 0;gap:16px;border-block:1px solid var(--surface-alt)}
+#main:has(.home-hero-reference) .home-product-grid{gap:14px;grid-template-columns:repeat(4,minmax(0,1fr))}
+#main:has(.home-hero-reference) .appliance-card{border-radius:16px!important;box-shadow:0 6px 22px color-mix(in srgb,var(--text) 3%,transparent)!important;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+#main:has(.home-hero-reference) .product-card-info{padding:12px!important}
+#main:has(.home-hero-reference) .product-card h3{margin-bottom:8px!important}
+#main:has(.home-hero-reference) .product-price-row{gap:8px}
+#main:has(.home-hero-reference) .product-price strong{font-family:var(--font-heading);font-size:clamp(24px,2.2vw,30px)!important;font-weight:750;letter-spacing:-.04em;line-height:1.15}
+#main:has(.home-hero-reference) .product-card-bottom{margin-top:8px!important;padding-top:8px!important}
+#main:has(.home-hero-reference) .home-deals{padding:48px 32px;margin:8px auto;background:var(--invert);border-radius:24px}
+#main:has(.home-hero-reference) .home-deals .appliance-card{box-shadow:none!important}
+#main:has(.home-hero-reference) .home-editorial{margin:8px auto;min-height:420px;border-radius:24px}
+#main:has(.home-hero-reference) .home-editorial-content{padding:40px;max-width:600px}
+#main:has(.home-hero-reference) .home-editorial h2{font-size:clamp(30px,3.6vw,46px);letter-spacing:-.04em}
+#main:has(.home-hero-reference) .home-editorial p{margin-bottom:18px}
+#main:has(.home-hero-reference) .home-editorial-shortcuts{margin-top:18px;gap:8px}
+
+/* Glass header stays above the existing menus and drawer. */
+body:has(.home-hero-reference) .store-header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 85%,transparent)!important;border-bottom:1px solid color-mix(in srgb,var(--bg) 69%,transparent);box-shadow:0 4px 24px color-mix(in srgb,var(--text) 4%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+body:has(.home-hero-reference) .header-main{height:80px;gap:32px}
+body:has(.home-hero-reference) .site-nav-trigger{font-size:12px;padding-inline:5px;gap:5px}
+.site-nav-trigger .category-symbol{display:block;opacity:1;flex-shrink:0;transform:none}
+.site-nav-trigger[aria-expanded=true] .category-symbol{color:var(--home-accent-ink)}
+.mm-acc-heading button>.category-symbol{flex-shrink:0;transform:none}
+.mm-acc-heading button>span{flex:1;text-align:left}
+#main .category-image-grid{gap:14px}
+#main .category-image-card{border:0;border-radius:16px;box-shadow:0 6px 22px color-mix(in srgb,var(--text) 5%,transparent);transition:transform .25s ease,box-shadow .25s ease}
+
+/* Existing logo links remain; banners add the requested brand shortcuts. */
+#main .brand-section-heading{margin-bottom:20px}
+#main .brand-marquee-track{gap:14px!important}
+#main .brand-marquee-item{height:72px!important;width:150px!important;border:1px solid var(--surface-alt)!important;border-radius:14px;background:var(--bg)!important}
+#main .brand-marquee-item img,.mm-brand-logo img{filter:none!important;transition:filter .3s ease,transform .3s ease}
+#main .brand-marquee-item:hover img,#main .brand-marquee-item:focus-visible img,.mm-brand:hover img,.mm-brand:focus-visible img{filter:none!important}
+#main .blog-card{border-radius:18px;box-shadow:0 6px 24px color-mix(in srgb,var(--text) 3%,transparent);transition:transform .25s ease,box-shadow .25s ease}
+#main .blog-card-content{padding:16px}
+#main .blog-card h3{font-size:20px;letter-spacing:-.035em;margin:12px 0 8px}
+#main .blog-card-content>p{margin-bottom:12px}
+/* Keep the existing carousel's 20px scroll increment aligned with its gaps. */
+#main .blog-carousel-track{gap:20px;padding-top:8px;padding-bottom:12px}
+#main .blog-card-image img{transition:transform .4s ease}
+
+/* Progressive scroll reveal; cards remain visible without view timelines. */
+@keyframes home-reveal{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@keyframes home-icon-bounce{0%,100%{translate:0 0}40%{translate:0 -4px}70%{translate:0 -1px}}
+@keyframes home-button-shine{to{left:140%}}
+#main:has(.home-hero-reference) .offer-badge.hot-deal{animation:deals-pulse 3s ease-in-out infinite}
+#main:has(.home-hero-reference) .button{position:relative;overflow:hidden;isolation:isolate}
+#main:has(.home-hero-reference) .button::after{content:'';position:absolute;inset:-50% auto -50% -70%;width:40%;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--bg) 33%,transparent),transparent);transform:skewX(-20deg);pointer-events:none}
+@media(hover:hover){
+ #main:has(.home-hero-reference) :is(.appliance-card,.category-image-card,.blog-card):hover{transform:translateY(-6px);box-shadow:0 14px 30px color-mix(in srgb,var(--border-strong) 15%,transparent)!important;border-color:var(--border-strong)!important}
+ #main:has(.home-hero-reference) .home-deals .appliance-card:hover{box-shadow:0 12px 28px color-mix(in srgb,var(--surface-alt) 15%,transparent)!important}
+ #main:has(.home-hero-reference) :is(.hero-showcase:hover .hero-showcase-image:hover .home-brand-scene,.blog-card:hover .blog-card-image img){transform:scale(1.045)}
+ .site-nav-trigger:hover .category-symbol,.mm-acc-heading button:hover>.category-symbol{color:var(--home-accent-ink);animation:home-icon-bounce .55s ease}
+ #main:has(.home-hero-reference) .button:hover::after{animation:home-button-shine .7s ease-out}
+}
+#main .hero-showcase-image{transition:transform .5s ease}
+@media(max-width:1180px){body:has(.home-hero-reference) .header-main{gap:20px}}
+@media(max-width:1000px){#main:has(.home-hero-reference) .home-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){
+ #main>.hero.home-hero-reference{grid-template-columns:1fr!important;gap:24px!important}
+ #main .home-hero-reference .hero-showcase{min-height:340px!important}
+ #main .home-hero-reference .hero-copy h1{font-size:clamp(44px,8vw,68px)!important}
+}
+@media(max-width:560px){
+ body:has(.home-hero-reference) .container,#main>.hero.home-hero-reference{width:calc(100% - 32px)!important}
+ #main:has(.home-hero-reference)>.section{padding:24px 0}
+ #main>.hero.home-hero-reference{padding:24px 0!important;gap:20px!important}
+ #main .home-hero-reference .hero-copy h1{font-size:clamp(40px,11vw,56px)!important}
+ #main .home-hero-reference .hero-showcase{min-height:255px!important;border-radius:18px!important}
+ body:has(.home-hero-reference) .header-main{height:72px;gap:14px}
+ #main:has(.home-hero-reference) .section-heading{gap:12px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px}
+ #main:has(.home-hero-reference) .home-product-grid,#main .category-image-grid{gap:12px}
+ #main:has(.home-hero-reference) .product-price strong{font-size:21px!important}
+ #main:has(.home-hero-reference) .home-deals{padding:24px;border-radius:18px}
+ #main:has(.home-hero-reference) .home-editorial{min-height:420px;border-radius:18px}
+ #main:has(.home-hero-reference) .home-editorial-content{padding:24px}
+ #main .category-image-card strong{font-size:14px;line-height:1.2}
+ #main .category-image-card small{font-size:10px}
+ #main .brand-marquee-item{width:92px!important;height:64px!important}
+ #main .blog-card h3{font-size:18px}
+}
+/* Respect reduced motion across inherited styles and all new effects. */
+@media(prefers-reduced-motion:reduce){
+ body:has(.home-hero-reference){scroll-behavior:auto}
+ html:has(.home-hero-reference){scroll-behavior:auto}
+ #main:has(.home-hero-reference) *,#main:has(.home-hero-reference) *::before,#main:has(.home-hero-reference) *::after,.site-nav-trigger .category-symbol,.mm-acc-heading button>.category-symbol{animation:none!important;transition:none!important}
+ #main:has(.home-hero-reference) :is(.appliance-card,.category-image-card,.blog-card),#main:has(.home-hero-reference) img{translate:none!important;transform:none!important;opacity:1!important}
+}
+
+/* Hero only: keep tag spacing and remove its outer border. */
+#main .home-hero-reference .hero-copy>.eyebrow{border-color:transparent!important}
+#main .home-hero-reference .hero-copy>.eyebrow,
+#main .home-hero-reference .hero-copy>h1,
+#main .home-hero-reference .hero-copy>.hero-description{animation:hero-copy-enter .5s ease both}
+#main .home-hero-reference .hero-showcase-image[data-active]{opacity:0!important;pointer-events:none;transition:opacity .5s ease,transform .5s ease}
+#main .home-hero-reference .hero-showcase-image[data-active=true]{opacity:1!important}
+@keyframes hero-copy-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+ #main .home-hero-reference .hero-copy>.eyebrow,
+ #main .home-hero-reference .hero-copy>h1,
+ #main .home-hero-reference .hero-copy>.hero-description{animation:none!important;translate:none}
+ #main .home-hero-reference .hero-showcase-image{transition:none!important}
+}
+
+/* Stable slide geometry prevents layout jumps and scrolling-capture duplication. */
+#main .home-hero-reference .hero-copy>h1{min-height:4.08em}
+#main .home-hero-reference .hero-copy>.hero-description{min-height:4.95em}
+#main .home-hero-reference .hero-copy>.eyebrow{min-height:2.8em}
+/* Journal content stays readable regardless of scroll position or motion support. */
+#main .blog-card{translate:none!important;height:auto;align-self:stretch}
+#main .blog-card-content{display:flex;flex-direction:column;gap:0;min-height:200px}
+#main .blog-card h3,#main .blog-card-content>p,#main .blog-read-more{visibility:visible;opacity:1;max-height:none;overflow:visible}
+#main .blog-read-more{margin-top:auto}
+#main .blog-carousel-track{align-items:stretch}
+/* White product stages merge source backgrounds and keep complete products visible. */
+#main:has(.home-hero-reference) .appliance-card .product-card-image{background:var(--bg)!important;aspect-ratio:4/3!important}
+#main:has(.home-hero-reference) .appliance-card .product-image{background:var(--bg)!important;padding:14px;object-fit:contain!important}
+#main .category-image-card[href='/categories/acs-fans-heaters']{background:var(--bg)}
+#main .category-image-card[href='/categories/acs-fans-heaters'] .category-image img{object-fit:contain;padding:20px 14px 36px}
+#main .category-image-card strong{font-size:clamp(14px,1.35vw,18px);line-height:1.25;text-wrap:balance}
+/* Give the unique remaining arrival a deliberate featured layout. */
+/* More separation around the cleaning feature, less around the logo tiles. */
+#main:has(.home-hero-reference) .home-deals{margin-bottom:24px}
+#main:has(.home-hero-reference) .home-editorial{margin-top:24px;margin-bottom:16px}
+#main:has(.home-hero-reference)>.brand-marquee-section{padding-top:24px;padding-bottom:24px}
+#main .brand-section-heading{margin-bottom:16px}
+.store-footer .footer-grid>div:last-child>a{display:flex;align-items:center;gap:6px}
+@media(max-width:560px){
+ #main .home-hero-reference .hero-copy>.hero-description{min-height:6.6em}
+ #main .category-image-card strong{font-size:14px}
+}
+/* Reveal cards once instead of binding their visibility to scroll progress. */
+#main:has(.home-hero-reference) .home-deals .product-card{animation:none}
+@media(prefers-reduced-motion:no-preference){
+ #main:has(.home-hero-reference) [data-home-reveal=true],#main:has(.home-hero-reference) .home-deals .product-card[data-home-reveal=true]{animation:home-reveal .45s ease var(--home-reveal-delay,0ms) backwards}
+}
+
+/* Fresh arrival: deliberate split card, aligned to the section container. */
+@media(max-width:700px){
+}
+
+/* Compact two-line hero with a larger, balanced image column. */
+#main>.hero.home-hero-reference{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;gap:36px!important}
+#main .home-hero-reference .hero-copy>h1{min-height:2.16em;font-size:clamp(30px,3.25vw,48px)!important;line-height:1.08!important;letter-spacing:-.045em!important}
+#main .home-hero-reference .hero-copy>h1>span{white-space:nowrap}
+#main .home-hero-reference .hero-copy>.eyebrow{background:transparent!important;border:0!important;padding:0!important;min-height:1.4em;width:auto!important}
+#main .home-hero-reference .hero-showcase{min-height:450px!important}
+#main:has(.home-hero-reference) .appliance-card .product-image{padding:2px;transform:scale(1.17)}
+#main:has(.home-hero-reference) .appliance-card:hover .product-image{transform:scale(1.2)}
+#main .category-image-card[href='/categories/acs-fans-heaters'] .category-image img{object-fit:cover;padding:0}
+@media(max-width:900px){#main>.hero.home-hero-reference{grid-template-columns:1fr!important;gap:24px!important}#main .home-hero-reference .hero-showcase{min-height:350px!important}}
+@media(max-width:560px){#main .home-hero-reference .hero-copy>h1{font-size:clamp(22px,6.9vw,38px)!important}#main .home-hero-reference .hero-showcase{min-height:280px!important}}
+
+/* Native carousels: four desktop cards, two on small screens. */
+#main:has(.home-hero-reference) .home-product-grid[data-product-carousel]{display:flex!important;gap:14px!important;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:0;overscroll-behavior-x:contain;scrollbar-width:none;padding:8px 0 14px;margin:0;touch-action:pan-x pan-y}
+#main .home-product-grid[data-product-carousel]::-webkit-scrollbar{display:none}
+#main .home-product-grid[data-product-carousel]>.product-card{flex:0 0 calc((100% - 42px)/4);min-width:0;scroll-snap-align:start}
+.product-carousel-controls{display:flex;justify-content:flex-end;gap:8px;margin-top:4px}
+.product-carousel-controls button{display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--surface-alt);border-radius:50%;background:var(--bg);color:var(--text)}
+.product-carousel-controls button:disabled{opacity:.3;cursor:default}
+.home-deals .product-carousel-controls button{background:var(--text);color:var(--surface-alt);border-color:var(--text)}
+.product-review-summary{display:flex;align-items:center;gap:6px;margin:0 0 10px;line-height:1.2}
+.product-review-summary>span{display:flex;gap:1px;color:var(--muted)}
+.product-review-summary small{font-size:10px;color:var(--muted)}
+.home-deals .product-review-summary>span{color:var(--surface-alt)}
+.home-deals .product-review-summary small{color:var(--border-strong)}
+.product-card-bottom [data-low-stock=true]{color:var(--muted)!important;font-weight:650}
+.home-deals .product-card-bottom [data-low-stock=true]{color:var(--surface-alt)!important}
+/* Payment badges disclose checkout availability rather than change payment data. */
+.payment-badges{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.payment-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;min-height:32px;border:1px solid var(--surface-alt);border-radius:7px;background:var(--bg);font-size:12px;font-weight:750;white-space:nowrap}
+.payment-badge.mpesa{color:var(--muted)}.payment-badge.visa{color:var(--text);font-style:italic}.payment-badge.mastercard{color:var(--text)}
+.payment-badge.mastercard i{width:24px;height:16px;display:block;background:radial-gradient(circle at 8px 8px,var(--muted) 7px,transparent 8px),radial-gradient(circle at 16px 8px,var(--border-strong) 7px,transparent 8px)}
+.payment-badges>small{font-size:10px;color:var(--muted);flex-basis:100%;text-align:center}
+#main:has(.home-hero-reference)>.benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+#main .benefits>.payment-badges{grid-column:1/-1;border-top:1px solid var(--surface-alt);padding-top:14px}
+.footer-payments{padding:20px 0}
+.footer-payments .payment-badges>small{color:var(--border-strong)}
+.store-footer>.newsletter{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:0 auto 32px;padding:28px 0;border-bottom:1px solid color-mix(in srgb,var(--bg) 14%,transparent);background:transparent!important}
+.store-footer .newsletter .eyebrow{color:var(--surface-alt)!important;margin-bottom:8px}
+.store-footer .newsletter h2{color:var(--bg);margin:0 0 8px;font-size:28px}
+.store-footer .newsletter p,.store-footer .newsletter small{color:var(--border-strong)}
+.store-footer .newsletter p{margin:0}
+.store-footer .newsletter form>div{background:var(--bg);border-radius:10px;padding:4px;overflow:hidden}
+.store-footer .newsletter input{color:var(--text);background:var(--bg);border:0}
+.store-footer .newsletter button{color:var(--text)!important;padding:8px}
+/* Real local brand assets at replaceable /images/brands paths. */
+.home-brand-banners{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px}
+.home-brand-banner{position:relative;display:block;isolation:isolate;aspect-ratio:1.35;border-radius:18px;overflow:hidden;box-shadow:0 8px 28px color-mix(in srgb,var(--text) 7%,transparent)}
+.home-brand-banner::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,color-mix(in srgb,var(--invert) 53%,transparent),transparent 65%);pointer-events:none}
+.home-brand-scene{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.home-brand-logo{position:absolute;top:14px;left:14px;z-index:2;display:grid;place-items:center;width:104px;height:50px;padding:9px;border-radius:10px;background:color-mix(in srgb,var(--bg) 94%,transparent)}
+.home-brand-logo img{width:100%;height:100%;object-fit:contain}
+#main:has(.home-hero-reference) .home-brand-banner .button{position:absolute;left:14px;bottom:14px;z-index:2;background:var(--bg)!important;color:var(--text)!important;padding:10px 14px;border-radius:999px;font-size:13px;gap:8px}
+#main .category-image-card>.category-symbol{position:absolute;top:12px;left:12px;z-index:2;width:36px;height:36px;padding:8px;border-radius:10px;background:color-mix(in srgb,var(--bg) 86%,transparent);color:var(--text)}
+#main .category-image-card:hover>.category-symbol{color:var(--muted);background:var(--surface-alt);animation:home-icon-bounce .5s ease}
+.site-nav-trigger .category-symbol,.site-nav-trigger[aria-expanded=true] .category-symbol,.mm-acc-heading button>.category-symbol{transform:none}
+/* Only transform and opacity animate; glow and accent changes are immediate. */
+#main:has(.home-hero-reference) *,#main:has(.home-hero-reference) *::before,#main:has(.home-hero-reference) *::after{transition-property:transform,opacity!important}
+@keyframes home-icon-bounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-4px)}70%{transform:translateY(-1px)}}
+@keyframes deals-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.04);opacity:.92}}
+@keyframes home-button-shine{from{transform:translateX(0) skewX(-20deg);opacity:0}25%{opacity:1}to{transform:translateX(550%) skewX(-20deg);opacity:0}}
+@keyframes deals-shine{from{transform:translateX(0) skewX(-20deg);opacity:0}25%{opacity:1}to{transform:translateX(550%) skewX(-20deg);opacity:0}}
+@keyframes home-reveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(hover:hover){
+ #main .home-brand-banner:hover{transform:translateY(-6px);box-shadow:0 14px 30px color-mix(in srgb,var(--border-strong) 15%,transparent)}
+ #main .home-brand-banner:hover .home-brand-scene{transform:scale(1.045)}
+}
+@media(max-width:1000px){#main .home-product-grid[data-product-carousel]>.product-card{flex-basis:calc((100% - 14px)/2)}}
+@media(max-width:700px){
+ .home-brand-banners{grid-template-columns:1fr;gap:12px}
+ .home-brand-banner{aspect-ratio:1.6}
+ .store-footer>.newsletter{grid-template-columns:1fr;gap:20px;padding:24px 0}
+ #main:has(.home-hero-reference)>.benefits{grid-template-columns:1fr}
+ #main .benefits>.payment-badges{grid-column:auto}
+}
+@media(max-width:560px){
+ #main:has(.home-hero-reference) .home-product-grid[data-product-carousel]{gap:12px!important}
+ #main .home-product-grid[data-product-carousel]>.product-card{flex-basis:calc((100% - 12px)/2)}
+ #main .category-image-card>.category-symbol{top:8px;left:8px;width:30px;height:30px;padding:6px}
+ .product-review-summary{flex-wrap:wrap;gap:4px}
+}
+@media(prefers-reduced-motion:reduce){
+ #main:has(.home-hero-reference) .appliance-card .product-image,#main:has(.home-hero-reference) .appliance-card:hover .product-image{transform:scale(1.17)!important}
+ #main .home-brand-banner,#main .home-brand-banner:hover{transform:none!important}
+ #main .home-brand-banner img,#main .home-brand-banner:hover img{transform:none!important}
+ #main .category-symbol{animation:none!important}
+ #main .home-product-grid[data-product-carousel],#main .blog-carousel-track{scroll-behavior:auto}
+}
+
+/* Enlarge the subject while retaining enough edge clearance for tall appliances. */
+#main:has(.home-hero-reference) .appliance-card .product-image{padding:10px}
+#main .appliance-card .add-button{position:relative;overflow:hidden}
+#main .appliance-card .add-button::after{content:'';position:absolute;inset:-50% auto -50% -70%;width:40%;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--bg) 33%,transparent),transparent);transform:skewX(-20deg);pointer-events:none}
+@media(hover:hover){#main .appliance-card .add-button:hover:not(:disabled)::after{animation:home-button-shine .7s ease-out}}
+.site-nav-trigger,.site-nav-trigger svg,.mm-acc-heading button,.category-symbol{transition-property:transform,opacity!important}
+@media(prefers-reduced-motion:reduce){#main .appliance-card .add-button::after{animation:none!important}}

@@ -20,7 +20,7 @@ class StorefrontController extends Controller
     {
         $commerce = app(Commerce::class);
         $active = fn (string $resource): array => array_values(array_filter($commerce->rows($resource), fn ($row) => ($row['status'] ?? '') === 'Active'));
-        $settings = array_intersect_key($commerce->settings(), array_flip(['store_name', 'email', 'phone', 'whatsapp', 'address', 'logo', 'favicon', 'facebook', 'instagram', 'ga4_id', 'meta_pixel_id']));
+        $settings = array_intersect_key($commerce->settings(), array_flip(['deals_tagline', 'store_name', 'email', 'phone', 'whatsapp', 'address', 'logo', 'favicon', 'facebook', 'instagram', 'ga4_id', 'meta_pixel_id']));
         $products = array_map(fn ($row) => array_intersect_key($row, array_flip(['id', 'name', 'sku', 'slug', 'type', 'brand_id', 'category_ids', 'price', 'sale_price', 'stock', 'reserved', 'image', 'gallery_images', 'description', 'specifications', 'warranty', 'manual', 'seo_title', 'seo_description', 'created_at'])), $active('products'));
 
         $sold = [];
@@ -31,8 +31,22 @@ class StorefrontController extends Controller
                 }
             }
         }
+        // Only moderated, published reviews contribute to public product ratings.
+        $ratings = [];
+        foreach ($commerce->rows('reviews') as $review) {
+            if (($review['status'] ?? '') !== 'Approved' || ! isset($review['product_id'], $review['rating'])) {
+                continue;
+            }
+            $rating = (int) $review['rating'];
+            if ($rating >= 1 && $rating <= 5) {
+                $ratings[$review['product_id']][] = $rating;
+            }
+        }
         foreach ($products as &$product) {
             $product['sold_count'] = $sold[$product['id']] ?? 0;
+            $productRatings = $ratings[$product['id']] ?? [];
+            $product['review_count'] = count($productRatings);
+            $product['rating_average'] = $productRatings ? round(array_sum($productRatings) / count($productRatings), 1) : null;
         }
         unset($product);
         $expose = fn (string $resource, array $fields): array => array_map(fn (array $row): array => array_intersect_key($row, array_flip($fields)), $active($resource));
@@ -66,7 +80,7 @@ class StorefrontController extends Controller
 
     private function profileData(Record $customer): array
     {
-        return array_intersect_key($customer->row(), array_flip(['id', 'name', 'email', 'phone', 'addresses', 'wishlist', 'account_type']));
+        return array_intersect_key($customer->row(), array_flip(['id', 'name', 'email', 'phone', 'addresses', 'wishlist', 'account_type', 'marketing_consent']));
     }
 
     private function orderData(array $order): array
@@ -119,7 +133,7 @@ class StorefrontController extends Controller
     public function profile(Request $request): array
     {
         $customer = $this->customer($request);
-        $input = $request->validate(['name' => 'required|string|max:180', 'phone' => 'nullable|string|max:50', 'wishlist' => 'nullable|array|max:100', 'wishlist.*' => 'uuid|distinct', 'addresses' => 'nullable|array|max:10', 'addresses.*.address' => 'required|string|max:1000', 'addresses.*.county_code' => ['required', Rule::in(array_keys(config('shipping.countries.KE.counties')))], 'current_password' => 'required_with:password|nullable|string|max:72', 'password' => 'nullable|string|min:12|max:72']);
+        $input = $request->validate(['name' => 'required|string|max:180', 'phone' => 'nullable|string|max:50', 'marketing_consent' => 'sometimes|boolean', 'wishlist' => 'nullable|array|max:100', 'wishlist.*' => 'uuid|distinct', 'addresses' => 'nullable|array|max:10', 'addresses.*.town' => 'nullable|string|max:180', 'addresses.*.phone' => 'nullable|string|max:50', 'addresses.*.is_default' => 'sometimes|boolean', 'addresses.*.address' => 'required|string|max:1000', 'addresses.*.county_code' => ['required', Rule::in(array_keys(config('shipping.countries.KE.counties')))], 'current_password' => 'required_with:password|nullable|string|max:72', 'password' => 'nullable|string|min:12|max:72']);
 
         return DB::transaction(function () use ($input, $customer): array {
             $customer = app(Commerce::class)->find('customers', $customer->id, true);
@@ -128,7 +142,7 @@ class StorefrontController extends Controller
                 abort_unless(Hash::check($input['current_password'], $data['password_hash']), 422, 'Current password is incorrect.');
                 $data['password_hash'] = Hash::make($input['password']);
             }
-            $customer->data = array_merge($data, array_intersect_key($input, array_flip(['name', 'phone', 'wishlist', 'addresses'])));
+            $customer->data = array_merge($data, array_intersect_key($input, array_flip(['name', 'phone', 'wishlist', 'addresses', 'marketing_consent'])));
             $customer->version++;
             $customer->save();
 

@@ -643,6 +643,7 @@ class Commerce
     public function saveSettings(array $input, User $actor): array
     {
         Validator::make($input, [
+            'deals_tagline' => 'nullable|string|max:180',
             'store_name' => 'required|string|max:180', 'version' => 'required|integer|min:1',
             'email' => 'nullable|email|max:180', 'mail_from' => 'nullable|email|max:180',
             'phone' => 'nullable|string|max:50', 'whatsapp' => 'nullable|string|max:50', 'address' => 'nullable|string|max:2000',

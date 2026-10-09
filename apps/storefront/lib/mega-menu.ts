@@ -1,12 +1,14 @@
+import type {Catalog} from './store';
+
 /**
  * Main navigation / mega menu content.
  *
  * This is the single place to edit the store's top-level categories.
  * The homepage "Shop by category" grid and the header mega menu both read from it.
  *
- * Links work exactly like the existing homepage category links: they open the
- * products page with a search query (`/products?q=...`). Brand links add the
- * brand filter (`&brand=<brand id>`), resolved at runtime from the catalog.
+ * Category links resolve the category slug and parent relationships from the catalog.
+ * Brand links combine actual brand and category IDs; search is only a fallback
+ * for installations without the defined categories.
  *
  * Field guide
  * - id:            unique key, also used for element ids (lowercase, dashes)
@@ -55,7 +57,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'tvs-audio',
     name: 'TVs & Audio',
-    image: '/assets/categories/tvs-audio.jpg',
+    image: '/images/categories/tvs-audio-realistic.webp',
     query: 'tv',
     subcategories: [
       {label: 'Smart TVs', query: 'smart tv'},
@@ -73,7 +75,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'fridges-freezers',
     name: 'Fridges & Freezers',
-    image: '/assets/categories/fridges-freezers.jpg',
+    image: '/images/categories/fridges-freezers-realistic.webp',
     query: 'fridge',
     subcategories: [
       {label: 'Side by Side', query: 'side by side'},
@@ -91,7 +93,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'washers-dryers',
     name: 'Washers & Dryers',
-    image: '/assets/categories/washers-dryers.jpg',
+    image: '/images/categories/washers-dryers-realistic.webp',
     query: 'washer',
     subcategories: [
       {label: 'Front Load Washers', query: 'front load'},
@@ -108,7 +110,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'cookers-microwaves',
     name: 'Cookers & Microwaves',
-    image: '/assets/categories/cookers-microwaves.jpg',
+    image: '/images/categories/cookers-microwaves-realistic.webp',
     query: 'cooker',
     subcategories: [
       {label: 'Standing Cookers', query: 'cooker'},
@@ -127,7 +129,7 @@ export const menuCategories: MenuCategory[] = [
     id: 'small-appliances',
     name: 'Kitchen & Home Small Appliances',
     navLabel: 'Small Appliances',
-    image: '/assets/categories/kitchen-small-appliances.jpg',
+    image: '/images/categories/kitchen-small-appliances-realistic.webp',
     query: 'kettle',
     subcategories: [
       {label: 'Kettles', query: 'kettle'},
@@ -145,7 +147,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'built-in-appliances',
     name: 'Built in Appliances',
-    image: '/assets/categories/built-in-appliances.jpg',
+    image: '/images/categories/built-in-appliances-realistic.webp',
     query: 'microwave',
     subcategories: [
       {label: 'Built-in Ovens', query: 'built-in oven'},
@@ -162,7 +164,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'acs-fans-heaters',
     name: 'ACs, Fans & Heaters',
-    image: '/assets/banners/everyday-home.jpg',
+    image: '/images/categories/acs-fans-heaters-realistic.webp',
     query: 'ac',
     subcategories: [
       {label: 'Split ACs', query: 'split'},
@@ -179,7 +181,7 @@ export const menuCategories: MenuCategory[] = [
   {
     id: 'health-personal-care',
     name: 'Health & Personal Care',
-    image: '/assets/banners/lg-living.jpg',
+    image: '/images/categories/health-personal-care-realistic.webp',
     query: 'health',
     subcategories: [
       {label: 'Air Purifiers', query: 'purifier'},
@@ -190,18 +192,34 @@ export const menuCategories: MenuCategory[] = [
     featured: [
       {image: '/assets/banners/everyday-home.jpg', imageAlt: 'Bright, airy living space', label: 'Wellbeing', headline: 'Breathe easier at home', description: 'Air purifiers that quietly clear dust and allergens.', query: 'purifier'},
     ],
-    brands: ['lg', 'midea'],
+    brands: ['lg', 'midea', 'karcher'],
   },
 ];
 
-/** Builds a products-page link, the same way the homepage category links work. */
-export function productsHref(filters: {q?: string; brand?: string}) {
+/** Product links use the catalog's category IDs, so every collection includes all assigned products. */
+export function productsHref(filters: {q?: string; brand?: string; category?: string}) {
   const params = new URLSearchParams();
   if (filters.q) params.set('q', filters.q);
   if (filters.brand) params.set('brand', filters.brand);
+  if (filters.category) params.set('category', filters.category);
   const query = params.toString();
   return query ? `/products?${query}` : '/products';
 }
 
-export const featureHref = (feature: MenuFeature, category: MenuCategory) =>
-  feature.href ?? productsHref({q: feature.query ?? category.query});
+export function menuCategoryHref(category: MenuCategory, data: Catalog, label?: string) {
+  const parent = data.categories.find(item => item.slug === category.id);
+  const selected = label
+    ? data.categories.find(item => item.parent_id === parent?.id && item.name === label)
+    : parent;
+  return selected ? `/categories/${selected.slug}` : productsHref({q: label ? category.subcategories.find(item => item.label === label)?.query : category.query});
+}
+
+export function menuBrandHref(category: MenuCategory, data: Catalog, brand: string) {
+  const parent = data.categories.find(item => item.slug === category.id);
+  return productsHref({brand, ...(parent ? {category: parent.id} : {q: category.query})});
+}
+
+export const featureHref = (feature: MenuFeature, category: MenuCategory, data: Catalog) => {
+  const child = category.subcategories.find(item => item.query === feature.query);
+  return feature.href ?? menuCategoryHref(category, data, child?.label);
+};

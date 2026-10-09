@@ -1,0 +1,1250 @@
+{
+  "verified_on": "2026-10-09",
+  "brands": [
+    {
+      "name": "LG",
+      "slug": "lg",
+      "website": "https://www.lg.com/eastafrica/",
+      "description": "Home entertainment, laundry, cooling and kitchen appliances from LG.",
+      "image": "/assets/brands/lg.png",
+      "banner": "/assets/banners/lg-living.jpg"
+    },
+    {
+      "name": "Midea",
+      "slug": "midea",
+      "website": "https://www.midea.com/ke",
+      "description": "Practical appliances for cooking, laundry, refrigeration and home comfort.",
+      "image": "/assets/brands/midea.png",
+      "banner": "/assets/banners/midea-kitchen.jpg"
+    },
+    {
+      "name": "Kärcher",
+      "slug": "karcher",
+      "website": "https://www.karcherstore-eastafrica.com/",
+      "description": "Cleaning equipment and air treatment products for the home.",
+      "image": "/assets/brands/karcher.png",
+      "banner": "/assets/products/karcher-k-3-power-control-2.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "name": "TVs & Audio",
+      "slug": "tvs-audio",
+      "parent_slug": null,
+      "description": "Explore tvs & audio from LG, Midea and Kärcher."
+    },
+    {
+      "name": "Smart TVs",
+      "slug": "smart-tvs",
+      "parent_slug": "tvs-audio",
+      "description": "Browse smart tvs."
+    },
+    {
+      "name": "4K UHD TVs",
+      "slug": "4k-uhd-tvs",
+      "parent_slug": "tvs-audio",
+      "description": "Browse 4k uhd tvs."
+    },
+    {
+      "name": "OLED TVs",
+      "slug": "oled-tvs",
+      "parent_slug": "tvs-audio",
+      "description": "Browse oled tvs."
+    },
+    {
+      "name": "Soundbars",
+      "slug": "soundbars",
+      "parent_slug": "tvs-audio",
+      "description": "Browse soundbars."
+    },
+    {
+      "name": "Home Theatre",
+      "slug": "home-theatre",
+      "parent_slug": "tvs-audio",
+      "description": "Browse home theatre."
+    },
+    {
+      "name": "Fridges & Freezers",
+      "slug": "fridges-freezers",
+      "parent_slug": null,
+      "description": "Explore fridges & freezers from LG, Midea and Kärcher."
+    },
+    {
+      "name": "Side by Side",
+      "slug": "side-by-side",
+      "parent_slug": "fridges-freezers",
+      "description": "Browse side by side."
+    },
+    {
+      "name": "Top Freezer",
+      "slug": "top-freezer",
+      "parent_slug": "fridges-freezers",
+      "description": "Browse top freezer."
+    },
+    {
+      "name": "Bottom Freezer",
+      "slug": "bottom-freezer",
+      "parent_slug": "fridges-freezers",
+      "description": "Browse bottom freezer."
+    },
+    {
+      "name": "Single Door",
+      "slug": "single-door",
+      "parent_slug": "fridges-freezers",
+      "description": "Browse single door."
+    },
+    {
+      "name": "Chest Freezers",
+      "slug": "chest-freezers",
+      "parent_slug": "fridges-freezers",
+      "description": "Browse chest freezers."
+    },
+    {
+      "name": "Washers & Dryers",
+      "slug": "washers-dryers",
+      "parent_slug": null,
+      "description": "Explore washers & dryers from LG, Midea and Kärcher."
+    },
+    {
+      "name": "Front Load Washers",
+      "slug": "front-load-washers",
+      "parent_slug": "washers-dryers",
+      "description": "Browse front load washers."
+    },
+    {
+      "name": "Top Load Washers",
+      "slug": "top-load-washers",
+      "parent_slug": "washers-dryers",
+      "description": "Browse top load washers."
+    },
+    {
+      "name": "Washer Dryers",
+      "slug": "washer-dryers",
+      "parent_slug": "washers-dryers",
+      "description": "Browse washer dryers."
+    },
+    {
+      "name": "Tumble Dryers",
+      "slug": "tumble-dryers",
+      "parent_slug": "washers-dryers",
+      "description": "Browse tumble dryers."
+    },
+    {
+      "name": "Twin Tub",
+      "slug": "twin-tub",
+      "parent_slug": "washers-dryers",
+      "description": "Browse twin tub."
+    },
+    {
+      "name": "Cookers & Microwaves",
+      "slug": "cookers-microwaves",
+      "parent_slug": null,
+      "description": "Explore cookers & microwaves from LG, Midea and Kärcher."
+    },
+    {
+      "name": "Standing Cookers",
+      "slug": "standing-cookers",
+      "parent_slug": "cookers-microwaves",
+      "description": "Browse standing cookers."
+    },
+    {
+      "name": "Gas Cookers",
+      "slug": "gas-cookers",
+      "parent_slug": "cookers-microwaves",
+      "description": "Browse gas cookers."
+    },
+    {
+      "name": "Microwaves",
+      "slug": "microwaves",
+      "parent_slug": "cookers-microwaves",
+      "description": "Browse microwaves."
+    },
+    {
+      "name": "Ovens",
+      "slug": "ovens",
+      "parent_slug": "cookers-microwaves",
+      "description": "Browse ovens."
+    },
+    {
+      "name": "Cooker Hoods",
+      "slug": "cooker-hoods",
+      "parent_slug": "cookers-microwaves",
+      "description": "Browse cooker hoods."
+    },
+    {
+      "name": "Kitchen & Home Small Appliances",
+      "slug": "small-appliances",
+      "parent_slug": null,
+      "description": "Explore kitchen & home small appliances from LG, Midea and Kärcher."
+    },
+    {
+      "name": "Kettles",
+      "slug": "kettles",
+      "parent_slug": "small-appliances",
+      "description": "Browse kettles."
+    },
+    {
+      "name": "Blenders",
+      "slug": "blenders",
+      "parent_slug": "small-appliances",
+      "description": "Browse blenders."
+    },
+    {
+      "name": "Air Fryers",
+      "slug": "air-fryers",
+      "parent_slug": "small-appliances",
+      "description": "Browse air fryers."
+    },
+    {
+      "name": "Irons",
+      "slug": "irons",
+      "parent_slug": "small-appliances",
+      "description": "Browse irons."
+    },
+    {
+      "name": "Vacuum Cleaners",
+      "slug": "vacuum-cleaners",
+      "parent_slug": "small-appliances",
+      "description": "Browse vacuum cleaners."
+    },
+    {
+      "name": "Built in Appliances",
+      "slug": "built-in-appliances",
+      "parent_slug": null,
+      "description": "Explore built in appliances from LG, Midea and Kärcher."
+    },
+    {
+      "name": "Built-in Ovens",
+      "slug": "built-in-ovens",
+      "parent_slug": "built-in-appliances",
+      "description": "Browse built-in ovens."
+    },
+    {
+      "name": "Hobs",
+      "slug": "hobs",
+      "parent_slug": "built-in-appliances",
+      "description": "Browse hobs."
+    },
+    {
+      "name": "Built-in Microwaves",
+      "slug": "built-in-microwaves",
+      "parent_slug": "built-in-appliances",
+      "description": "Browse built-in microwaves."
+    },
+    {
+      "name": "Dishwashers",
+      "slug": "dishwashers",
+      "parent_slug": "built-in-appliances",
+      "description": "Browse dishwashers."
+    },
+    {
+      "name": "Extractor Hoods",
+      "slug": "extractor-hoods",
+      "parent_slug": "built-in-appliances",
+      "description": "Browse extractor hoods."
+    },
+    {
+      "name": "ACs, Fans & Heaters",
+      "slug": "acs-fans-heaters",
+      "parent_slug": null,
+      "description": "Explore acs, fans & heaters from LG, Midea and Kärcher."
+    },
+    {
+      "name": "Split ACs",
+      "slug": "split-acs",
+      "parent_slug": "acs-fans-heaters",
+      "description": "Browse split acs."
+    },
+    {
+      "name": "Portable ACs",
+      "slug": "portable-acs",
+      "parent_slug": "acs-fans-heaters",
+      "description": "Browse portable acs."
+    },
+    {
+      "name": "Fans",
+      "slug": "fans",
+      "parent_slug": "acs-fans-heaters",
+      "description": "Browse fans."
+    },
+    {
+      "name": "Heaters",
+      "slug": "heaters",
+      "parent_slug": "acs-fans-heaters",
+      "description": "Browse heaters."
+    },
+    {
+      "name": "Dehumidifiers",
+      "slug": "dehumidifiers",
+      "parent_slug": "acs-fans-heaters",
+      "description": "Browse dehumidifiers."
+    },
+    {
+      "name": "Health & Personal Care",
+      "slug": "health-personal-care",
+      "parent_slug": null,
+      "description": "Explore health & personal care from LG, Midea and Kärcher."
+    },
+    {
+      "name": "Air Purifiers",
+      "slug": "air-purifiers",
+      "parent_slug": "health-personal-care",
+      "description": "Browse air purifiers."
+    },
+    {
+      "name": "Water Dispensers",
+      "slug": "water-dispensers",
+      "parent_slug": "health-personal-care",
+      "description": "Browse water dispensers."
+    },
+    {
+      "name": "Hair Dryers",
+      "slug": "hair-dryers",
+      "parent_slug": "health-personal-care",
+      "description": "Browse hair dryers."
+    },
+    {
+      "name": "Shavers & Trimmers",
+      "slug": "shavers-trimmers",
+      "parent_slug": "health-personal-care",
+      "description": "Browse shavers & trimmers."
+    }
+  ],
+  "products": [
+    {
+      "brand_slug": "lg",
+      "name": "LG 50NU840B6LA 50-inch NANO 4K UHD Smart TV",
+      "model": "50NU840B6LA",
+      "sku": "50NU840B6LA",
+      "slug": "lg-50nu840b6la-50-inch-nano-4k-uhd-smart-tv",
+      "category_slugs": [
+        "smart-tvs",
+        "4k-uhd-tvs"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 79995,
+      "sale_price": 56995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/lg-50nu840b6la-1.jpg",
+      "gallery_images": [
+        "/assets/products/lg-50nu840b6la-1.jpg",
+        "/assets/products/lg-50nu840b6la-2.jpg",
+        "/assets/products/lg-50nu840b6la-3.jpg"
+      ],
+      "description": "Bring films and streaming entertainment to a 50-inch 4K screen. Nano Detail Enhancer refines texture and depth, while webOS provides access to smart TV apps and LG Channels.",
+      "specifications": "Model: 50NU840B6LA\nScreen size: 50 inches\nResolution: 4K UHD\nDisplay range: NANO 4K AI NU84\nSmart platform: webOS\nPicture processing: Nano Detail Enhancer",
+      "warranty": "",
+      "seo_title": "LG 50NU840B6LA 50-inch NANO 4K UHD Smart TV | Leekav Kenya",
+      "seo_description": "Bring films and streaming entertainment to a 50-inch 4K screen. Nano Detail Enhancer refines texture and depth, while webOS provides access to smart TV apps and LG Channels.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/50-inch-lg-nano-4k-ai-nu84-smart-tv-2026.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_48_thum-1600x1062_2.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_54_thum-1600x1062.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_160_lg-nano-4k-uhd-nu85-2026-feature-05-ai-processor-alpha7-gen9-d.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "lg",
+      "name": "LG S95AR 9.1.5-channel Dolby Atmos Soundbar",
+      "model": "S95AR",
+      "sku": "S95AR",
+      "slug": "lg-s95ar-9-1-5-channel-dolby-atmos-soundbar",
+      "category_slugs": [
+        "soundbars"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 184995,
+      "sale_price": 164995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/lg-s95ar-1.jpg",
+      "gallery_images": [
+        "/assets/products/lg-s95ar-1.jpg",
+        "/assets/products/lg-s95ar-2.jpg",
+        "/assets/products/lg-s95ar-3.jpg"
+      ],
+      "description": "Create a surround sound setup with Dolby Atmos, up-firing speakers and rear speakers. Room Calibration Pro adjusts the audio presentation to your listening space.",
+      "specifications": "Model: S95AR\nChannels: 9.1.5\nSurround format: Dolby Atmos\nSpeakers: Triple up-firing speakers; 6-channel rear speaker\nCalibration: Room Calibration Pro",
+      "warranty": "",
+      "seo_title": "LG S95AR 9.1.5-channel Dolby Atmos Soundbar | Leekav Kenya",
+      "seo_description": "Create a surround sound setup with Dolby Atmos, up-firing speakers and rear speakers. Room Calibration Pro adjusts the audio presentation to your listening space.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/lg-soundbar-for-tv-with-dolby-atmos-9-1-5-channel-s95ar.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_49_large01.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_53_large03.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_55_large04.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "lg",
+      "name": "LG F4Y2TYG6X 8 kg Front Load Washer",
+      "model": "F4Y2TYG6X",
+      "sku": "F4Y2TYG6X",
+      "slug": "lg-f4y2tyg6x-8-kg-front-load-washer",
+      "category_slugs": [
+        "front-load-washers"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 103995,
+      "sale_price": 68995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/lg-f4y2tyg6x-1.jpg",
+      "gallery_images": [
+        "/assets/products/lg-f4y2tyg6x-1.jpg",
+        "/assets/products/lg-f4y2tyg6x-2.jpg",
+        "/assets/products/lg-f4y2tyg6x-3.jpg"
+      ],
+      "description": "Handle everyday laundry with an 8 kg front loader and Inverter Direct Drive motor. Choose 6 Motion washing, Allergy Care and Tub Clean, with LG ThinQ connectivity for smart control.",
+      "specifications": "Model: F4Y2TYG6X\nWash capacity: 8 kg\nLoading: Front load\nMaximum spin speed: 1400 rpm\nMotor: Inverter Direct Drive\nConnectivity: LG ThinQ Wi-Fi\nPrograms: 6 Motion; Allergy Care; Tub Clean",
+      "warranty": "",
+      "seo_title": "LG F4Y2TYG6X 8 kg Front Load Washer | Leekav Kenya",
+      "seo_description": "Handle everyday laundry with an 8 kg front loader and Inverter Direct Drive motor. Choose 6 Motion washing, Allergy Care and Tub Clean, with LG ThinQ connectivity for smart control.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/lg-8-kg-front-load-1400rpm-thinq-wi-fi.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_52_thum-1600x1062_2.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_56_thum-1600x1062_1.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_54_thum-1600x1062_2.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "lg",
+      "name": "LG GC-B569NQCM 462 L Bottom Freezer Fridge",
+      "model": "GC-B569NQCM",
+      "sku": "GC-B569NQCM",
+      "slug": "lg-gc-b569nqcm-bottom-freezer-fridge",
+      "category_slugs": [
+        "bottom-freezer"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 169995,
+      "sale_price": 139995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/lg-gc-b569nqcm-1.jpg",
+      "gallery_images": [
+        "/assets/products/lg-gc-b569nqcm-1.jpg",
+        "/assets/products/lg-gc-b569nqcm-2.jpg",
+        "/assets/products/lg-gc-b569nqcm-3.jpg"
+      ],
+      "description": "Organize chilled food above a spacious bottom freezer. DoorCooling+ and Linear Cooling support even cooling, with humidity control for produce and ThinQ Wi-Fi connectivity.",
+      "specifications": "Model: GC-B569NQCM\nConfiguration: Bottom freezer; no frost\nCapacity: 462 L total storage volume\nCompressor: Smart Inverter\nCooling: DoorCooling+; Linear Cooling\nConnectivity: LG ThinQ Wi-Fi\nFinish: Matte black steel\nDimensions (W x H x D): 700 x 1850 x 700 mm",
+      "warranty": "",
+      "seo_title": "LG GC-B569NQCM 462 L Bottom Freezer Fridge | Leekav Kenya",
+      "seo_description": "Organize chilled food above a spacious bottom freezer. DoorCooling+ and Linear Cooling support even cooling, with humidity control for produce and ThinQ Wi-Fi connectivity.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/lg-gc-b569nqcm-bottom-mount-freezer-fridge-462-l-smart-inverter-compressor-wi-fithinqtm-door-cooling-tm.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/l/g/lg_gc-b569nqcm_bottom_mount_freezer_fridge_462_l_-_smart_inverter_compressor_wi-fithinq_door_cooling.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_270_ezgif.com-gif-maker-01_yphi5ib.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_271_ezgif.com-gif-maker-02_fno1rrl.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true,
+        "specification_url": "https://www.lg.com/eastafrica/refrigerators/lg-gc-b569nqcm"
+      }
+    },
+    {
+      "brand_slug": "lg",
+      "name": "LG MH8265CIS 42 L NeoChef Grill Microwave",
+      "model": "MH8265CIS",
+      "sku": "MH-8265CIS",
+      "slug": "lg-mh8265cis-42-l-neochef-grill-microwave",
+      "category_slugs": [
+        "microwaves"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 33995,
+      "sale_price": 29995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/lg-mh-8265cis-1.jpg",
+      "gallery_images": [
+        "/assets/products/lg-mh-8265cis-1.jpg",
+        "/assets/products/lg-mh-8265cis-2.jpg",
+        "/assets/products/lg-mh-8265cis-3.jpg"
+      ],
+      "description": "Reheat, defrost and grill with a 42 L NeoChef microwave. Smart Inverter control supports even defrosting and fast cooking, while the EasyClean interior simplifies cleaning.",
+      "specifications": "Model: MH8265CIS\nCapacity: 42 L\nCooking functions: Microwave; grill\nTechnology: Smart Inverter\nInterior: EasyClean\nFinish: Stainless steel",
+      "warranty": "",
+      "seo_title": "LG MH8265CIS 42 L NeoChef Grill Microwave | Leekav Kenya",
+      "seo_description": "Reheat, defrost and grill with a 42 L NeoChef microwave. Smart Inverter control supports even defrosting and fast cooking, while the EasyClean interior simplifies cleaning.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/lg-kenya-mh8265cis-42l-neocheftm-stainless-steel-microwave.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/m/h/mh8265cis.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/z/z/zz2_1.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/z/z/zz3_1.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "lg",
+      "name": "LG DBC435TSL 14-place Built-in Dishwasher",
+      "model": "DBC435TSL",
+      "sku": "DBC435TSL",
+      "slug": "lg-dbc435tsl-14-place-built-in-dishwasher",
+      "category_slugs": [
+        "dishwashers"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 161995,
+      "sale_price": 144995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/lg-dbc435tsl-1.jpg",
+      "gallery_images": [
+        "/assets/products/lg-dbc435tsl-1.jpg",
+        "/assets/products/lg-dbc435tsl-2.jpg",
+        "/assets/products/lg-dbc435tsl-3.jpg"
+      ],
+      "description": "Fit a 14-place dishwasher into your kitchen cabinetry. QuadWash, TrueSteam and Auto Open Dry support cleaning and drying, with adjustable racks and a hidden control panel.",
+      "specifications": "Model: DBC435TSL\nInstallation: Built-in\nCapacity: 14 place settings\nMotor: Inverter Direct Drive\nCleaning: QuadWash; TrueSteam\nDrying: Auto Open Dry\nNoise level: 43 dB\nStandard cycle water use: 9.5 L\nWash cycles: 10\nConnectivity: SmartThinQ Wi-Fi",
+      "warranty": "",
+      "seo_title": "LG DBC435TSL 14-place Built-in Dishwasher | Leekav Kenya",
+      "seo_description": "Fit a 14-place dishwasher into your kitchen cabinetry. QuadWash, TrueSteam and Auto Open Dry support cleaning and drying, with adjustable racks and a hidden control panel.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/lg-built-in-dishwasher-with-truesteamtm.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/t/h/thum-1600x1062_16_.jpeg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/t/h/thum-1600x1062_23_.jpeg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/t/h/thum-1600x1062_21_.jpeg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "lg",
+      "name": "LG H12TN4 12,000 BTU Split AC",
+      "model": "H12TN4",
+      "sku": "H12TN4",
+      "slug": "lg-h12tn4-12-000-btu-split-ac",
+      "category_slugs": [
+        "split-acs"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 59995,
+      "sale_price": 47495,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/lg-h12tn4-1.jpg",
+      "gallery_images": [
+        "/assets/products/lg-h12tn4-1.jpg",
+        "/assets/products/lg-h12tn4-2.jpg",
+        "/assets/products/lg-h12tn4-3.jpg"
+      ],
+      "description": "Cool a room with this cool-only split air conditioner. JETCOOL PLUS provides rapid cooling, in a wall-mounted split design for everyday indoor comfort.",
+      "specifications": "Model: H12TN4\nCooling capacity: 12,000 BTU\nType: Split air conditioner\nOperating mode: Cooling only\nRapid cooling: JETCOOL PLUS",
+      "warranty": "",
+      "seo_title": "LG H12TN4 12,000 BTU Split AC | Leekav Kenya",
+      "seo_description": "Cool a room with this cool-only split air conditioner. JETCOOL PLUS provides rapid cooling, in a wall-mounted split design for everyday indoor comfort.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/lg-12k-btu-split-air-conditioner-energy-saving-faster-cooling-h12tn4.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/d/z/dz-07_1_.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/d/z/dz-10-12k.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/d/z/dz-12_1_.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea MDRT294FGN28 204 L Top Freezer Fridge",
+      "model": "MDRT294FGN28",
+      "sku": "MDRT294FGN28",
+      "slug": "midea-mdrt294fgn28-204-l-top-freezer-fridge",
+      "category_slugs": [
+        "top-freezer"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 64995,
+      "sale_price": 51995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-mdrt294fgn28-1.png",
+      "gallery_images": [
+        "/assets/products/midea-mdrt294fgn28-1.png",
+        "/assets/products/midea-mdrt294fgn28-2.png",
+        "/assets/products/midea-mdrt294fgn28-3.png"
+      ],
+      "description": "Keep daily groceries organized in a low-frost top freezer fridge. Adjustable shelving, a large crisper and a 2 L bottle rack make the interior practical, with a reversible door for flexible placement.",
+      "specifications": "Model: MDRT294FGN28\nCapacity: 204 L\nConfiguration: Top freezer\nDefrosting: Low frost\nFinish: Jazz Black\nStorage: Adjustable shelf; big crisper; 2 L bottle rack\nDoor: Reversible\nLighting: Interior light",
+      "warranty": "",
+      "seo_title": "Midea MDRT294FGN28 204 L Top Freezer Fridge | Leekav Kenya",
+      "seo_description": "Keep daily groceries organized in a low-frost top freezer fridge. Adjustable shelving, a large crisper and a 2 L bottle rack make the interior practical, with a reversible door for flexible placement.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-204l-jazz-black-top-mount-refrigerator.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_11_a-mdrt294fgf28-v1-3--removebg-preview.png",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_12_a-mdrt294fgf28-v1-2--removebg-preview.png",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_13_a-mdrt294fgf28-v1-1--removebg-preview.png"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea MF200W80WB/T 8 kg Front Load Washer",
+      "model": "MF200W80WB/T",
+      "sku": "MF200W80WB/T",
+      "slug": "midea-mf200w80wb-t-8-kg-front-load-washer",
+      "category_slugs": [
+        "front-load-washers"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 79995,
+      "sale_price": 54995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-mf200w80wb-t-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-mf200w80wb-t-1.jpg"
+      ],
+      "description": "Wash everyday loads with Inverter Quattro technology, Steam Care and a Lunar Dial display. Wi-Fi control, a 15-minute quick wash and Drum Clean help simplify laundry routines.",
+      "specifications": "Model: MF200W80WB/T\nCapacity: 8 kg\nLoading: Front load\nMaximum spin speed: 1400 rpm\nMotor: Inverter Quattro\nConnectivity: Wi-Fi smart control\nDisplay: LED Lunar Dial\nPrograms: Steam Care; Drum Clean; 15-minute Quick Wash; 45-minute Rapid Wash",
+      "warranty": "",
+      "seo_title": "Midea MF200W80WB/T 8 kg Front Load Washer | Leekav Kenya",
+      "seo_description": "Wash everyday loads with Inverter Quattro technology, Steam Care and a Lunar Dial display. Wi-Fi control, a 15-minute quick wash and Drum Clean help simplify laundry routines.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-10-kg-front-loader-washing-machine-2.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/m/f/mf200d100wb-t_1_1_1.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea MA200W90/T 9 kg Top Load Washer",
+      "model": "MA200W90/T",
+      "sku": "MA200W90/T",
+      "slug": "midea-ma200w90-t-9-kg-top-load-washer",
+      "category_slugs": [
+        "top-load-washers"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 43995,
+      "sale_price": 34995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-ma200w90-t-1.png",
+      "gallery_images": [
+        "/assets/products/midea-ma200w90-t-1.png",
+        "/assets/products/midea-ma200w90-t-2.png",
+        "/assets/products/midea-ma200w90-t-3.png"
+      ],
+      "description": "A 9 kg top loader with a soft-close lid and Titanium finish. Turbo and Hygiene Wash modes, delay start and child lock support everyday family laundry.",
+      "specifications": "Model: MA200W90/T\nCapacity: 9 kg\nLoading: Top load\nFinish: Titanium\nFunctions: Turbo; Hygiene Wash; Delay Start\nSafety: Child lock\nLid: Soft close\nRecovery: Memory recovery",
+      "warranty": "",
+      "seo_title": "Midea MA200W90/T 9 kg Top Load Washer | Leekav Kenya",
+      "seo_description": "A 9 kg top loader with a soft-close lid and Titanium finish. Turbo and Hygiene Wash modes, delay start and child lock support everyday family laundry.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-9kg-titanium-color-front-load-washing-machine.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_10_a-ma200w110t-front-v1-removebg-preview_1_.png",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_10_a-ma200w110t-front-v1-removebg-preview.png",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_11_c-ma200w110t-side-v1-removebg-preview.png"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea MF200D100WB/T 10/7 kg Washer Dryer",
+      "model": "MF200D100WB/T",
+      "sku": "MF200D100WB/T",
+      "slug": "midea-mf200d100wb-t-10-7-kg-washer-dryer",
+      "category_slugs": [
+        "washer-dryers"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 104995,
+      "sale_price": 74995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-mf200d100wb-t-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-mf200d100wb-t-1.jpg",
+        "/assets/products/midea-mf200d100wb-t-2.jpg",
+        "/assets/products/midea-mf200d100wb-t-3.jpg"
+      ],
+      "description": "Combine a 10 kg wash and 7 kg dry capacity in one front-loading appliance. An inverter motor, SteamCare, Turbo Wash and Wi-Fi readiness support convenient laundry care.",
+      "specifications": "Model: MF200D100WB/T\nWashing capacity: 10 kg\nDrying capacity: 7 kg\nLoading: Front load\nMotor: Inverter\nFinish: Titanium\nConnectivity: SmartHome Wi-Fi ready\nFunctions: SteamCare; Turbo Wash; Auto Drum Clean; AirFresh",
+      "warranty": "",
+      "seo_title": "Midea MF200D100WB/T 10/7 kg Washer Dryer | Leekav Kenya",
+      "seo_description": "Combine a 10 kg wash and 7 kg dry capacity in one front-loading appliance. An inverter motor, SteamCare, Turbo Wash and Wi-Fi readiness support convenient laundry care.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-10-7kg-front-load-inverter-washer-tumble-dryer-titanium.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/0/0/001-20.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/0/0/004-12.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/0/0/002-18.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea 60E3G1H4F-SL 60 cm Gas and Electric Cooker",
+      "model": "60E3G1H4F-SL",
+      "sku": "60E3G1H4F-SL-1",
+      "slug": "midea-60e3g1h4f-sl-60-cm-gas-and-electric-cooker",
+      "category_slugs": [
+        "standing-cookers",
+        "gas-cookers"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 46995,
+      "sale_price": 38995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-60e3g1h4f-sl-1-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-60e3g1h4f-sl-1-1.jpg"
+      ],
+      "description": "Prepare meals with three gas burners, an electric hotplate and an electric oven. Mechanical controls, auto ignition and a removable double-glass oven door support everyday cooking and cleaning.",
+      "specifications": "Model: 60E3G1H4F-SL\nSize: 60 x 60 cm\nHob: 3 gas burners; 1 electric hotplate\nOven: Electric\nControls: Mechanical\nIgnition: Automatic\nDoor: 2-layer removable glass\nFinish: Silver",
+      "warranty": "",
+      "seo_title": "Midea 60E3G1H4F-SL 60 cm Gas and Electric Cooker | Leekav Kenya",
+      "seo_description": "Prepare meals with three gas burners, an electric hotplate and an electric oven. Mechanical controls, auto ignition and a removable double-glass oven door support everyday cooking and cleaning.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-60-60-3gas-1-electric-standing-cooker-with-electric-oven-60e3g1h4f-sl-silver.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/i/m/imgi_17_a-60e3g1h4f-sl-v1-1200x1200_1.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea 65M40M1-SS 80 L Built-in Electric Oven",
+      "model": "65M40M1-SS",
+      "sku": "65M40M1-SS",
+      "slug": "midea-65m40m1-ss-80-l-built-in-electric-oven",
+      "category_slugs": [
+        "built-in-ovens",
+        "ovens"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 36495,
+      "sale_price": 28995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-65m40m1-ss-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-65m40m1-ss-1.jpg"
+      ],
+      "description": "Bake and roast in an 80 L built-in oven with fan-assisted conventional cooking. Vapor cleaning helps loosen residue, and the stainless steel finish suits fitted kitchens.",
+      "specifications": "Model: 65M40M1-SS\nCapacity: 80 L\nWidth: 60 cm\nInstallation: Built-in\nFuel: Electric\nTemperature range: 50-250 degrees C\nMaximum power: 2100 W\nDimensions (W x D x H): 595 x 565 x 595 mm\nFinish: Stainless steel\nCleaning: Vapor cleaning",
+      "warranty": "",
+      "seo_title": "Midea 65M40M1-SS 80 L Built-in Electric Oven | Leekav Kenya",
+      "seo_description": "Bake and roast in an 80 L built-in oven with fan-assisted conventional cooking. Vapor cleaning helps loosen residue, and the stainless steel finish suits fitted kitchens.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-built-in-electric-oven-60cm-80l-capacity-stainless-steel.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/m/i/midea_65m40m1-ss_1.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true,
+        "specification_url": "https://www.midea.com/ke/kitchen-appliances/built-in-oven/midea-built-in-electric-oven.65m40m1-ss"
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea AG925BVE-SS 25 L Built-in Grill Microwave",
+      "model": "AG925BVE-SS",
+      "sku": "AG925BVE-SS",
+      "slug": "midea-ag925bve-ss-25-l-built-in-grill-microwave",
+      "category_slugs": [
+        "built-in-microwaves",
+        "microwaves"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 31995,
+      "sale_price": 24995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-ag925bve-ss-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-ag925bve-ss-1.jpg"
+      ],
+      "description": "Add microwave and grill cooking to a fitted kitchen with this 25 L built-in model. Five power levels and eight preset programs offer practical options for reheating and meal preparation.",
+      "specifications": "Model: AG925BVE-SS\nCapacity: 25 L\nInstallation: Full built-in\nMicrowave power: 900 W\nPower levels: 5\nPreset programs: 8\nGrill: Yes\nFinish: Stainless steel / Inox\nNet weight: 19 kg",
+      "warranty": "",
+      "seo_title": "Midea AG925BVE-SS 25 L Built-in Grill Microwave | Leekav Kenya",
+      "seo_description": "Add microwave and grill cooking to a fitted kitchen with this 25 L built-in model. Five power levels and eight preset programs offer practical options for reheating and meal preparation.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-built-in-microwave-oven-25l-compact-design-manual-controls-stainless-steel.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/a/-/a-ag925bve-ss-v1_1.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea MH60M77ET26MB-BS 60 cm Cooker Hood",
+      "model": "MH60M77ET26MB-BS",
+      "sku": "MH60M77ET26MB-BS",
+      "slug": "midea-mh60m77et26mb-bs-60-cm-cooker-hood",
+      "category_slugs": [
+        "extractor-hoods",
+        "cooker-hoods"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 23495,
+      "sale_price": 18995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-mh60m77et26mb-bs-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-mh60m77et26mb-bs-1.jpg"
+      ],
+      "description": "Extract kitchen air with a 60 cm T-shape hood and three fan speeds. A five-layer aluminium filter, digital display and gesture-operated controls make ventilation easy to manage.",
+      "specifications": "Model: MH60M77ET26MB-BS\nWidth: 60 cm\nDesign: T-shape extractor hood\nAirflow: 400 cubic metres/hour\nFan speeds: 3\nFilter: 5-layer aluminium\nControls: Gesture operation; digital display\nFinish: Stainless steel with black panel",
+      "warranty": "",
+      "seo_title": "Midea MH60M77ET26MB-BS 60 cm Cooker Hood | Leekav Kenya",
+      "seo_description": "Extract kitchen air with a 60 cm T-shape hood and three fan speeds. A five-layer aluminium filter, digital display and gesture-operated controls make ventilation easy to manage.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-cooker-hood-60cm-t-shape-type-stainless-steel-with-black-panel-400m3-h-with-3-fan-speeds.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/a/-/a-60m77-v2.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea MK-17S32A2 1.7 L Stainless Steel Kettle",
+      "model": "MK-17S32A2",
+      "sku": "MK-17S32A2",
+      "slug": "midea-mk-17s32a2-1-7-l-stainless-steel-kettle",
+      "category_slugs": [
+        "kettles"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 2795,
+      "sale_price": 2395,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-mk-17s32a2-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-mk-17s32a2-1.jpg"
+      ],
+      "description": "Boil water in a cordless stainless steel kettle with a 360-degree base. The pop-up lid and internal water indicator help with filling and daily use.",
+      "specifications": "Model: MK-17S32A2\nCapacity: 1.7 L\nPower: 2200 W\nBody: Brushed SUS 304 stainless steel\nBase: 360-degree cordless\nLid: Automatic pop-up\nWater level: Internal indicator",
+      "warranty": "",
+      "seo_title": "Midea MK-17S32A2 1.7 L Stainless Steel Kettle | Leekav Kenya",
+      "seo_description": "Boil water in a cordless stainless steel kettle with a 360-degree base. The pop-up lid and internal water indicator help with filling and daily use.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-1-7l-stainless-steel-kettle-2200w-stainless-steel.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/m/k/mk-17s32a2.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea MF-TN45WK4 4.7 L Air Fryer",
+      "model": "MF-TN45WK4",
+      "sku": "MF-TN45WK4",
+      "slug": "midea-mf-tn45wk4-4-7-l-air-fryer",
+      "category_slugs": [
+        "air-fryers"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 9495,
+      "sale_price": 6995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-mf-tn45wk4-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-mf-tn45wk4-1.jpg",
+        "/assets/products/midea-mf-tn45wk4-2.jpg",
+        "/assets/products/midea-mf-tn45wk4-3.jpg"
+      ],
+      "description": "Cook small meals and snacks in a compact manual air fryer. Temperature control, a 60-minute timer and automatic shut-off support grilling, roasting and baking.",
+      "specifications": "Model: MF-TN45WK4\nCapacity: 4.7 L\nPower: 1500 W\nControls: Manual temperature control\nTimer: 60 minutes\nFunctions: Grilling; roasting; baking\nSafety: Automatic shut-off\nFinish: Black",
+      "warranty": "",
+      "seo_title": "Midea MF-TN45WK4 4.7 L Air Fryer | Leekav Kenya",
+      "seo_description": "Cook small meals and snacks in a compact manual air fryer. Temperature control, a 60-minute timer and automatic shut-off support grilling, roasting and baking.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-non-stick-4-7l-manual-air-fryer-1500w-black.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/a/-/a-mf-tn45wk4-v1.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/a/-/a-mf-tn45wk4-v1-3-.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/a/-/a-mf-tn45wk4-v1-4-.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea MJ-BL7001AW 1.5 L Blender",
+      "model": "MJ-BL7001AW",
+      "sku": "MJ-BL7001AW",
+      "slug": "midea-mj-bl7001aw-1-5-l-blender",
+      "category_slugs": [
+        "blenders"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 7995,
+      "sale_price": 5995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-mj-bl7001aw-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-mj-bl7001aw-1.jpg",
+        "/assets/products/midea-mj-bl7001aw-2.jpg",
+        "/assets/products/midea-mj-bl7001aw-3.jpg"
+      ],
+      "description": "Blend ingredients with two speed settings and a pulse function. Detachable blades simplify cleaning, while interlock protection and suction feet support stable operation.",
+      "specifications": "Model: MJ-BL7001AW\nCapacity: 1.5 L\nPower: 750 W\nSpeeds: 2 plus pulse\nBlade: Food-grade; detachable\nSafety: Interlock protection\nBase: Anti-slip suction feet",
+      "warranty": "",
+      "seo_title": "Midea MJ-BL7001AW 1.5 L Blender | Leekav Kenya",
+      "seo_description": "Blend ingredients with two speed settings and a pulse function. Detachable blades simplify cleaning, while interlock protection and suction feet support stable operation.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-blender-1-5l-750w.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/a/-/a-mjbl7001aw-v1-3-.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/a/-/a-mjbl7001aw-v1-4-.jpg",
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/a/-/a-mjbl7001aw-v1-2-.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea FS40-19K 16-inch Stand Fan",
+      "model": "FS40-19K",
+      "sku": "FS40-19K",
+      "slug": "midea-fs40-19k-16-inch-stand-fan",
+      "category_slugs": [
+        "fans"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 7495,
+      "sale_price": 4995,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-fs40-19k-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-fs40-19k-1.jpg"
+      ],
+      "description": "Circulate air with a 16-inch fan offering adjustable height and tilt. Three speed levels and 3D oscillation help direct airflow around the room.",
+      "specifications": "Model: FS40-19K\nFan diameter: 16 inches\nPower: 50 W\nSpeeds: 3\nOscillation: 3D\nAdjustment: Height and tilt",
+      "warranty": "",
+      "seo_title": "Midea FS40-19K 16-inch Stand Fan | Leekav Kenya",
+      "seo_description": "Circulate air with a 16-inch fan offering adjustable height and tilt. Three speed levels and 3D oscillation help direct airflow around the room.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-stand-fan-16-50w-3-speed.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/f/s/fs40-19k.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "midea",
+      "name": "Midea YD1518S-X 20 L Standing Water Dispenser",
+      "model": "YD1518S-X",
+      "sku": "YD1518S-X",
+      "slug": "midea-yd1518s-x-20-l-standing-water-dispenser",
+      "category_slugs": [
+        "water-dispensers"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 18495,
+      "sale_price": 14495,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/midea-yd1518s-x-1.jpg",
+      "gallery_images": [
+        "/assets/products/midea-yd1518s-x-1.jpg"
+      ],
+      "description": "Serve drinking water from a slim standing dispenser. Semiconductor cooling and a compact upright design make it a practical choice for a home or shared office.",
+      "specifications": "Model: YD1518S-X\nFormat: Standing water dispenser\nCapacity: 20 L\nPower: 420 W\nCooling: Semiconductor\nDesign: Slim upright",
+      "warranty": "",
+      "seo_title": "Midea YD1518S-X 20 L Standing Water Dispenser | Leekav Kenya",
+      "seo_description": "Serve drinking water from a slim standing dispenser. Semiconductor cooling and a compact upright design make it a practical choice for a home or shared office.",
+      "catalog_source": {
+        "product_url": "https://www.opalnet.co.ke/midea-standing-water-dispenser-yd1518s-x-20l.html",
+        "image_urls": [
+          "https://www.opalnet.co.ke/media/catalog/product/cache/d349dbc46a4092e8dfd5f7908cd360f7/p/d/pd-yd1518s-x-1200x1200-1.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "karcher",
+      "name": "Kärcher WD 2 Plus S V-15/4/18 Wet and Dry Vacuum",
+      "model": "1.628-050.0",
+      "sku": "1.628-050.0",
+      "slug": "karcher-wd-2-plus-s-v-15-4-18-wet-and-dry-vacuum",
+      "category_slugs": [
+        "vacuum-cleaners"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 23995,
+      "sale_price": 19196,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/karcher-wd-2-plus-s-1.jpg",
+      "gallery_images": [
+        "/assets/products/karcher-wd-2-plus-s-1.jpg",
+        "/assets/products/karcher-wd-2-plus-s-2.jpg",
+        "/assets/products/karcher-wd-2-plus-s-3.jpg"
+      ],
+      "description": "Clean wet spills and dry debris with a stainless steel 15 L container. The 1.8 m suction hose, 4 m power cable and blower function support household and workshop cleaning.",
+      "specifications": "Model: 1.628-050.0\nContainer: 15 L stainless steel\nRated input power: 1000 W\nSuction hose: 1.8 m\nPower cable: 4 m\nFunctions: Wet vacuuming; dry vacuuming; blowing\nWeight without accessories: 4.5 kg\nDimensions (L x W x H): 353 x 328 x 431 mm",
+      "warranty": "",
+      "seo_title": "Kärcher WD 2 Plus S V-15/4/18 Wet and Dry Vacuum | Leekav Kenya",
+      "seo_description": "Clean wet spills and dry debris with a stainless steel 15 L container. The 1.8 m suction hose, 4 m power cable and blower function support household and workshop cleaning.",
+      "catalog_source": {
+        "product_url": "https://www.karcherstore-eastafrica.com/wd-2-plus-s-v-15-4-18-wet-dry-vacuum-cleaner.html",
+        "image_urls": [
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/w/d/wd_2_plus_1628050_std_02-300_dpi.jpg",
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/w/d/wd_3_-_10.jpg",
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/w/d/wd_3_-_14.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "karcher",
+      "name": "Kärcher SC 3 EasyFix Steam Cleaner",
+      "model": "1.513-652.0",
+      "sku": "1.513-652.0",
+      "slug": "karcher-sc-3-easyfix-steam-cleaner",
+      "category_slugs": [
+        "small-appliances"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 45411,
+      "sale_price": null,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/karcher-sc-3-easyfix-1.jpg",
+      "gallery_images": [
+        "/assets/products/karcher-sc-3-easyfix-1.jpg",
+        "/assets/products/karcher-sc-3-easyfix-2.jpg",
+        "/assets/products/karcher-sc-3-easyfix-3.jpg"
+      ],
+      "description": "Steam-clean hard surfaces with an EasyFix floor nozzle and a refillable water tank. A 30-second heat-up time and descaling cartridge support continuous cleaning sessions.",
+      "specifications": "Model: 1.513-652.0\nHeating output: 1900 W\nMaximum steam pressure: 3.5 bar\nTank capacity: 1 L\nHeat-up time: 30 seconds\nCable length: 4 m\nDescaling: Cartridge\nWeight without accessories: 3.1 kg\nDimensions (L x W x H): 360 x 236 x 253 mm",
+      "warranty": "",
+      "seo_title": "Kärcher SC 3 EasyFix Steam Cleaner | Leekav Kenya",
+      "seo_description": "Steam-clean hard surfaces with an EasyFix floor nozzle and a refillable water tank. A 30-second heat-up time and descaling cartridge support continuous cleaning sessions.",
+      "catalog_source": {
+        "product_url": "https://www.karcherstore-eastafrica.com/steam-cleaner-sc-3-easyfix.html",
+        "image_urls": [
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/s/c/sc_3_1513650_std_01-300_dpi.jpg",
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/s/c/sc_3_easyfix_premium_corridor_wood_app_01_ci20-300_dpi.jpg",
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/s/c/sc_3_1513160_std_3-300_dpi.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "karcher",
+      "name": "Kärcher K 3 Power Control Pressure Washer",
+      "model": "1.676-100.0",
+      "sku": "1.676-100.0",
+      "slug": "karcher-k-3-power-control-pressure-washer",
+      "category_slugs": [
+        "small-appliances"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 44410,
+      "sale_price": 31087,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/karcher-k-3-power-control-1.jpg",
+      "gallery_images": [
+        "/assets/products/karcher-k-3-power-control-1.jpg",
+        "/assets/products/karcher-k-3-power-control-2.jpg",
+        "/assets/products/karcher-k-3-power-control-3.jpg"
+      ],
+      "description": "Clean outdoor surfaces with adjustable Power Control spray settings. The spray gun and lances help match the pressure to the task, with app guidance for cleaning techniques.",
+      "specifications": "Model: 1.676-100.0\nMaximum pressure: 120 bar\nMaximum flow rate: 380 L/hour\nConnected load: 1.6 kW\nArea performance: 25 square metres/hour\nPower cable: 5 m\nWeight without accessories: 4.4 kg\nDimensions (L x W x H): 297 x 280 x 677 mm",
+      "warranty": "",
+      "seo_title": "Kärcher K 3 Power Control Pressure Washer | Leekav Kenya",
+      "seo_description": "Clean outdoor surfaces with adjustable Power Control spray settings. The spray gun and lances help match the pressure to the task, with app guidance for cleaning techniques.",
+      "catalog_source": {
+        "product_url": "https://www.karcherstore-eastafrica.com/pressure-washer-k-3-power-control.html",
+        "image_urls": [
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/k/_/k_3_power_control_pressure_washer-03_1.jpg",
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/k/_/k_3_power_control_pressure_washer-02.jpg",
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/k/3/k3_power_control_-_01.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    },
+    {
+      "brand_slug": "karcher",
+      "name": "Kärcher AF 20 Air Purifier",
+      "model": "1.024-823.0",
+      "sku": "1.024-823.0",
+      "slug": "karcher-af-20-air-purifier",
+      "category_slugs": [
+        "air-purifiers"
+      ],
+      "type": "Simple",
+      "status": "Active",
+      "price": 51633,
+      "sale_price": 30980,
+      "stock": 10,
+      "reserved": 0,
+      "low_stock_threshold": 5,
+      "image": "/assets/products/karcher-af-20-1.jpg",
+      "gallery_images": [
+        "/assets/products/karcher-af-20-1.jpg",
+        "/assets/products/karcher-af-20-2.jpg",
+        "/assets/products/karcher-af-20-3.jpg"
+      ],
+      "description": "Filter airborne particles and odours with H13 filtration and activated carbon. Three power settings and a compact design suit smaller rooms.",
+      "specifications": "Model: 1.024-823.0\nRecommended room size: 20 square metres at 3 m ceiling height\nAir throughput: Up to 220 cubic metres/hour\nFilter: H13 and activated carbon\nConnected load: 24 W\nPower settings: 3\nWeight: 3 kg\nDimensions (L x W x H): 220 x 220 x 346 mm",
+      "warranty": "",
+      "seo_title": "Kärcher AF 20 Air Purifier | Leekav Kenya",
+      "seo_description": "Filter airborne particles and odours with H13 filtration and activated carbon. Three power settings and a compact design suit smaller rooms.",
+      "catalog_source": {
+        "product_url": "https://www.karcherstore-eastafrica.com/air-purifier-af-20.html",
+        "image_urls": [
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/a/f/af_20_air_purifier-01.jpg",
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/a/f/af_20_air_purifier-02.jpg",
+          "https://www.karcherstore-eastafrica.com/media/catalog/product/cache/2ab59e795355d47654a6e98d116935c7/a/f/af_20_-_05.jpg"
+        ],
+        "verified_on": "2026-10-09",
+        "currency": "KES",
+        "price_kind": "Kenyan dealer reference price",
+        "inventory_verified": true
+      }
+    }
+  ]
+}

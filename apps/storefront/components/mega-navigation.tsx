@@ -1,4 +1,5 @@
 "use client";
+import CategorySymbol from '@/components/category-symbol';
 import {useEffect, useMemo, useRef, useState} from 'react';
 import type {KeyboardEvent as ReactKeyboardEvent, ReactNode} from 'react';
 import {createPortal} from 'react-dom';
@@ -7,17 +8,17 @@ import Image from 'next/image';
 import {usePathname} from 'next/navigation';
 import {ArrowRight, ChevronDown, ImageOff, Truck, X} from 'lucide-react';
 import {Catalog, slugify} from '@/lib/store';
-import {brandLogoFallbacks, featureHref, menuCategories, productsHref, type MenuCategory} from '@/lib/mega-menu';
+import {brandLogoFallbacks, featureHref, menuCategories, menuCategoryHref, menuBrandHref, type MenuCategory} from '@/lib/mega-menu';
 
 /* Menu content lives in lib/mega-menu.ts. This file only handles layout and behaviour. */
 
-type ResolvedBrand = {id: string; name: string; slug: string; logo?: string};
-type ResolvedCategory = MenuCategory & {label: string; brandLinks: ResolvedBrand[]};
+type ResolvedBrand = {id: string; name: string; slug: string; logo?: string; href?: string};
+type ResolvedCategory = Omit<MenuCategory, 'subcategories'> & {label: string; href: string; subcategories: (MenuCategory['subcategories'][number] & {href: string})[]; brandLinks: ResolvedBrand[]};
 
 const DESKTOP_QUERY = '(min-width: 1181px)';
 const OPEN_DELAY = 110; // hover intent before the first panel opens
 const SWITCH_DELAY = 90; // moving between categories while a panel is open
-const CLOSE_DELAY = 200; // grace period after the pointer leaves the menu
+const CLOSE_DELAY = 150; // grace period after the pointer leaves the menu
 
 const quickLinks = [
   {label: 'All products', href: '/products'},
@@ -37,11 +38,20 @@ function useResolvedCategories(data: Catalog): ResolvedCategory[] {
     return menuCategories.map(category => ({
       ...category,
       label: category.navLabel ?? category.name,
+      href: menuCategoryHref(category, data),
+      subcategories: category.subcategories.map(sub => ({...sub, href: menuCategoryHref(category, data, sub.label)})),
+      featured: category.featured.map(feature => {
+        const destination = featureHref(feature, category, data);
+        const selected = data.categories.find(item => destination === `/categories/${item.slug}`);
+        const product = data.products.find(item => selected && item.category_ids.includes(selected.id) && item.image);
+        return {...feature, href: destination, image: product?.image ?? feature.image, imageAlt: product?.name ?? feature.imageAlt};
+      }),
       brandLinks: category.brands
         .map(slug => brands.find(brand => brand.slug === slug))
-        .filter((brand): brand is ResolvedBrand => Boolean(brand)),
+        .filter((brand): brand is ResolvedBrand => Boolean(brand) && data.products.some(product => product.brand_id === brand?.id && product.category_ids.includes(data.categories.find(item => item.slug === category.id)?.id ?? '')))
+        .map(brand => ({...brand, href: menuBrandHref(category, data, brand.id)})),
     }));
-  }, [data.brands]);
+  }, [data.brands, data.categories, data.products]);
 }
 
 /** next/image with a graceful fallback when the source is missing or fails to load. */
@@ -60,7 +70,7 @@ const imageFallback = (
 
 function BrandTile({brand, category, onSelect}: {brand: ResolvedBrand; category: ResolvedCategory; onSelect: () => void}) {
   return (
-    <Link className="mm-brand" href={productsHref({q: category.query, brand: brand.id})} onClick={onSelect} aria-label={`Shop ${brand.name} ${category.name}`}>
+    <Link className="mm-brand" href={brand.href ?? '/brands/'+brand.slug} onClick={onSelect} aria-label={`Shop ${brand.name} ${category.name}`}>
       <span className="mm-brand-logo">
         <MenuImage src={brand.logo} alt={`${brand.name} logo`} sizes="140px" fallback={<span className="mm-brand-name">{brand.name}</span>} />
       </span>
@@ -94,7 +104,7 @@ export default function MegaNavigation({data, mobileOpen, onNavigate}: {data: Ca
     clearTimer();
     const previous = openRef.current;
     if (previous === id) return;
-    setSwitching(Boolean(previous && id)); // swap panels instantly instead of cross-fading
+    setSwitching(false); // Keep the same fade/slide when switching categories.
     openRef.current = id;
     if (id) openedAt.current = Date.now();
     setOpenId(id);
@@ -168,6 +178,11 @@ export default function MegaNavigation({data, mobileOpen, onNavigate}: {data: Ca
     const list = triggers();
     const index = list.indexOf(event.currentTarget);
     switch (event.key) {
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        show(id);
+        break;
       case 'ArrowRight':
       case 'ArrowLeft': {
         event.preventDefault();
@@ -225,8 +240,9 @@ export default function MegaNavigation({data, mobileOpen, onNavigate}: {data: Ca
         ref={navRef}
         aria-label="Main navigation"
         className={'container site-nav' + (switching ? ' is-switching' : '')}
+        onPointerEnter={clearTimer}
         onPointerLeave={event => {
-          if (event.pointerType === 'mouse' && openRef.current) schedule(() => show(null), CLOSE_DELAY);
+          if (event.pointerType === 'mouse') schedule(() => show(null), CLOSE_DELAY);
         }}
         onBlur={event => {
           const next = event.relatedTarget as Node | null;
@@ -237,7 +253,7 @@ export default function MegaNavigation({data, mobileOpen, onNavigate}: {data: Ca
           {categories.map(category => {
             const open = openId === category.id;
             return (
-              <li className="site-nav-item" key={category.id}>
+              <li className="site-nav-item" key={category.id} onPointerLeave={event => {if(event.pointerType==='mouse') schedule(()=>show(null),CLOSE_DELAY);}}>
                 <button
                   type="button"
                   id={triggerId(category.id)}
@@ -260,7 +276,7 @@ export default function MegaNavigation({data, mobileOpen, onNavigate}: {data: Ca
                   }}
                   onKeyDown={event => onTriggerKeyDown(event, category.id)}
                 >
-                  <span>{category.label}</span>
+                  <CategorySymbol id={category.id} size={16}/><span>{category.label}</span>
                   <ChevronDown size={14} strokeWidth={2.2} aria-hidden="true" />
                 </button>
 
@@ -269,7 +285,9 @@ export default function MegaNavigation({data, mobileOpen, onNavigate}: {data: Ca
                   className={'site-nav-panel' + (open ? ' is-open' : '')}
                   role="region"
                   aria-labelledby={triggerId(category.id)}
+                  inert={!open}
                   onPointerEnter={clearTimer}
+                  onPointerLeave={event=>{if(event.pointerType==='mouse')schedule(()=>show(null),CLOSE_DELAY);}}
                   onKeyDown={event => onPanelKeyDown(event, category.id)}
                 >
                   <div className="mm-grid">
@@ -278,14 +296,14 @@ export default function MegaNavigation({data, mobileOpen, onNavigate}: {data: Ca
                       <ul className="mm-sublinks" aria-labelledby={`mm-sub-${category.id}`}>
                         {category.subcategories.map(sub => (
                           <li key={sub.label}>
-                            <Link href={productsHref({q: sub.query})} onClick={selectLink}>
+                            <Link href={sub.href} onClick={selectLink}>
                               <span>{sub.label}</span>
                               <ArrowRight size={14} aria-hidden="true" />
                             </Link>
                           </li>
                         ))}
                       </ul>
-                      <Link className="mm-view-all" href={productsHref({q: category.query})} onClick={selectLink}>
+                      <Link className="mm-view-all" href={category.href} onClick={selectLink}>
                         View all {category.label} <ArrowRight size={14} aria-hidden="true" />
                       </Link>
                     </div>
@@ -303,7 +321,7 @@ export default function MegaNavigation({data, mobileOpen, onNavigate}: {data: Ca
                                 <span className="mm-feature-label">{feature.label}</span>
                                 <span className="mm-feature-headline">{feature.headline}</span>
                                 <span className="mm-feature-desc">{feature.description}</span>
-                                <Link className="mm-feature-link" href={featureHref(feature, category)} onClick={selectLink} aria-label={`Explore: ${feature.headline}`}>
+                                <Link className="mm-feature-link" href={feature.href ?? category.href} onClick={selectLink} aria-label={`Explore: ${feature.headline}`}>
                                   Explore <ArrowRight size={14} aria-hidden="true" />
                                 </Link>
                               </span>
@@ -427,11 +445,11 @@ function MobileDrawer({categories, open, onClose}: {categories: ResolvedCategory
                       <ul className="mm-acc-links">
                         {category.subcategories.map(sub => (
                           <li key={sub.label}>
-                            <Link href={productsHref({q: sub.query})} onClick={onClose}>{sub.label}</Link>
+                            <Link href={sub.href} onClick={onClose}>{sub.label}</Link>
                           </li>
                         ))}
                         <li>
-                          <Link className="mm-acc-all" href={productsHref({q: category.query})} onClick={onClose}>
+                          <Link className="mm-acc-all" href={category.href} onClick={onClose}>
                             View all {category.label} <ArrowRight size={14} aria-hidden="true" />
                           </Link>
                         </li>

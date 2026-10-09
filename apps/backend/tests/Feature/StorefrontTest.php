@@ -165,4 +165,21 @@ class StorefrontTest extends TestCase
         $other = $this->member('other@example.com');
         $this->withToken($other)->withHeader('Idempotency-Key', 'other-return')->postJson('/api/v1/store/returns', $body)->assertNotFound();
     }
+
+    public function test_catalog_ratings_include_only_approved_reviews_and_expose_no_review_details(): void
+    {
+        [$product] = $this->fixture();
+        foreach ([['Approved', 5], ['Approved', 4], ['Pending', 1], ['Rejected', 1]] as [$status, $rating]) {
+            Record::create(['resource' => 'reviews', 'data' => ['product_id' => $product->id, 'status' => $status, 'rating' => $rating, 'body' => 'Private review text']]);
+        }
+        $response = $this->getJson('/api/v1/store/catalog')->assertOk();
+        $response->assertJsonPath('products.0.review_count', 2)->assertJsonPath('products.0.rating_average', 4.5);
+        $this->assertArrayNotHasKey('reviews', $response->json('products.0'));
+    }
+
+    public function test_unreviewed_catalog_products_have_zero_reviews_and_no_fabricated_average(): void
+    {
+        $this->fixture();
+        $this->getJson('/api/v1/store/catalog')->assertOk()->assertJsonPath('products.0.review_count', 0)->assertJsonPath('products.0.rating_average', null);
+    }
 }

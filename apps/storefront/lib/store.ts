@@ -1,4 +1,4 @@
-export type Product={id:string;name:string;slug:string;sku:string;type:string;price:number;sale_price?:number|null;stock:number;reserved:number;sold_count?:number;image?:string;gallery_images?:string[];brand_id?:string;category_ids:string[];description?:string;specifications?:string;warranty?:string;manual?:string;seo_title?:string;seo_description?:string;created_at:string};
+export type Product={id:string;name:string;slug:string;sku:string;type:string;price:number;sale_price?:number|null;stock:number;reserved:number;sold_count?:number;review_count?:number;rating_average?:number|null;image?:string;gallery_images?:string[];brand_id?:string;category_ids:string[];description?:string;specifications?:string;warranty?:string;manual?:string;seo_title?:string;seo_description?:string;created_at:string};
 export type Catalog={products:Product[];brands:any[];categories:any[];banners:any[];pages:any[];delivery_zones:any[];locations:any;payment_methods:any[];settings:Record<string,string>};
 export const apiBase=()=>process.env.LARAVEL_API_URL||'http://127.0.0.1:8000';
 let publicCatalog:{expires:number;promise:Promise<Catalog>}|undefined;

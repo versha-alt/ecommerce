@@ -17,9 +17,9 @@ const photo = {
 const unsplashLoader = ({src, width, quality}: ImageLoaderProps) => `${src}&w=${width}&q=${quality ?? 75}`;
 
 const shortcuts = [
-  {label: 'Vacuum cleaners', href: '/products?q=vacuum', Icon: Wind},
-  {label: 'Pressure washers', href: '/products?q=pressure', Icon: Sparkles},
-  {label: 'All cleaning', href: '/products?q=cleaner', Icon: ShieldCheck},
+  {label: 'Vacuum cleaners', href: '/categories/vacuum-cleaners', Icon: Wind},
+  {label: 'Pressure washers', href: '/products?q=pressure%20washer', Icon: Sparkles},
+  {label: 'Kärcher collection', href: '/brands/karcher', Icon: ShieldCheck},
 ];
 
 export default function HomeEditorial({headline, link, image, imageAlt}: {headline?: string; link?: string; image?: string; imageAlt?: string}) {
@@ -27,7 +27,7 @@ export default function HomeEditorial({headline, link, image, imageAlt}: {headli
   const [photoFailed, setPhotoFailed] = useState(false);
   const showCustom = Boolean(image) && !customFailed;
   const showPhoto = !showCustom && !photoFailed;
-  const href = link?.startsWith('/') ? link : '/products?q=cleaner';
+  const href = link?.startsWith('/') ? link : '/brands/karcher';
   const sizes = '(max-width: 1320px) 100vw, 1240px';
   return (
     <section className="container home-editorial" aria-labelledby="home-editorial-title">
@@ -50,11 +50,6 @@ export default function HomeEditorial({headline, link, image, imageAlt}: {headli
         </ul>
       </div>
       <span className="home-editorial-tagline" aria-hidden="true">CLEANER SPACES.<br />CLEARER MINDS.</span>
-      {showPhoto && (
-        <a className="home-editorial-credit" href={photo.sourceUrl} target="_blank" rel="noopener noreferrer">
-          Photo by {photo.author} on Unsplash
-        </a>
-      )}
-    </section>
+</section>
   );
 }
