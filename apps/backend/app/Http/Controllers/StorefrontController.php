@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\BrandImageResolver;
 use App\Services\Commerce;
 use App\Services\StoreEmails;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,12 +20,14 @@ class StorefrontController extends Controller
     public function catalog(): array
     {
         $commerce = app(Commerce::class);
-        $active = fn (string $resource): array => array_values(array_filter($commerce->rows($resource), fn ($row) => ($row['status'] ?? '') === 'Active'));
-        $settings = array_intersect_key($commerce->settings(), array_flip(['deals_tagline', 'store_name', 'email', 'phone', 'whatsapp', 'address', 'logo', 'favicon', 'facebook', 'instagram', 'ga4_id', 'meta_pixel_id']));
-        $products = array_map(fn ($row) => array_intersect_key($row, array_flip(['id', 'name', 'sku', 'slug', 'type', 'brand_id', 'category_ids', 'price', 'sale_price', 'stock', 'reserved', 'image', 'gallery_images', 'description', 'specifications', 'warranty', 'manual', 'seo_title', 'seo_description', 'created_at'])), $active('products'));
+        $catalogRecords = Record::whereIn('resource', ['products', 'brands', 'categories', 'coupons', 'banners', 'homepage-sections', 'articles', 'pages', 'delivery-zones', 'payment-methods', 'orders', 'reviews'])->latest()->get()->groupBy('resource');
+        $rows = fn (string $resource): array => ($catalogRecords->get($resource) ?? collect())->map(fn (Record $record): array => $record->row())->all();
+        $active = fn (string $resource): array => array_values(array_filter($rows($resource), fn ($row) => ($row['status'] ?? '') === 'Active'));
+        $settings = array_intersect_key($commerce->settings(), array_flip(['deals_tagline', 'announcement', 'footer_tagline', 'site_title', 'site_description', 'store_name', 'email', 'phone', 'whatsapp', 'address', 'logo', 'favicon', 'facebook', 'instagram', 'ga4_id', 'meta_pixel_id']));
+        $products = array_map(fn ($row) => array_intersect_key($row, array_flip(['id', 'name', 'sku', 'slug', 'type', 'brand_id', 'category_ids', 'price', 'sale_price', 'stock', 'reserved', 'featured', 'deal', 'new_arrival', 'image', 'gallery_images', 'description', 'specifications', 'warranty', 'manual', 'seo_title', 'seo_description', 'created_at', 'updated_at'])), $active('products'));
 
         $sold = [];
-        foreach ($commerce->rows('orders') as $order) {
+        foreach ($rows('orders') as $order) {
             if (($order['status'] ?? '') === 'Delivered') {
                 foreach ($order['lines'] ?? [] as $line) {
                     $sold[$line['product_id']] = ($sold[$line['product_id']] ?? 0) + $line['quantity'];
@@ -33,7 +36,7 @@ class StorefrontController extends Controller
         }
         // Only moderated, published reviews contribute to public product ratings.
         $ratings = [];
-        foreach ($commerce->rows('reviews') as $review) {
+        foreach ($rows('reviews') as $review) {
             if (($review['status'] ?? '') !== 'Approved' || ! isset($review['product_id'], $review['rating'])) {
                 continue;
             }
@@ -51,7 +54,33 @@ class StorefrontController extends Controller
         unset($product);
         $expose = fn (string $resource, array $fields): array => array_map(fn (array $row): array => array_intersect_key($row, array_flip($fields)), $active($resource));
 
-        return ['products' => $products, 'brands' => $expose('brands', ['id', 'name', 'description', 'image', 'banner']), 'categories' => $expose('categories', ['id', 'name', 'slug', 'parent_id', 'description']), 'banners' => $expose('banners', ['id', 'name', 'placement', 'headline', 'description', 'image', 'link']), 'pages' => array_map(fn ($row) => array_intersect_key($row, array_flip(['name', 'slug', 'body', 'seo_title', 'seo_description'])), $active('pages')), 'delivery_zones' => $expose('delivery-zones', ['id', 'name', 'country_code', 'county_codes', 'county_names', 'charge', 'free_threshold']), 'locations' => config('shipping'), 'payment_methods' => array_map(fn ($row) => array_intersect_key($row, array_flip(['id', 'name', 'category', 'provider', 'instructions'])), $active('payment-methods')), 'settings' => $settings];
+        $banners = $expose('banners', ['id', 'name', 'placement', 'eyebrow', 'headline', 'description', 'image', 'link', 'cta_label', 'sort_order']);
+        $homepageSections = $expose('homepage-sections', ['id', 'name', 'key', 'eyebrow', 'heading', 'body', 'image', 'link', 'link_label', 'sort_order']);
+        $articles = $expose('articles', ['id', 'name', 'slug', 'category', 'excerpt', 'body', 'image', 'image_alt', 'minutes', 'sort_order', 'created_at', 'updated_at']);
+        $coupons = array_values(array_filter($active('coupons'), function (array $coupon): bool {
+            return ($coupon['eligibility'] ?? 'All') === 'All'
+                && (empty($coupon['starts_at']) || now()->gte($coupon['starts_at']))
+                && (empty($coupon['ends_at']) || now()->lte(Carbon::parse($coupon['ends_at'])->endOfDay()))
+                && (empty($coupon['usage_limit']) || ($coupon['usage'] ?? 0) < $coupon['usage_limit']);
+        }));
+        $coupons = array_map(fn (array $coupon): array => array_intersect_key($coupon, array_flip(['id', 'name', 'code', 'description', 'discount_kind', 'discount_type', 'value', 'minimum_type', 'minimum_amount', 'minimum_quantity', 'starts_at', 'ends_at', 'once_per_customer'])), $coupons);
+        $pages = array_map(fn ($row) => array_intersect_key($row, array_flip(['name', 'slug', 'body', 'seo_title', 'seo_description', 'updated_at'])), $active('pages'));
+        $warnings = [];
+        if (! collect($banners)->contains('placement', 'Hero slider')) {
+            $warnings[] = 'No active homepage hero slides are configured.';
+        }
+        foreach (['categories', 'featured-products', 'deals', 'deals-page', 'editorial', 'new-arrivals', 'brands', 'journal'] as $requiredSection) {
+            if (! collect($homepageSections)->contains('key', $requiredSection)) {
+                $warnings[] = 'Missing active homepage section: '.$requiredSection.'.';
+            }
+        }
+        foreach (['about', 'faq', 'privacy', 'shipping-returns', 'terms-conditions', 'contact'] as $requiredPage) {
+            if (! collect($pages)->contains('slug', $requiredPage)) {
+                $warnings[] = 'Missing active CMS page: '.$requiredPage.'.';
+            }
+        }
+
+        return ['products' => $products, 'brands' => $expose('brands', ['id', 'name', 'description', 'image', 'banner']), 'categories' => $expose('categories', ['id', 'name', 'slug', 'parent_id', 'description', 'image', 'nav_label', 'promo_image', 'promo_label', 'promo_headline', 'promo_description', 'sort_order']), 'coupons' => $coupons, 'banners' => $banners, 'homepage_sections' => $homepageSections, 'articles' => $articles, 'pages' => $pages, 'delivery_zones' => $expose('delivery-zones', ['id', 'name', 'country_code', 'county_codes', 'county_names', 'charge', 'free_threshold']), 'locations' => config('shipping'), 'payment_methods' => array_map(fn ($row) => array_intersect_key($row, array_flip(['id', 'name', 'category', 'provider', 'instructions'])), $active('payment-methods')), 'settings' => $settings, 'integration_warnings' => $warnings];
     }
 
     public function brandHero(string $id, BrandImageResolver $resolver): array

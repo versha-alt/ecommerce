@@ -52,7 +52,7 @@ class FormValidationTest extends TestCase
         $payload = ['name' => 'Appliance', 'sku' => 'GALLERY-001', 'slug' => 'gallery-appliance', 'type' => 'Simple', 'price' => 1000, 'stock' => 5, 'status' => 'Inactive'];
         $this->postJson('/api/v1/products', $payload + ['image' => ['one', 'two'], 'gallery_images' => 'invalid'])->assertUnprocessable()->assertJsonValidationErrors(['image', 'gallery_images']);
         $this->postJson('/api/v1/products', $payload + ['gallery_images' => ['javascript:alert(1)']])->assertUnprocessable()->assertJsonValidationErrors('gallery_images.0');
-        $images = ['/api/v1/media/front.webp', '/api/v1/media/back.webp'];
+        $images = ['/api/v1/media/front.webp', '/assets/products/back.webp', 'https://example.com/detail.webp'];
         $product = $this->postJson('/api/v1/products', $payload + ['image' => 'https://example.com/main.jpg', 'gallery_images' => $images])->assertOk()->assertJsonPath('gallery_images', $images)->json();
         $this->assertSame($images, CommerceRecord::findOrFail($product['id'])->data['gallery_images']);
         unset($product['gallery_images']);

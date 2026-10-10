@@ -5,15 +5,8 @@ import Link from 'next/link';
 import {ArrowRight,ChevronLeft,ChevronRight} from 'lucide-react';
 import {Catalog} from '@/lib/store';
 
-// Keep the existing images and destinations; match the copy to each slide.
-const banners=[
- {id:'everyday-home',name:'Everyday home',tag:'LEEKAV HOME ESSENTIALS · KENYA',heading:['Upgrade your home.','Elevate your everyday.'],image:'/assets/banners/everyday-appliances.webp',description:'Shop reliable appliances from trusted brands, priced clearly and delivered with support that keeps everyday life moving.',link:'/products'},
- {id:'midea-kitchen',name:'Kitchen essentials',tag:'LEEKAV KITCHEN ESSENTIALS · KENYA',heading:['Better cooking.','Brighter everyday.'],image:'/assets/banners/kitchen-appliances.webp',description:'Refresh your kitchen with practical appliances chosen for everyday cooking, storage and simple routines.',link:'/categories/cookers-microwaves'},
- {id:'lg-living',name:'Living room upgrades',tag:'LEEKAV HOME ENTERTAINMENT · KENYA',heading:['Big moments.','Better together.'],image:'/assets/banners/living-entertainment.webp',description:'Bring comfort, entertainment and easy living together with dependable home technology.',link:'/categories/tvs-audio'},
-];
-
 export default function Hero({data}:{data:Catalog}){
- void data;
+ const banners=data.banners.filter(banner=>banner.placement==='Hero slider').sort((a,b)=>Number(a.sort_order||0)-Number(b.sort_order||0));
  const heroRef=useRef<HTMLElement>(null);
  const [visible,setVisible]=useState(true);
  const [index,setIndex]=useState(0);
@@ -38,6 +31,7 @@ export default function Hero({data}:{data:Catalog}){
   const timer=window.setTimeout(()=>setIndex(current=>(current+1)%banners.length),5000);
   return()=>window.clearTimeout(timer);
  },[index,reducedMotion,hovered,touching,visible]);
+ if(!banners.length)return <section className="hero content-unavailable" role="alert"><div className="hero-copy"><h1>Homepage content is unavailable.</h1><p>Configure and activate at least one Hero slider in the admin panel.</p></div></section>;
  const current=index%banners.length;
  const banner=banners[current];
  const move=(step:number)=>setIndex(active=>(active+step+banners.length)%banners.length);
@@ -47,10 +41,10 @@ export default function Hero({data}:{data:Catalog}){
   onTouchStart={()=>setTouching(true)} onTouchEnd={()=>setTouching(false)} onTouchCancel={()=>setTouching(false)}
   onKeyDown={event=>{if(event.key==='ArrowLeft'){event.preventDefault();move(-1);}if(event.key==='ArrowRight'){event.preventDefault();move(1);}}}>
   <div className="hero-copy">
-   <span key={banner.id+'-tag'} className="eyebrow">{banner.tag}</span>
-   <h1 key={banner.id+'-heading'}><span>{banner.heading[0]}</span><br/><span>{banner.heading[1]}</span></h1>
+   <span key={banner.id+'-tag'} className="eyebrow">{banner.eyebrow}</span>
+   <h1 key={banner.id+'-heading'}>{banner.headline}</h1>
    <RichContent key={banner.id+'-description'} className="hero-description" value={banner.description}/>
-   <div className="hero-actions"><Link className="button" href={banner.link}>Shop the range <ArrowRight size={17}/></Link><Link className="button secondary" href="/products">Browse categories</Link></div>
+   <div className="hero-actions"><Link className="button" href={banner.link||'/products'}>{banner.cta_label||'Explore'} <ArrowRight size={17}/></Link><Link className="button secondary" href="/products">Browse categories</Link></div>
    {banners.length>1&&<div className="hero-controls carousel-controls">
     <button type="button" aria-label="Previous banner" onClick={()=>move(-1)}><ChevronLeft size={20}/></button>
     <div className="carousel-dots" aria-label="Choose banner">{banners.map((slide,i)=><button type="button" key={slide.id} aria-label={`Go to banner ${i+1}: ${slide.name}`} aria-current={current===i?'true':undefined} className={current===i?'selected':''} onClick={()=>setIndex(i)}><span/></button>)}</div>

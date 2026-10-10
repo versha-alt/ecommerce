@@ -16,10 +16,10 @@ use Illuminate\Validation\ValidationException;
 
 class Commerce
 {
-    public const RESOURCES = ['products', 'brands', 'categories', 'attributes', 'customers', 'delivery-zones', 'taxes', 'coupons', 'banners', 'pages', 'orders', 'payments', 'payment-methods', 'returns', 'reviews', 'enquiries', 'emails', 'settings'];
+    public const RESOURCES = ['products', 'brands', 'categories', 'attributes', 'customers', 'delivery-zones', 'taxes', 'coupons', 'banners', 'homepage-sections', 'articles', 'pages', 'orders', 'payments', 'payment-methods', 'returns', 'reviews', 'enquiries', 'emails', 'settings'];
 
     public const PERMISSIONS = [
-        'Admin' => ['dashboard', 'products', 'brands', 'categories', 'attributes', 'inventory', 'customers', 'delivery-zones', 'taxes', 'coupons', 'banners', 'pages', 'users', 'orders', 'payments', 'payment-methods', 'returns', 'reviews', 'enquiries', 'emails', 'settings', 'reports', 'activity'],
+        'Admin' => ['dashboard', 'products', 'brands', 'categories', 'attributes', 'inventory', 'customers', 'delivery-zones', 'taxes', 'coupons', 'banners', 'homepage-sections', 'articles', 'pages', 'users', 'orders', 'payments', 'payment-methods', 'returns', 'reviews', 'enquiries', 'emails', 'settings', 'reports', 'activity'],
         'Sales' => ['dashboard', 'products', 'brands', 'categories', 'customers', 'orders', 'payments', 'returns', 'enquiries', 'reports'],
         'Store Manager' => ['dashboard', 'products', 'brands', 'categories', 'attributes', 'inventory', 'customers', 'orders', 'reports'],
     ];
@@ -86,18 +86,20 @@ class Commerce
     {
         $base = ['name' => 'required|string|max:180', 'status' => 'nullable|string|max:30', 'description' => 'nullable|string|max:20000', 'notes' => 'nullable|string|max:20000', 'image' => 'nullable|string|max:2000', 'banner' => 'nullable|string|max:2000', 'seo_title' => 'nullable|string|max:250', 'seo_description' => 'nullable|string|max:2000', 'specifications' => 'nullable|string|max:20000', 'warranty' => 'nullable|string|max:2000', 'website' => 'nullable|url|max:2000'];
         $rules = match ($resource) {
-            'products' => ['gallery_images' => 'nullable|array', 'gallery_images.*' => ['required', 'string', 'max:2000', 'distinct', 'regex:~^(https?://|/api/v1/media/)~'], 'slug' => ['required', 'max:180', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('commerce_records', 'product_slug')->ignore($old?->id)], 'sku' => 'required|string|max:80', 'type' => 'required|in:Simple,Variable', 'price' => 'required|numeric|min:0|max:100000000', 'sale_price' => 'nullable|numeric|min:0|max:100000000', 'stock' => 'required|integer|min:0|max:1000000', 'low_stock_threshold' => 'nullable|integer|min:0', 'brand_id' => 'nullable|uuid', 'category_ids' => 'nullable|array', 'category_ids.*' => 'uuid', 'status' => 'required|in:Active,Inactive', 'image' => 'nullable|string|max:2000', 'manual' => 'nullable|string|max:2000'],
-            'categories' => ['slug' => 'required|string|max:180|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'parent_id' => 'nullable|uuid'],
+            'products' => ['gallery_images' => 'nullable|array', 'gallery_images.*' => ['required', 'string', 'max:2000', 'distinct', 'regex:~^(https?://|/api/v1/media/|/assets/)~'], 'slug' => ['required', 'max:180', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', Rule::unique('commerce_records', 'product_slug')->ignore($old?->id)], 'sku' => 'required|string|max:80', 'type' => 'required|in:Simple,Variable', 'price' => 'required|numeric|min:0|max:100000000', 'sale_price' => 'nullable|numeric|min:0|max:100000000', 'stock' => 'required|integer|min:0|max:1000000', 'low_stock_threshold' => 'nullable|integer|min:0', 'brand_id' => 'nullable|uuid', 'category_ids' => 'nullable|array', 'category_ids.*' => 'uuid', 'featured' => 'nullable|boolean', 'deal' => 'nullable|boolean', 'new_arrival' => 'nullable|boolean', 'status' => 'required|in:Active,Inactive', 'image' => 'nullable|string|max:2000', 'manual' => 'nullable|string|max:2000'],
+            'categories' => ['slug' => 'required|string|max:180|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'parent_id' => 'nullable|uuid', 'nav_label' => 'nullable|string|max:80', 'image' => 'nullable|string|max:2000', 'promo_image' => 'nullable|string|max:2000', 'promo_label' => 'nullable|string|max:80', 'promo_headline' => 'nullable|string|max:180', 'promo_description' => 'nullable|string|max:500', 'sort_order' => 'nullable|integer|min:0|max:1000'],
             'attributes' => ['filterable' => 'nullable|boolean', 'required' => 'nullable|boolean', 'unit' => 'nullable|string|max:80', 'options.*' => 'string|max:180', 'code' => 'required|string|max:80|regex:/^[a-z][a-z0-9_]*$/', 'input_type' => 'required|in:Text,Number,Single choice,Multiple choice,Yes/No', 'options' => 'nullable|array'],
             'customers' => ['marketing_consent' => 'nullable|boolean', 'company' => 'nullable|string|max:180', 'county' => 'nullable|string|max:180', 'email' => 'required|email|max:180', 'phone' => 'nullable|string|max:50', 'account_type' => 'required|in:Individual,Business', 'status' => 'required|in:Active,Inactive,Retired', 'address' => 'nullable|string|max:2000'],
             'delivery-zones' => ['country_code' => ['required', Rule::in(array_keys(config('shipping.countries')))], 'county_codes' => 'required|array|min:1|max:47', 'county_codes.*' => ['required', 'string', 'distinct', Rule::in(array_keys(config('shipping.countries.'.($data['country_code'] ?? 'KE').'.counties', [])))], 'charge' => 'required|numeric|min:0', 'free_threshold' => 'nullable|numeric|min:0', 'status' => 'required|in:Active,Inactive,Retired'],
             'taxes' => ['rate' => 'required|numeric|min:0|max:100', 'inclusive' => 'boolean'],
             'coupons' => [],
-            'banners' => ['placement' => 'required|in:Hero slider,Promotional banner,Featured brand,Featured product', 'headline' => 'nullable|string|max:250', 'link' => ['nullable', 'string', 'max:2000', 'regex:~^(https?://|/(?!/)|\#)~']],
+            'banners' => ['placement' => 'required|in:Hero slider,Promotional banner,Featured brand,Featured product', 'eyebrow' => 'nullable|string|max:120', 'headline' => 'required|string|max:250', 'cta_label' => 'nullable|string|max:80', 'link' => ['nullable', 'string', 'max:2000', 'regex:~^(https?://|/(?!/)|\#)~'], 'sort_order' => 'nullable|integer|min:0|max:1000'],
+            'homepage-sections' => ['key' => ['required', 'string', Rule::in(['categories', 'featured-products', 'deals', 'deals-page', 'editorial', 'new-arrivals', 'brands', 'journal'])], 'eyebrow' => 'nullable|string|max:120', 'heading' => 'required|string|max:250', 'body' => 'nullable|string|max:2000', 'image' => 'nullable|string|max:2000', 'link' => ['nullable', 'string', 'max:2000', 'regex:~^(https?://|/(?!/)|\#)~'], 'link_label' => 'nullable|string|max:80', 'sort_order' => 'nullable|integer|min:0|max:1000'],
+            'articles' => ['slug' => ['required', 'string', 'max:180', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'], 'category' => 'required|string|max:100', 'excerpt' => 'required|string|max:500', 'body' => 'required|string|max:50000', 'image' => 'required|string|max:2000', 'image_alt' => 'required|string|max:250', 'minutes' => 'required|integer|min:1|max:120', 'sort_order' => 'nullable|integer|min:0|max:1000'],
             'pages' => ['slug' => 'required|string|max:180|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', 'body' => 'required|string|max:50000'],
             'emails' => ['event' => 'required|in:Order confirmation,Order status update,Admin new order,Payment successful,Password reset', 'subject' => 'required|string|max:250', 'body' => 'required|string|max:20000'],
             'enquiries' => ['email' => 'required|email', 'subject' => 'required|string|max:200', 'message' => 'required|string|max:10000', 'status' => 'required|in:Open,In progress,Resolved'],
-            'payments' => ['name' => 'nullable', 'order_id' => 'required|uuid', 'reference' => 'required|string|max:120', 'method' => 'required|in:M-Pesa,Card,PayPal,Razorpay,COD,Bank transfer,Other online,Other manual,Pesapal,Flutterwave,DPO', 'amount' => 'required|numeric|min:0.01', 'status' => 'required|in:Pending,Failed'],
+            'payments' => ['name' => 'nullable', 'order_id' => 'required|uuid', 'reference' => 'required|string|max:120', 'method' => 'required|in:M-Pesa,Card,PayPal,Stripe,Razorpay,COD,Bank transfer,Other online,Other manual,Pesapal,Flutterwave,DPO', 'amount' => 'required|numeric|min:0.01', 'status' => 'required|in:Pending,Failed'],
             'returns' => ['name' => 'nullable', 'order_id' => 'required|uuid', 'reason' => 'required|string|max:2000', 'refund_amount' => 'required|numeric|min:0.01', 'status' => 'required|in:Requested,Approved,Received,Rejected'],
             default => []
         };
@@ -229,6 +231,14 @@ class Commerce
         }
         if ($resource === 'coupons') {
             $clean = array_merge($clean, app(Discounts::class)->validate($clean, $old));
+        }
+        if (in_array($resource, ['homepage-sections', 'articles', 'pages'], true)) {
+            $uniqueField = $resource === 'homepage-sections' ? 'key' : 'slug';
+            foreach ($this->rows($resource) as $record) {
+                if ($record['id'] !== $old?->id && ($record[$uniqueField] ?? null) === $clean[$uniqueField]) {
+                    throw ValidationException::withMessages([$uniqueField => 'This value is already in use.']);
+                }
+            }
         }
         if ($resource === 'payment-methods') {
             $clean = array_intersect_key($clean, array_flip(['name', 'status', 'description']));
@@ -643,7 +653,7 @@ class Commerce
     public function saveSettings(array $input, User $actor): array
     {
         Validator::make($input, [
-            'deals_tagline' => 'nullable|string|max:180',
+            'deals_tagline' => 'nullable|string|max:180', 'announcement' => 'nullable|string|max:250', 'footer_tagline' => 'nullable|string|max:250', 'site_title' => 'nullable|string|max:180', 'site_description' => 'nullable|string|max:500',
             'store_name' => 'required|string|max:180', 'version' => 'required|integer|min:1',
             'email' => 'nullable|email|max:180', 'mail_from' => 'nullable|email|max:180',
             'phone' => 'nullable|string|max:50', 'whatsapp' => 'nullable|string|max:50', 'address' => 'nullable|string|max:2000',
@@ -673,7 +683,7 @@ class Commerce
                 } else {
                     $d[$k] = $v;
                 }
-            }$allowed = ['store_name', 'email', 'phone', 'whatsapp', 'address', 'logo', 'favicon', 'facebook', 'instagram', 'cdn_url', 'mail_transport', 'smtp_host', 'smtp_port', 'smtp_username', 'smtp_password', 'mail_from', 'ga4_id', 'meta_pixel_id'];
+            }$allowed = ['store_name', 'deals_tagline', 'announcement', 'footer_tagline', 'site_title', 'site_description', 'email', 'phone', 'whatsapp', 'address', 'logo', 'favicon', 'facebook', 'instagram', 'cdn_url', 'mail_transport', 'smtp_host', 'smtp_port', 'smtp_username', 'smtp_password', 'mail_from', 'ga4_id', 'meta_pixel_id'];
             $d = array_intersect_key($d, array_flip($allowed));
             $r->data = $d;
             $r->version++;

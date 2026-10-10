@@ -8,7 +8,7 @@ import Image from 'next/image';
 import {usePathname} from 'next/navigation';
 import {ArrowRight, ChevronDown, ImageOff, Truck, X} from 'lucide-react';
 import {Catalog, slugify} from '@/lib/store';
-import {brandLogoFallbacks, featureHref, menuCategories, menuCategoryHref, menuBrandHref, type MenuCategory} from '@/lib/mega-menu';
+import {featureHref, menuCategories, menuCategoryHref, menuBrandHref, type MenuCategory} from '@/lib/mega-menu';
 
 /* Menu content lives in lib/mega-menu.ts. This file only handles layout and behaviour. */
 
@@ -23,7 +23,7 @@ const CLOSE_DELAY = 150; // grace period after the pointer leaves the menu
 const quickLinks = [
   {label: 'All products', href: '/products'},
   {label: 'New arrivals', href: '/products?sort=newest'},
-  {label: 'Special offers', href: '/products?sale=1'},
+  {label: 'Deals', href: '/deals'},
 ];
 
 const triggerId = (id: string) => `site-nav-trigger-${id}`;
@@ -33,9 +33,9 @@ function useResolvedCategories(data: Catalog): ResolvedCategory[] {
   return useMemo(() => {
     const brands: ResolvedBrand[] = (data.brands ?? []).map((brand: any) => {
       const slug = slugify(String(brand.name ?? ''));
-      return {id: String(brand.id), name: String(brand.name ?? ''), slug, logo: brand.image || brandLogoFallbacks[slug]};
+      return {id: String(brand.id), name: String(brand.name ?? ''), slug, logo: brand.image};
     });
-    return menuCategories.map(category => ({
+    return menuCategories(data).map(category => ({
       ...category,
       label: category.navLabel ?? category.name,
       href: menuCategoryHref(category, data),

@@ -13,7 +13,7 @@ class PaymentMethods
     {
         $data = Validator::make($input, [
             'category' => 'required|in:Online,Manual',
-            'provider' => 'required|in:PayPal,Razorpay,M-Pesa,Pesapal,Flutterwave,DPO,Other online,COD,Bank transfer,Other manual',
+            'provider' => 'required|in:PayPal,Stripe,Razorpay,M-Pesa,Pesapal,Flutterwave,DPO,Other online,COD,Bank transfer,Other manual',
             'environment' => 'required|in:Sandbox,Production',
             'public_key' => 'nullable|string|max:2000',
             'credentials' => 'nullable|string|max:10000',
@@ -57,7 +57,7 @@ class PaymentMethods
         }
         if (! $manual && ($input['status'] ?? 'Active') === 'Active') {
             $required = match ($data['provider']) {
-                'PayPal' => ['client_secret'], 'Razorpay' => ['key_secret'], 'M-Pesa' => ['consumer_key', 'consumer_secret', 'passkey'], 'Pesapal' => ['consumer_key', 'consumer_secret'], 'Flutterwave' => ['secret_key'], 'DPO' => ['company_token'], default => []
+                'PayPal' => ['client_secret'], 'Stripe' => ['secret_key'], 'Razorpay' => ['key_secret'], 'M-Pesa' => ['consumer_key', 'consumer_secret', 'passkey'], 'Pesapal' => ['consumer_key', 'consumer_secret'], 'Flutterwave' => ['secret_key'], 'DPO' => ['company_token'], default => []
             };
             $stored = json_decode(Crypt::decryptString($data['credentials']), true);
             foreach ($required as $key) {
@@ -65,7 +65,7 @@ class PaymentMethods
                     $this->fail('Configure '.$key.' before enabling this gateway.');
                 }
             }
-            if (in_array($data['provider'], ['PayPal', 'Razorpay', 'M-Pesa'], true) && empty(trim($data['public_key'] ?? ''))) {
+            if (in_array($data['provider'], ['PayPal', 'Stripe', 'Razorpay', 'M-Pesa'], true) && empty(trim($data['public_key'] ?? ''))) {
                 $this->fail('Configure the public gateway identifier before enabling this method.');
             }
         }

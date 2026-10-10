@@ -18,10 +18,22 @@ class DatabaseSeeder extends Seeder
         }
         User::firstOrCreate(['email' => $email], ['name' => 'Alex Morgan', 'password' => Hash::make($password), 'role' => 'Admin', 'status' => 'Active']);
         Record::firstOrCreate(['resource' => 'settings'], ['data' => ['store_name' => 'Leekav', 'email' => 'hello@example.com', 'phone' => '+254 700 000 000', 'address' => 'Nairobi, Kenya', 'mail_transport' => 'Log (local preview)', 'smtp_port' => 587]]);
-        if (! Record::where('resource', 'payment-methods')->exists()) {
-            Record::create(['resource' => 'payment-methods', 'data' => ['name' => 'Cash on delivery', 'category' => 'Manual', 'provider' => 'COD', 'environment' => 'Production', 'instructions' => 'Pay the courier on delivery.', 'status' => 'Inactive']]);
-            Record::create(['resource' => 'payment-methods', 'data' => ['name' => 'M-Pesa', 'category' => 'Online', 'provider' => 'M-Pesa', 'environment' => 'Sandbox', 'credentials' => '', 'status' => 'Inactive']]);
+        $paymentMethods = [
+            ['name' => 'PayPal', 'category' => 'Online', 'provider' => 'PayPal', 'environment' => 'Sandbox', 'credentials' => '', 'instructions' => 'Pay securely with PayPal.', 'status' => 'Inactive'],
+            ['name' => 'Stripe', 'category' => 'Online', 'provider' => 'Stripe', 'environment' => 'Sandbox', 'credentials' => '', 'instructions' => 'Pay securely by card through Stripe.', 'status' => 'Inactive'],
+            ['name' => 'Razorpay', 'category' => 'Online', 'provider' => 'Razorpay', 'environment' => 'Sandbox', 'credentials' => '', 'instructions' => 'Pay securely through Razorpay.', 'status' => 'Inactive'],
+            ['name' => 'Cash on delivery', 'category' => 'Manual', 'provider' => 'COD', 'environment' => 'Production', 'instructions' => 'Pay the courier when your order is delivered.', 'status' => 'Active'],
+        ];
+        $configuredProviders = Record::where('resource', 'payment-methods')->get()->pluck('data')->pluck('provider')->all();
+        foreach ($paymentMethods as $paymentMethod) {
+            if (! in_array($paymentMethod['provider'], $configuredProviders, true)) {
+                Record::create(['resource' => 'payment-methods', 'data' => $paymentMethod]);
+            }
         }
         $this->call(RealProductCatalogSeeder::class);
+        $this->call(StorefrontContentSeeder::class);
+        if (filter_var(env('DEMO_WORKSPACE', false), FILTER_VALIDATE_BOOL)) {
+            $this->call(OperationalDemoSeeder::class);
+        }
     }
 }
